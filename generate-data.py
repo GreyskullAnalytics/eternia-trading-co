@@ -452,7 +452,7 @@ with open(fact_sales_path, "w", newline="", encoding="utf-8") as f:
 
 readme_md = f"""<img align="right" width="140" src="assets/eternia-trading-co.png" alt="Eternia Trading Co. logo">
 
-# Eternia Trading Co.
+### <p style="font-size:40px">Eternia Trading Co.</p>
 
 *Supplying the bold, the baffled, the noble, and the deeply suspicious all across Eternia.*
 
