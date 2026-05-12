@@ -1,0 +1,25 @@
+location_key,city_name,region,alignment,population_size
+1,Eternos,Royal Kingdom,Heroic,Large
+2,Royal Palace District,Royal Kingdom,Heroic,Medium
+3,Market of Eternos,Royal Kingdom,Heroic,Medium
+4,Snake Mountain,Dark Hemisphere,Evil,Medium
+5,Dark Fortress,Dark Hemisphere,Evil,Medium
+6,Shadow Valley,Dark Hemisphere,Evil,Small
+7,Avion,Sky Realm,Heroic,Small
+8,Cloudspire,Sky Realm,Heroic,Small
+9,Stratos Peak,Sky Realm,Heroic,Small
+10,Subternia,Underground,Evil,Medium
+11,Mole City,Underground,Neutral,Small
+12,Crystal Caverns,Underground,Neutral,Small
+13,Vine Jungle,Wilderness,Neutral,Small
+14,Whispering Woods,Wilderness,Neutral,Small
+15,Beast Plains,Wilderness,Neutral,Medium
+16,Castle Grayskull,Mystic Zone,Neutral,Small
+17,Mystic Mountains,Mystic Zone,Neutral,Small
+18,Ancient Ruins,Mystic Zone,Neutral,Small
+19,Tundaria Outpost,Tundaria,Neutral,Small
+20,Ice Harbor,Tundaria,Neutral,Small
+21,Frozen Watch,Tundaria,Neutral,Small
+22,Pearl Trench,Coastal Depths,Neutral,Medium
+23,Caligar Reef,Coastal Depths,Heroic,Medium
+24,Sunken Bazaar,Coastal Depths,Neutral,Small

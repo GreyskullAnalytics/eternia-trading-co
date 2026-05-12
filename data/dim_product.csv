@@ -1,0 +1,17 @@
+product_key,product_name,category,alignment,brand_name,power_level,unit_cost
+1,Sword of Protection,Weapons,Heroic,Grayskull Forge,High,300
+2,Shield of Eternos,Defense,Heroic,Eternos Arms,Medium,150
+3,Battle Armor,Armor,Heroic,Eternos Arms,High,250
+4,Healing Potion,Consumables,Heroic,Lightspire Healing,Low,20
+5,Sky Sled,Vehicle,Heroic,Avion Aerotech,Medium,400
+6,Guardian Spear,Weapons,Heroic,Grayskull Forge,Medium,180
+7,Defender Cloak,Armor,Heroic,Mystic Guard Co.,Medium,140
+8,Sunstone Charm,Accessories,Heroic,Lightspire Healing,Low,60
+9,Doom Blade,Weapons,Evil,ShadowForge,High,280
+10,Mind Control Orb,Dark Magic,Evil,Darkspell Collective,High,500
+11,Shadow Beast,Creatures,Evil,Snake Mountain Industries,High,350
+12,Poison Vial,Consumables,Evil,Havoc Labs,Low,25
+13,Trap Kit,Tools,Evil,DoomTech,Medium,120
+14,Chaos Staff,Weapons,Evil,Darkspell Collective,High,320
+15,Soul Drain Amulet,Dark Magic,Evil,ShadowForge,High,450
+16,Nightmare Blade,Weapons,Evil,ShadowForge,High,380

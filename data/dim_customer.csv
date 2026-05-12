@@ -1,0 +1,17 @@
+customer_key,customer_name,race,alignment,home_region,loyalty_tier
+1,King Randor,Human,Heroic,Royal Kingdom,Gold
+2,Royal Guard,Human,Heroic,Royal Kingdom,Silver
+3,Avion Sky Patrol,Avionian,Heroic,Sky Realm,Gold
+4,Andreenid Hive,Andreenid,Neutral,Wilderness,Silver
+5,Caligar Council,Caligar,Heroic,Coastal Depths,Gold
+6,Repton Clan,Repton,Evil,Underground,Bronze
+7,Trollan Guild,Trollan,Neutral,Mystic Zone,Silver
+8,Dark Warlord,Human,Evil,Dark Hemisphere,Bronze
+9,Beast Collective,Beast,Neutral,Wilderness,Bronze
+10,Mole Engineers,Molekin,Neutral,Underground,Silver
+11,Mer-Folk Alliance,Mer-Folk,Neutral,Coastal Depths,Silver
+12,Stone Giant Circle,Giant,Neutral,Mystic Zone,Bronze
+13,Northern Rangers,Human,Heroic,Tundaria,Silver
+14,Shadow Syndicate,Human,Evil,Dark Hemisphere,Bronze
+15,Skywatch Corps,Avionian,Heroic,Sky Realm,Gold
+16,Jungle Cartographers,Human,Neutral,Wilderness,Silver
