@@ -224,6 +224,7 @@ print("[4/6] Checking existing fact_sales")
 sales_id_counter = 0
 order_id_counter = 100000
 generate_from = start_date
+existing_rows = 0
 
 if fact_sales_path.exists():
     df_ex = pd.read_csv(fact_sales_path, parse_dates=["order_date"])
@@ -243,8 +244,10 @@ if fact_sales_path.exists():
         last_date = df_ex["order_date"].max()
         sales_id_counter = int(df_ex["sales_id"].max())
         order_id_counter = int(df_ex["order_id"].max())
+        existing_rows = len(df_ex)
         generate_from = last_date + timedelta(days=1)
         print(f"      Last date in file : {last_date}")
+        print(f"      Existing rows     : {existing_rows:,}")
         print(f"      Generating from   : {generate_from}")
     else:
         fact_sales_path.unlink()
@@ -481,10 +484,11 @@ The fact table is generated with:
 
 ## Refresh summary
 
-- Window start : `{start_date}`
-- Window end   : `{end_date}`
-- Days covered : `{days_covered:,}`
-- Years covered: `{years_covered:.2f}`
+- Window start    : `{start_date}`
+- Window end      : `{end_date}`
+- Days covered    : `{days_covered:,}`
+- Years covered   : `{years_covered:.2f}`
+- Total fact rows : `{existing_rows + new_rows:,}`
 - New rows this run: `{new_rows:,}`
 """
 
