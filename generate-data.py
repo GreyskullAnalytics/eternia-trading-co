@@ -1,3 +1,4 @@
+import calendar
 import pandas as pd
 import numpy as np
 from datetime import date, timedelta
@@ -57,9 +58,10 @@ def safe_money(value, label="value"):
 data_dir = Path("data")
 data_dir.mkdir(parents=True, exist_ok=True)
 fact_sales_path = data_dir / "fact_sales.csv"
-readme_path = Path("README.md")
+targets_path    = data_dir / "fact_salesperson_targets.csv"
+readme_path     = Path("README.md")
 
-print(f"[1/6] Data folder ready: {data_dir.resolve()}")
+print(f"[1/7] Data folder ready: {data_dir.resolve()}")
 
 # ----------------------
 # ROLLING DATE WINDOW
@@ -69,7 +71,7 @@ today = date.today()
 start_date = date(today.year - 2, 1, 1)  # always Jan 1, two years back
 end_date = today - timedelta(days=1)     # yesterday — today's data isn't complete yet
 
-print(f"[2/6] Rolling window: {start_date} → {end_date}")
+print(f"[2/7] Rolling window: {start_date} -> {end_date}")
 
 # ----------------------
 # SEASONAL WEIGHTS + DAILY HELPERS
@@ -102,11 +104,47 @@ def heroic_share(month):
         return 0.49
     return 0.53
 
+# ── SALESPERSON TARGETS CONFIG ───────────────────────────────────────────────
+# Annual targets per salesperson, derived from expected transaction volume ×
+# average net_amount per transaction × 1.10 stretch, with role-based scaling.
+# Evil reps carry higher targets: their product portfolio averages ~$303 unit
+# cost vs ~$188 heroic, producing larger net_amount per transaction.
+# Orko is substantially lower due to his 10–45% discount behaviour.
+
+ANNUAL_TARGETS = {
+    1:  17_496_000,  # He-Man       – Champion   (Heroic manager)
+    2:  16_524_000,  # Teela        – Captain
+    3:  15_876_000,  # Man-At-Arms  – Engineer
+    4:  15_228_000,  # Stratos      – Scout
+    5:  12_136_000,  # Orko         – Mage       (heavy discounter, lower net revenue)
+    6:  23_112_000,  # Skeletor     – Overlord   (Evil manager)
+    7:  22_464_000,  # Evil-Lyn     – Sorceress
+    8:  22_032_000,  # Trap Jaw     – Enforcer
+    9:  19_872_000,  # Beast Man    – Handler
+    10: 21_168_000,  # Tri-Klops   – Technician
+    11: 20_736_000,  # Webstor      – Infiltrator
+    12: 19_440_000,  # Mantenna     – Observer
+    13: 16_200_000,  # Buzz-Off     – Commander
+    14: 15_876_000,  # Fisto        – Specialist
+}
+
+
+def last_day_of_month(year, month):
+    return date(year, month, calendar.monthrange(year, month)[1])
+
+
+def sp_monthly_target(sp_key, month):
+    """Seasonally-adjusted monthly net_amount target, rounded to nearest 10,000."""
+    base     = ANNUAL_TARGETS[sp_key] / 12.0
+    seasonal = combined_weight(month) / _weight_mean
+    return round(base * seasonal / 10_000) * 10_000
+
+
 # ----------------------
 # DIMENSION DATA (in-memory only — dim_ CSVs are static)
 # ----------------------
 
-print("[3/6] Loading dimension lookup structures")
+print("[3/7] Loading dimension lookup structures")
 
 _loc_cols  = ["location_key", "city_name", "region", "alignment", "population_size"]
 _sp_cols   = ["salesperson_key", "name", "faction", "sales_manager", "role", "specialty", "home_region"]
@@ -219,7 +257,7 @@ print(f"      {len(all_locations)} locations, {len(all_salespeople)} salespeople
 # EXISTING FILE STATE
 # ----------------------
 
-print("[4/6] Checking existing fact_sales")
+print("[4/7] Checking existing fact_sales")
 
 sales_id_counter = 0
 order_id_counter = 100000
@@ -259,7 +297,7 @@ else:
 # GENERATE NEW ROWS
 # ----------------------
 
-print("[5/6] Generating new rows")
+print("[5/7] Generating new rows")
 
 days_to_generate = []
 d = generate_from
@@ -272,7 +310,7 @@ new_rows = 0
 if not days_to_generate:
     print(f"      Already up to date (last date = {end_date})")
 else:
-    print(f"      Days to generate: {len(days_to_generate):,}  ({days_to_generate[0]} → {days_to_generate[-1]})")
+    print(f"      Days to generate: {len(days_to_generate):,}  ({days_to_generate[0]} -> {days_to_generate[-1]})")
 
     file_exists = fact_sales_path.exists()
     with open(fact_sales_path, "a" if file_exists else "w", newline="", encoding="utf-8") as f:
@@ -292,61 +330,84 @@ else:
 
             hs = heroic_share(day.month)
 
-            for _ in range(daily_row_count(day)):
-                order_id_counter += 1
-                sales_id_counter += 1
+            # Generate orders; some have multiple lines sharing salesperson/customer/location.
+            target_lines = daily_row_count(day)
+            lines_today  = 0
 
+            while lines_today < target_lines:
+                # 70% single-line, 22% two-line, 8% three-line orders
+                n_lines = int(random.choices([1, 2, 3], weights=[70, 22, 8])[0])
+                n_lines = min(n_lines, target_lines - lines_today)
+
+                order_id_counter += 1
+
+                # Order-level attributes shared across all lines
                 faction = "Heroic" if random.random() < hs else "Evil"
 
                 if faction == "Heroic":
-                    sp           = pick_one(heroic_salespeople, all_salespeople, "heroic_salespeople")
-                    prod_pool    = heroic_products
+                    sp            = pick_one(heroic_salespeople, all_salespeople, "heroic_salespeople")
+                    prod_pool     = heroic_products
                     location_pool = heroic_location_pool
                 else:
-                    sp           = pick_one(evil_salespeople, all_salespeople, "evil_salespeople")
-                    prod_pool    = evil_products
+                    sp            = pick_one(evil_salespeople, all_salespeople, "evil_salespeople")
+                    prod_pool     = evil_products
                     location_pool = evil_location_pool
-
-                prod = (
-                    pick_one(all_products, None, "all_products")
-                    if random.random() < 0.12
-                    else pick_one(prod_pool, all_products, "product_pool")
-                )
 
                 cust = choose_customer(faction, heroic_customers, evil_customers, neutral_customers, all_customers)
                 loc  = choose_location(location_pool, cust["home_region"], all_locations, region_lookup)
 
-                qty        = int(random.choices([1, 2, 3, 4, 5, 6], weights=[35, 25, 18, 12, 7, 3])[0])
-                base_price = float(prod["unit_cost"]) * float(random.uniform(1.28, 2.15))
+                used_product_keys = set()
 
-                if sp["name"] == "Orko":
-                    discount = base_price * float(random.uniform(0.10, 0.45))
-                elif prod["alignment"] != sp["faction"]:
-                    discount = base_price * float(random.choice([0.05, 0.10, 0.15]))
-                else:
-                    discount = base_price * float(random.choices([0, 0.05, 0.10], weights=[62, 25, 13])[0])
+                for _ in range(n_lines):
+                    sales_id_counter += 1
 
-                if day.month in (11, 12) and prod["alignment"] == "Evil":
-                    discount *= 0.95
-                if day.month in (1, 2, 3) and prod["alignment"] == "Heroic":
-                    discount *= 0.97
+                    # Pick a product not already on this order
+                    for _attempt in range(20):
+                        if random.random() < 0.12:
+                            _candidate = pick_one(all_products, None, "all_products")
+                        else:
+                            _candidate = pick_one(prod_pool, all_products, "product_pool")
+                        if _candidate["product_key"] not in used_product_keys:
+                            prod = _candidate
+                            break
+                    else:
+                        _unused = [p for p in all_products if p["product_key"] not in used_product_keys]
+                        prod = random.choice(_unused) if _unused else pick_one(prod_pool, all_products, "product_pool")
 
-                net = float((base_price - discount) * qty)
+                    used_product_keys.add(prod["product_key"])
 
-                writer.writerow([
-                    sales_id_counter,
-                    order_id_counter,
-                    day,
-                    loc["location_key"],
-                    sp["salesperson_key"],
-                    cust["customer_key"],
-                    prod["product_key"],
-                    qty,
-                    safe_money(base_price, "base_price"),
-                    safe_money(discount, "discount"),
-                    safe_money(net, "net"),
-                ])
-                new_rows += 1
+                    qty        = int(random.choices([1, 2, 3, 4, 5, 6], weights=[35, 25, 18, 12, 7, 3])[0])
+                    base_price = float(prod["unit_cost"]) * float(random.uniform(1.28, 2.15))
+
+                    if sp["name"] == "Orko":
+                        discount = base_price * float(random.uniform(0.10, 0.45))
+                    elif prod["alignment"] != sp["faction"]:
+                        discount = base_price * float(random.choice([0.05, 0.10, 0.15]))
+                    else:
+                        discount = base_price * float(random.choices([0, 0.05, 0.10], weights=[62, 25, 13])[0])
+
+                    if day.month in (11, 12) and prod["alignment"] == "Evil":
+                        discount *= 0.95
+                    if day.month in (1, 2, 3) and prod["alignment"] == "Heroic":
+                        discount *= 0.97
+
+                    net = float((base_price - discount) * qty)
+
+                    writer.writerow([
+                        sales_id_counter,
+                        order_id_counter,
+                        day,
+                        loc["location_key"],
+                        sp["salesperson_key"],
+                        cust["customer_key"],
+                        prod["product_key"],
+                        qty,
+                        safe_money(base_price, "base_price"),
+                        safe_money(discount, "discount"),
+                        safe_money(net, "net"),
+                    ])
+                    new_rows += 1
+                    lines_today += 1
 
             if (i + 1) % 30 == 0 or i == len(days_to_generate) - 1:
                 elapsed = time.time() - run_start
@@ -355,25 +416,66 @@ else:
     print(f"      Done: {new_rows:,} new rows written")
 
 # ----------------------
+# SALESPERSON TARGETS
+# ----------------------
+
+print("[6/7] Updating salesperson targets")
+
+_tgt_window_start = today.year - 2
+_tgt_window_end   = today.year
+
+# Load existing records that are within the rolling year window, preserving values.
+_tgt_existing      = {}
+_tgt_original_count = 0
+if targets_path.exists():
+    with open(targets_path, encoding="utf-8") as _tf:
+        for _row in csv.DictReader(_tf):
+            _tgt_original_count += 1
+            if int(_row["date"][:4]) >= _tgt_window_start:
+                _tgt_existing[(_row["date"], int(_row["salesperson_key"]))] = _row["monthly_target"]
+
+_tgt_trimmed = _tgt_original_count - len(_tgt_existing)
+
+# Append any month-end dates missing from the window (new year roll-in or forward months).
+_tgt_added = 0
+for _year in range(_tgt_window_start, _tgt_window_end + 1):
+    for _month in range(1, 13):
+        _d_str = str(last_day_of_month(_year, _month))
+        for _sp_key in sorted(ANNUAL_TARGETS):
+            _key = (_d_str, _sp_key)
+            if _key not in _tgt_existing:
+                _tgt_existing[_key] = sp_monthly_target(_sp_key, _month)
+                _tgt_added += 1
+
+with open(targets_path, "w", newline="", encoding="utf-8") as _tf:
+    _writer = csv.writer(_tf)
+    _writer.writerow(["date", "salesperson_key", "monthly_target"])
+    for _key in sorted(_tgt_existing):
+        _writer.writerow([_key[0], _key[1], _tgt_existing[_key]])
+
+print(f"      Window    : {_tgt_window_start}-{_tgt_window_end}")
+print(f"      Total rows: {len(_tgt_existing):,}  (trimmed {_tgt_trimmed:,}, added {_tgt_added:,})")
+
+# ----------------------
 # README
 # ----------------------
 
-print("[6/6] Updating README.md")
+print("[7/7] Updating README.md")
 
 days_covered  = (end_date - start_date).days + 1
 years_covered = days_covered / 365.25
 
 readme_md = f"""<img align="right" width="140" src="assets/eternia-trading-co.png" alt="Eternia Trading Co. logo">
 
-### <p style="font-size:40px">Eternia Trading Co.</p>
+### <p style="font-size:32px">Eternia Trading Co.</p>
 
 *Supplying the bold, the baffled, the noble, and the deeply suspicious all across Eternia.*
 
 ## Last refreshed
 
-This dataset was last refreshed on **{end_date.strftime("%d %B %Y")}**.
+This data was last refreshed on **{today.strftime("%d %B %Y")}**.
 
-`fact_sales.csv` is updated automatically each day via GitHub Actions. The rolling window always covers the current year and the two preceding calendar years. The dimension files (`dim_location`, `dim_salesperson`, `dim_customer`, `dim_product`) are static and do not change between refreshes.
+Data is automatically updated each day. Data covers a rolling three-year window — the current calendar year and the two preceding years — so the oldest year drops off each January as the new year is added.
 
 ## About the company
 
@@ -409,11 +511,12 @@ The dataset contains:
 - `data/dim_customer.csv`
 - `data/dim_product.csv`
 - `data/fact_sales.csv` *(refreshed daily)*
+- `data/fact_salesperson_targets.csv` *(refreshed daily)*
 
 ## Schema
 
 ### fact_sales
-Grain: one row per sales transaction line.
+Grain: one row per sales transaction line. Multiple lines can share the same `order_id` (same salesperson, customer, and location) with each line representing a different product.
 
 Columns:
 - `sales_id`
@@ -427,6 +530,16 @@ Columns:
 - `unit_price`
 - `discount_amount`
 - `net_amount`
+
+### fact_salesperson_targets
+Grain: one row per salesperson per calendar month.
+
+Columns:
+- `date` – last calendar day of the month
+- `salesperson_key` – foreign key to dim_salesperson
+- `monthly_target` – net revenue target for the month
+
+Targets use a seasonally adjusted formula based on each salesperson's annual quota, with higher-volume months receiving proportionally higher targets. The rolling window always covers the current year and the two preceding calendar years; targets for the remainder of the current year are projected forward. The oldest year rolls off each January.
 
 ### dim_location
 Columns:
@@ -484,12 +597,30 @@ The fact table is generated with:
 
 ## Refresh summary
 
-- Window start    : `{start_date}`
-- Window end      : `{end_date}`
-- Days covered    : `{days_covered:,}`
-- Years covered   : `{years_covered:.2f}`
-- Total fact rows : `{existing_rows + new_rows:,}`
-- New rows this run: `{new_rows:,}`
+- Window start         : `{start_date}`
+- Window end           : `{end_date}`
+- Days covered         : `{days_covered:,}`
+- Years covered        : `{years_covered:.2f}`
+- Total fact_sales rows              : `{existing_rows + new_rows:,}`
+- New fact_sales rows this run       : `{new_rows:,}`
+- Total fact_salesperson_target rows : `{len(_tgt_existing):,}`
+- New fact_salesperson_target rows   : `{_tgt_added:,}`
+
+## Support
+
+The Eternia Trading Co. Dataset is provided free of charge. If it saves you time or sparks a project, Greyskull Analytics would really appreciate your support.
+
+[![Buy Me A Coffee](https://img.shields.io/badge/Buy%20Me%20A%20Coffee-support-%23FFDD00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black)](https://buymeacoffee.com/greyskullanalytics)
+
+## License
+
+This dataset is free to use for personal and commercial purposes. See the [LICENSE](LICENSE) file for full terms.
+
+## About Greyskull Analytics
+
+Greyskull Analytics builds data solutions that make businesses better. By the Power of Greyskull!
+
+[www.greyskullanalytics.com](https://www.greyskullanalytics.com)
 """
 
 readme_path.write_text(readme_md, encoding="utf-8")
