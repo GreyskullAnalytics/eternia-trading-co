@@ -1,14 +1,14 @@
 <img align="right" width="140" src="assets/eternia-trading-co.png" alt="Eternia Trading Co. logo">
 
-### <p style="font-size:40px">Eternia Trading Co.</p>
+### <p style="font-size:32px">Eternia Trading Co.</p>
 
 *Supplying the bold, the baffled, the noble, and the deeply suspicious all across Eternia.*
 
 ## Last refreshed
 
-This dataset was last refreshed on **13 May 2026**.
+This data was last refreshed on **14 May 2026**.
 
-`fact_sales.csv` is updated automatically each day via GitHub Actions. The rolling window always covers the current year and the two preceding calendar years. The dimension files (`dim_location`, `dim_salesperson`, `dim_customer`, `dim_product`) are static and do not change between refreshes.
+Data is automatically updated each day. Data covers a rolling three-year window — the current calendar year and the two preceding years — so the oldest year drops off each January as the new year is added.
 
 ## About the company
 
@@ -44,11 +44,12 @@ The dataset contains:
 - `data/dim_customer.csv`
 - `data/dim_product.csv`
 - `data/fact_sales.csv` *(refreshed daily)*
+- `data/fact_salesperson_targets.csv` *(refreshed daily)*
 
 ## Schema
 
 ### fact_sales
-Grain: one row per sales transaction line.
+Grain: one row per sales transaction line. Multiple lines can share the same `order_id` (same salesperson, customer, and location) with each line representing a different product.
 
 Columns:
 - `sales_id`
@@ -62,6 +63,16 @@ Columns:
 - `unit_price`
 - `discount_amount`
 - `net_amount`
+
+### fact_salesperson_targets
+Grain: one row per salesperson per calendar month.
+
+Columns:
+- `date` – last calendar day of the month
+- `salesperson_key` – foreign key to dim_salesperson
+- `monthly_target` – net revenue target for the month
+
+Targets use a seasonally adjusted formula based on each salesperson's annual quota, with higher-volume months receiving proportionally higher targets. The rolling window always covers the current year and the two preceding calendar years; targets for the remainder of the current year are projected forward. The oldest year rolls off each January.
 
 ### dim_location
 Columns:
@@ -119,9 +130,27 @@ The fact table is generated with:
 
 ## Refresh summary
 
-- Window start    : `2024-01-01`
-- Window end      : `2026-05-13`
-- Days covered    : `864`
-- Years covered   : `2.37`
-- Total fact rows : `591,370`
-- New rows this run: `679`
+- Window start         : `2024-01-01`
+- Window end           : `2026-05-13`
+- Days covered         : `864`
+- Years covered        : `2.37`
+- Total fact_sales rows              : `589,798`
+- New fact_sales rows this run       : `589,798`
+- Total fact_salesperson_target rows : `504`
+- New fact_salesperson_target rows   : `0`
+
+## Support
+
+The Eternia Trading Co. Dataset is provided free of charge. If it saves you time or sparks a project, Greyskull Analytics would really appreciate your support.
+
+[![Buy Me A Coffee](https://img.shields.io/badge/Buy%20Me%20A%20Coffee-support-%23FFDD00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black)](https://buymeacoffee.com/greyskullanalytics)
+
+## License
+
+This dataset is free to use for personal and commercial purposes. See the [LICENSE](LICENSE) file for full terms.
+
+## About Greyskull Analytics
+
+Greyskull Analytics builds data solutions that make businesses better. By the Power of Greyskull!
+
+[www.greyskullanalytics.com](https://www.greyskullanalytics.com)
