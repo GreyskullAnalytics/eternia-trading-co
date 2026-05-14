@@ -1,0 +1,48 @@
+table 'Salesperson Targets'
+	lineageTag: f973819d-e732-444a-90d8-4c2a46bb9359
+
+	column Date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 9a6bff4d-cadc-47b5-a0bf-cd38b39402e3
+		summarizeBy: none
+		sourceColumn: Date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Salesperson Key'
+		dataType: int64
+		formatString: 0
+		lineageTag: 5e1dabe4-f02f-4634-97ba-241204619de0
+		summarizeBy: none
+		sourceColumn: Salesperson Key
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Monthly Target'
+		dataType: int64
+		formatString: 0
+		lineageTag: f47461cc-c265-48a3-9a1a-835344f8e494
+		summarizeBy: sum
+		sourceColumn: Monthly Target
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Salesperson Targets' = m
+		mode: import
+		queryGroup: Facts
+		source =
+				let
+				    Source = Csv.Document(Web.Contents("https://raw.githubusercontent.com/GreyskullAnalytics/eternia-trading-co/refs/heads/main/data/fact_salesperson_targets.csv"),[Delimiter=",", Columns=3, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"date", type date}, {"salesperson_key", Int64.Type}, {"monthly_target", Int64.Type}}),
+				    Custom1 = fn_FormatColumnNames ( #"Changed Type" )
+				in
+				    Custom1
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

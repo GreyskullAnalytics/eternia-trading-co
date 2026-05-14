@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "Eternia Trading Co Retail Dataset"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "2f4c70f5-0445-4402-aebd-d4ef07f51920"
+  }
+}

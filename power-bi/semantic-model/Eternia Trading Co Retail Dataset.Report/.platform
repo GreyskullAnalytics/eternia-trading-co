@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "Eternia Trading Co Retail Dataset"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "50f0572f-205e-400d-a253-159e0d35e0a1"
+  }
+}

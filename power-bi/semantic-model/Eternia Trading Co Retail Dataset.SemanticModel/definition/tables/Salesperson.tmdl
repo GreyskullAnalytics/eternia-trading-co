@@ -1,0 +1,76 @@
+table Salesperson
+	lineageTag: 09fe251a-121b-4568-8d46-f47c6a8ea921
+
+	column 'Salesperson Key'
+		dataType: int64
+		formatString: 0
+		lineageTag: 54c0646f-d330-457d-840c-3744f26b4d8f
+		summarizeBy: none
+		sourceColumn: Salesperson Key
+
+		annotation SummarizationSetBy = Automatic
+
+	column Name
+		dataType: string
+		lineageTag: 20402a8e-1c06-49ac-82a8-54e51e0ab1e7
+		summarizeBy: none
+		sourceColumn: Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column Faction
+		dataType: string
+		lineageTag: 5c6f9eaa-663b-452d-8d23-2578151dbe98
+		summarizeBy: none
+		sourceColumn: Faction
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Sales Manager'
+		dataType: string
+		lineageTag: 2342638b-a0a8-4fad-a48f-59c48334e9f1
+		summarizeBy: none
+		sourceColumn: Sales Manager
+
+		annotation SummarizationSetBy = Automatic
+
+	column Role
+		dataType: string
+		lineageTag: d879ba25-9418-41d9-a885-c67775304343
+		summarizeBy: none
+		sourceColumn: Role
+
+		annotation SummarizationSetBy = Automatic
+
+	column Specialty
+		dataType: string
+		lineageTag: 8c85817e-cc11-455a-887f-1dbe1fbfd1e9
+		summarizeBy: none
+		sourceColumn: Specialty
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Home Region'
+		dataType: string
+		lineageTag: 6d0d8ce3-9349-4bfd-875d-620725d6ccc1
+		summarizeBy: none
+		sourceColumn: Home Region
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Salesperson = m
+		mode: import
+		queryGroup: Dimensions
+		source =
+				let
+				    Source = Csv.Document(Web.Contents("https://raw.githubusercontent.com/GreyskullAnalytics/eternia-trading-co/refs/heads/main/data/dim_salesperson.csv"),[Delimiter=",", Columns=7, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"salesperson_key", Int64.Type}, {"name", type text}, {"faction", type text}, {"sales_manager", type text}, {"role", type text}, {"specialty", type text}, {"home_region", type text}}),
+				    #"Rename columns" = fn_FormatColumnNames ( #"Changed Type" )
+				in
+				    #"Rename columns"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

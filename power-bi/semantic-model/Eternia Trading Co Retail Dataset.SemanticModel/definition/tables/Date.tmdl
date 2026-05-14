@@ -1,0 +1,129 @@
+table Date
+	lineageTag: 90c9b992-a8d9-42ec-a069-cdfaf03a67ce
+
+	column Date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: badf1d4d-18c9-470b-8182-dc280234867f
+		summarizeBy: none
+		sourceColumn: Date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Day of Week'
+		dataType: string
+		lineageTag: 975f186e-ca41-47ee-af20-defc29472d7b
+		summarizeBy: none
+		sourceColumn: Day of Week
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Day of Week Number'
+		dataType: int64
+		formatString: 0
+		lineageTag: e898524d-d727-495c-a029-31c063d8fbfb
+		summarizeBy: none
+		sourceColumn: Day of Week Number
+
+		annotation SummarizationSetBy = Automatic
+
+	column Month
+		dataType: string
+		lineageTag: 49280ba9-67b2-4987-bc43-44bb8a535226
+		summarizeBy: none
+		sourceColumn: Month
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Month Number'
+		dataType: int64
+		formatString: 0
+		lineageTag: 750b955b-5997-476a-b2d7-1081b84d2b66
+		summarizeBy: none
+		sourceColumn: Month Number
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quarter
+		dataType: string
+		lineageTag: 4e36e182-f51e-4a5e-baef-f58f44c6f7fe
+		summarizeBy: none
+		sourceColumn: Quarter
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Quarter Number'
+		dataType: int64
+		formatString: 0
+		lineageTag: 31559113-2d6c-4725-a87e-3bd9a9f5b5f2
+		summarizeBy: none
+		sourceColumn: Quarter Number
+
+		annotation SummarizationSetBy = Automatic
+
+	column Year
+		dataType: int64
+		formatString: 0
+		lineageTag: e5ba3f3e-2f90-4dc8-9b97-7c0e999303bb
+		summarizeBy: none
+		sourceColumn: Year
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Year Quarter'
+		dataType: string
+		lineageTag: f5c67d14-1fa3-4886-a597-403807ab4f7b
+		summarizeBy: none
+		sourceColumn: Year Quarter
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Year Month'
+		dataType: string
+		lineageTag: 56bc81ed-17bb-4256-9c03-84735c2cffc6
+		summarizeBy: none
+		sourceColumn: Year Month
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Year Month Number'
+		dataType: string
+		lineageTag: a548ea97-cca4-4893-9853-6d4bb59270f5
+		summarizeBy: none
+		sourceColumn: Year Month Number
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Date = m
+		mode: import
+		queryGroup: Dimensions
+		source =
+				let
+				  // set calendar start date based on minimum date available in the Sales table - always start on 1st Jan
+				  StartDate = #date(Date.Year(List.Min(Sales[Order Date])),1,1),
+				  // calculates last day of the next year
+				  EndDate = #date(Date.Year(List.Max(Sales[Order Date])), 12, 31),
+				  // works out number of days between start date and end date
+				  Duration = Duration.Days(EndDate - StartDate)+1,
+				  // creates list of dates based on specified start date and calculated duration
+				  Calendar = Table.TransformColumnTypes(Table.FromList(List.Dates(StartDate, Duration, #duration(1, 0, 0, 0)),Splitter.SplitByNothing(),{"Date"}, null, ExtraValues.Error),{{"Date", type date}}),
+				  #"Add Day of Week" = Table.AddColumn(Calendar, "Day of Week", each Date.DayOfWeekName([Date]), type text),
+				  #"Add Day of Week Number" = Table.AddColumn(#"Add Day of Week", "Day of Week Number", each Date.DayOfWeek([Date])+1, Int64.Type),
+				  #"Add Day of Month" = Table.AddColumn(#"Add Day of Week Number", "Day", each Date.DayOfMonth([Date]), Int64.Type),
+				  #"Add Month" = Table.AddColumn(#"Add Day of Week Number", "Month", each Date.MonthName([Date]), type text),
+				  #"Add Month Number" = Table.AddColumn(#"Add Month", "Month Number", each Date.Month([Date]), Int64.Type),
+				  #"Add Quarter" = Table.AddColumn(#"Add Month Number", "Quarter", each "Qtr " & Text.From(Date.QuarterOfYear([Date])), type text),
+				  #"Add Quarter Number" = Table.AddColumn(#"Add Quarter", "Quarter Number", each Date.QuarterOfYear([Date]), Int64.Type),
+				  #"Add Year" = Table.AddColumn(#"Add Quarter Number", "Year", each Date.Year([Date]), Int64.Type),
+				  #"Add Year Quarter" = Table.AddColumn(#"Add Year", "Year Quarter", each Text.From([Year]) & "-" & [Quarter]),
+				  #"Add Year Month" = Table.AddColumn(#"Add Year Quarter", "Year Month", each Text.From([Year]) & "-" & Date.ToText([Date], "MMM")),
+				  #"Add Year Month Number" = Table.AddColumn(#"Add Year Month", "Year Month Number", each Text.From([Year]) & Text.PadStart(Text.From([Month Number]), 2, "0"))
+				in
+				  #"Add Year Month Number"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
