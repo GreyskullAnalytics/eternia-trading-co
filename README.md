@@ -1,15 +1,18 @@
 <img align="right" width="140" src="assets/eternia-trading-co.png" alt="Eternia Trading Co. logo">
 
-
-
 ### <p style="font-size:40px">Eternia Trading Co.</p>
-
 
 *Supplying the bold, the baffled, the noble, and the deeply suspicious all across Eternia.*
 
+## Last refreshed
+
+This dataset was last refreshed on **13 May 2026**.
+
+`fact_sales.csv` is updated automatically each day via GitHub Actions. The rolling window always covers the current year and the two preceding calendar years. The dimension files (`dim_location`, `dim_salesperson`, `dim_customer`, `dim_product`) are static and do not change between refreshes.
+
 ## About the company
 
-Eternia Trading Co. is one of the most recognisable commercial houses in all Eternia, with trading routes, supplier networks, and customer relationships stretching from the Royal Kingdom to the Dark Hemisphere and well beyond. The company deals in a broad portfolio of high-demand goods including weapons, armour, mystical accessories, transport, consumables, field equipment, and other specialist items required by Eternia’s more adventurous populations.
+Eternia Trading Co. is one of the most recognisable commercial houses in all Eternia, with trading routes, supplier networks, and customer relationships stretching from the Royal Kingdom to the Dark Hemisphere and well beyond. The company deals in a broad portfolio of high-demand goods including weapons, armour, mystical accessories, transport, consumables, field equipment, and other specialist items required by Eternia's more adventurous populations.
 
 Known for its ambitious regional reach and flair for dramatic merchandising, ETC has built its reputation on being able to put the right product in the right hands at the right moment — whether that means resupplying a palace guard, outfitting a sky patrol, restocking an underground engineering crew, or discreetly fulfilling a rather ominous bulk order from somewhere with too many skull-shaped doors. Its public image is polished, its distribution network is formidable, and its appetite for expansion is, by most accounts, enormous.
 
@@ -19,7 +22,7 @@ At the heart of the business are its two formidable sales managers: **He-Man** f
 
 Their rivalry is the engine that keeps the whole enterprise moving. A strong quarter in the Royal Kingdom will be met by a suspiciously intense push in the Dark Hemisphere; a surge in heroic armour sales will somehow be answered by an urgent campaign for cursed blades, shadow beasts, and morally questionable accessories. The result is a company culture powered by competitive energy, theatrical self-belief, and the constant sense that someone is about to storm into a meeting and demand a revised forecast.
 
-## What Eternia Trading Co. actually “does”
+## What Eternia Trading Co. actually "does"
 
 In the broadest possible sense, Eternia Trading Co. is in the business of cross-realm commerce. It buys, sells, distributes, promotes, discounts, bundles, and dramatically repositions inventory for customers from every corner of the planet.
 
@@ -40,7 +43,7 @@ The dataset contains:
 - `data/dim_salesperson.csv`
 - `data/dim_customer.csv`
 - `data/dim_product.csv`
-- `data/fact_sales.csv`
+- `data/fact_sales.csv` *(refreshed daily)*
 
 ## Schema
 
@@ -99,9 +102,10 @@ Columns:
 
 ## Date logic
 
-- Fixed start date: `2024-01-01`
-- Dynamic end date: the day the script is run
-- Target fact volume: approximately **250,000 rows per calendar year covered**
+- Rolling window start: `2024-01-01` (1 January, 2024)
+- Current end date: `2026-05-13`
+- Target fact volume: approximately **250,000 rows per calendar year**
+- Maximum window: 3 full calendar years; oldest year rolls off each January
 
 ## Distribution logic
 
@@ -113,20 +117,11 @@ The fact table is generated with:
 - Mostly alignment-matching product sales, with occasional cross-alignment exceptions
 - Higher discount variability for Orko
 
-## Performance notes
+## Refresh summary
 
-This version uses lightweight Python structures and `csv.writer` for faster fact generation and output.
-
-## Reliability notes
-
-This version explicitly converts money values to native Python floats before rounding and writing, and validates that month allocation matches the full month range.
-
-## Generation summary
-
-- Start date: `2024-01-01`
-- End date: `2026-05-12`
-- Days covered: `863`
-- Years covered: `2.36`
-- Months in scope: `29`
-- Target fact rows: `590,691`
-- Actual fact rows written: `590,691`
+- Window start    : `2024-01-01`
+- Window end      : `2026-05-13`
+- Days covered    : `864`
+- Years covered   : `2.37`
+- Total fact rows : `591,370`
+- New rows this run: `679`
