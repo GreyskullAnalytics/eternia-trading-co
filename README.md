@@ -139,6 +139,12 @@ The fact table is generated with:
 - Total fact_salesperson_target rows : `504`
 - New fact_salesperson_target rows   : `0`
 
+## Power BI Semantic Model
+
+This repository includes a pre-built Power BI semantic model (`power-bi/semantic-model/`) ready to use out of the box.
+
+The model connects directly to the CSV files hosted in this GitHub repository, so refreshing it in Power BI Desktop will always pull the latest data. Since the underlying dataset is updated daily, the model can be kept current with a single refresh — no manual data exports or file replacements required.
+
 ## Support
 
 The Eternia Trading Co. Dataset is provided free of charge. If it saves you time or sparks a project, Greyskull Analytics would really appreciate your support.

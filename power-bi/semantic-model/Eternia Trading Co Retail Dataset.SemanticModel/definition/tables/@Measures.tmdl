@@ -1,0 +1,469 @@
+/// Disconnected table used to organise all DAX measures for the model. Contains no rows or source columns.
+table @Measures
+	lineageTag: cc0f3fd2-6cf3-48f0-bdb1-ab8e61e3c43c
+
+	/// Net revenue earned from the Sales fact table.
+	measure '€ Total Sales' = SUM(Sales[Net Amount])
+		formatString: €#,##0
+		displayFolder: Sales
+		lineageTag: 64bc8c6c-928b-4441-9e9d-00659a3d6ee7
+
+	/// Total quantity of products sold across all sales transactions.
+	measure '# Total Quantity Sold' = SUM(Sales[Quantity])
+		formatString: #,0
+		displayFolder: Sales
+		lineageTag: 98277300-31d4-4ba4-ba4b-1fbeb0331047
+
+	/// Average net sales price per unit sold, calculated as total net sales divided by total quantity sold. Reflects price per unit, not per order.
+	measure '€ Avg Sales Price' = DIVIDE([€ Total Sales],[# Total Quantity Sold],0)
+		formatString: €#,##0.0
+		displayFolder: Sales
+		lineageTag: c7bf540e-6f9e-40f4-9823-3a0f16c2a98d
+
+	/// Total discount value applied across all sales transaction lines.
+	measure '€ Total Discount Amount' = SUM(Sales[Discount Amount])
+		formatString: €#,##0
+		displayFolder: Sales
+		lineageTag: e8bfe9b2-32f9-4b52-9536-9918a66c1999
+
+	/// Cumulative net sales from the start of the year to the current filter context.
+	measure '€ Sales Year to Date' = TOTALYTD([€ Total Sales],'Date'[Date])
+		formatString: €#,##0
+		displayFolder: Sales\Time Intelligence\Total Sales
+		lineageTag: 6c0bc44b-6a53-4913-8f7a-7136c6d99a64
+
+	/// Net sales for the same period in the prior year, using the model Date table.
+	measure '€ Sales Prior Year' = CALCULATE([€ Total Sales],SAMEPERIODLASTYEAR('Date'[Date]))
+		formatString: €#,##0
+		displayFolder: Sales\Time Intelligence\Total Sales
+		lineageTag: 839ea92d-3fed-4406-9416-ec339283da44
+
+	/// Year-over-year growth rate for net sales compared to the prior year period.
+	measure '% Sales Year-over-Year Growth' = DIVIDE([€ Sales Year-over-Year Change], [€ Sales Prior Year])
+		formatString: 0.0%
+		displayFolder: Sales\Time Intelligence\Total Sales
+		lineageTag: 5370af19-ad07-41be-ad5a-7bb381b11db1
+
+	/// The sum of monthly revenue targets from the Salesperson Targets fact table.
+	measure '€ Total Sales Target' = SUM('Salesperson Targets'[Monthly Target])
+		formatString: €#,##0
+		displayFolder: Salesperson Targets
+		lineageTag: 128eb130-953d-4003-8660-b6124de22a2d
+
+	/// Difference between actual net sales and the aggregated monthly target.
+	measure '€ Target Variance' = [€ Total Sales]-[€ Total Sales Target]
+		formatString: €#,##0
+		displayFolder: Salesperson Targets
+		lineageTag: 567e7244-36fb-43e8-af30-8365adb12f2e
+
+	/// The share of target reached, expressed as a percentage of the total sales target.
+	measure '% Target Coverage' = DIVIDE([€ Total Sales],[€ Total Sales Target],0)
+		formatString: 0.0%
+		displayFolder: Salesperson Targets
+		lineageTag: 8c597f49-bc3f-4658-bcff-520975f42a01
+
+	/// The number of distinct sales orders.
+	measure '# Total Orders' = DISTINCTCOUNT(Sales[Order Id])
+		formatString: #,0
+		displayFolder: Sales
+		lineageTag: 0f6dcafa-b116-457a-a4f0-b1d42d3c1f02
+
+	/// Average net revenue per order, calculated as total sales divided by the number of distinct orders.
+	measure '€ Avg Order Amount' = DIVIDE([€ Total Sales], [# Total Orders])
+		formatString: €#,##0.0
+		displayFolder: Sales
+		lineageTag: 681d3914-6b67-4609-83e9-5477cf3c1e8d
+
+	/// Total gross profit calculated as net sales revenue minus the total purchase cost of units sold (Quantity × Unit Cost). Based on supplier purchase cost, not full COGS.
+	measure '€ Gross Margin' = [€ Total Sales] - SUMX(Sales, Sales[Quantity] * RELATED(Product[Unit Cost]))
+		formatString: €#,##0
+		displayFolder: Sales
+		lineageTag: a14cbde9-616a-4294-a83f-5492b6855924
+
+	/// Gross profit as a percentage of total net sales revenue, based on supplier purchase cost.
+	measure '% Gross Margin' = DIVIDE([€ Gross Margin], [€ Total Sales])
+		formatString: 0.0%
+		displayFolder: Sales
+		lineageTag: 5642f792-2a54-497e-bb71-0d1641ebdf41
+
+	/// Cumulative net sales from the start of the current quarter to the current filter context.
+	measure '€ Sales Quarter to Date' = TOTALQTD([€ Total Sales], 'Date'[Date])
+		formatString: €#,##0
+		displayFolder: Sales\Time Intelligence\Total Sales
+		lineageTag: 87993c0b-a40d-4386-88dc-efdd74501ef4
+
+	/// Cumulative net sales from the start of the current month to the current filter context.
+	measure '€ Sales Month to Date' = TOTALMTD([€ Total Sales], 'Date'[Date])
+		formatString: €#,##0
+		displayFolder: Sales\Time Intelligence\Total Sales
+		lineageTag: d3dc93bc-c301-4f72-bd40-d3acd5c9258c
+
+	/// Cumulative quantity sold from the start of the year to the current filter context.
+	measure '# Quantity Sold Year to Date' = TOTALYTD([# Total Quantity Sold], 'Date'[Date])
+		formatString: #,0
+		displayFolder: Sales\Time Intelligence\Quantity Sold
+		lineageTag: 2791fbc0-b219-48e7-8434-28c7345dbede
+
+	/// Cumulative quantity sold from the start of the current quarter to the current filter context.
+	measure '# Quantity Sold Quarter to Date' = TOTALQTD([# Total Quantity Sold], 'Date'[Date])
+		formatString: #,0
+		displayFolder: Sales\Time Intelligence\Quantity Sold
+		lineageTag: c34bd6c9-52f9-46f8-ae00-587d7b62d78c
+
+	/// Cumulative quantity sold from the start of the current month to the current filter context.
+	measure '# Quantity Sold Month to Date' = TOTALMTD([# Total Quantity Sold], 'Date'[Date])
+		formatString: #,0
+		displayFolder: Sales\Time Intelligence\Quantity Sold
+		lineageTag: 752a8806-328c-4233-bc91-87030f0b1fe9
+
+	/// Total quantity sold for the same period in the prior year.
+	measure '# Quantity Sold Prior Year' = CALCULATE([# Total Quantity Sold], SAMEPERIODLASTYEAR('Date'[Date]))
+		formatString: #,0
+		displayFolder: Sales\Time Intelligence\Quantity Sold
+		lineageTag: 77cec744-10a1-4e56-ba5d-8195030bfe10
+
+	/// Year-over-year growth rate for quantity sold compared to the same period in the prior year.
+	measure '% Quantity Sold Year-over-Year Growth' = DIVIDE([# Quantity Sold Year-over-Year Change], [# Quantity Sold Prior Year])
+		formatString: 0.0%
+		displayFolder: Sales\Time Intelligence\Quantity Sold
+		lineageTag: 9b7215cf-e720-4575-8570-d984a5870472
+
+	/// Cumulative distinct order count from the start of the year to the current filter context.
+	measure '# Orders Year to Date' = TOTALYTD([# Total Orders], 'Date'[Date])
+		formatString: #,0
+		displayFolder: Sales\Time Intelligence\Total Orders
+		lineageTag: a4ecba68-d477-425c-a722-2f11b9b74fd8
+
+	/// Cumulative distinct order count from the start of the current quarter to the current filter context.
+	measure '# Orders Quarter to Date' = TOTALQTD([# Total Orders], 'Date'[Date])
+		formatString: #,0
+		displayFolder: Sales\Time Intelligence\Total Orders
+		lineageTag: 7de8942d-5d11-4784-af49-c05bdcf58f3f
+
+	/// Cumulative distinct order count from the start of the current month to the current filter context.
+	measure '# Orders Month to Date' = TOTALMTD([# Total Orders], 'Date'[Date])
+		formatString: #,0
+		displayFolder: Sales\Time Intelligence\Total Orders
+		lineageTag: cd2aa4b2-a26d-4c67-90c9-43ac27283a7e
+
+	/// Distinct order count for the same period in the prior year.
+	measure '# Orders Prior Year' = CALCULATE([# Total Orders], SAMEPERIODLASTYEAR('Date'[Date]))
+		formatString: #,0
+		displayFolder: Sales\Time Intelligence\Total Orders
+		lineageTag: b4ec0d7a-0ade-419c-9708-4434e23f5d57
+
+	/// Year-over-year growth rate for order count compared to the same period in the prior year.
+	measure '% Orders Year-over-Year Growth' = DIVIDE([# Orders Year-over-Year Change], [# Orders Prior Year])
+		formatString: 0.0%
+		displayFolder: Sales\Time Intelligence\Total Orders
+		lineageTag: 510cbcf4-e27a-436a-afa9-512bcf2a35f6
+
+	/// Cumulative total discount applied from the start of the year to the current filter context.
+	measure '€ Discount Year to Date' = TOTALYTD([€ Total Discount Amount], 'Date'[Date])
+		formatString: €#,##0
+		displayFolder: Sales\Time Intelligence\Discount Amount
+		lineageTag: be76ab68-c453-43ef-ad7c-68449360013c
+
+	/// Cumulative total discount applied from the start of the current quarter to the current filter context.
+	measure '€ Discount Quarter to Date' = TOTALQTD([€ Total Discount Amount], 'Date'[Date])
+		formatString: €#,##0
+		displayFolder: Sales\Time Intelligence\Discount Amount
+		lineageTag: 9ee093d4-1ab0-4e06-9609-ef9bc07afc9b
+
+	/// Cumulative total discount applied from the start of the current month to the current filter context.
+	measure '€ Discount Month to Date' = TOTALMTD([€ Total Discount Amount], 'Date'[Date])
+		formatString: €#,##0
+		displayFolder: Sales\Time Intelligence\Discount Amount
+		lineageTag: 04e2fb25-4477-4e5e-863e-d824471ecd94
+
+	/// Total discount amount for the same period in the prior year.
+	measure '€ Discount Prior Year' = CALCULATE([€ Total Discount Amount], SAMEPERIODLASTYEAR('Date'[Date]))
+		formatString: €#,##0
+		displayFolder: Sales\Time Intelligence\Discount Amount
+		lineageTag: 0550afc5-df34-4555-ab6e-2f5a56f1d918
+
+	/// Year-over-year growth rate for total discount amount compared to the same period in the prior year.
+	measure '% Discount Year-over-Year Growth' = DIVIDE([€ Discount Year-over-Year Change], [€ Discount Prior Year])
+		formatString: 0.0%
+		displayFolder: Sales\Time Intelligence\Discount Amount
+		lineageTag: fd61c500-21dd-42f9-b4b8-8156793a237f
+
+	/// Cumulative gross margin from the start of the year to the current filter context.
+	measure '€ Gross Margin Year to Date' = TOTALYTD([€ Gross Margin], 'Date'[Date])
+		formatString: €#,##0
+		displayFolder: Sales\Time Intelligence\Gross Margin
+		lineageTag: 9865df10-a986-4dc4-b01c-d3e1b14acf40
+
+	/// Cumulative gross margin from the start of the current quarter to the current filter context.
+	measure '€ Gross Margin Quarter to Date' = TOTALQTD([€ Gross Margin], 'Date'[Date])
+		formatString: €#,##0
+		displayFolder: Sales\Time Intelligence\Gross Margin
+		lineageTag: eac3cb58-a67e-4d58-bcd2-89e43b49b732
+
+	/// Cumulative gross margin from the start of the current month to the current filter context.
+	measure '€ Gross Margin Month to Date' = TOTALMTD([€ Gross Margin], 'Date'[Date])
+		formatString: €#,##0
+		displayFolder: Sales\Time Intelligence\Gross Margin
+		lineageTag: 6f520ab8-71f4-4a43-bd62-d738db5087d9
+
+	/// Gross margin for the same period in the prior year.
+	measure '€ Gross Margin Prior Year' = CALCULATE([€ Gross Margin], SAMEPERIODLASTYEAR('Date'[Date]))
+		formatString: €#,##0
+		displayFolder: Sales\Time Intelligence\Gross Margin
+		lineageTag: 415b8347-e0b5-4499-b386-e51ef7296b84
+
+	/// Year-over-year growth rate for gross margin compared to the same period in the prior year.
+	measure '% Gross Margin Year-over-Year Growth' = DIVIDE([€ Gross Margin Year-over-Year Change], [€ Gross Margin Prior Year])
+		formatString: 0.0%
+		displayFolder: Sales\Time Intelligence\Gross Margin
+		lineageTag: fbc805e3-376c-4325-a1a9-432d20041eab
+
+	/// Gross margin percentage for the same period in the prior year.
+	measure '% Gross Margin Prior Year' = CALCULATE([% Gross Margin], SAMEPERIODLASTYEAR('Date'[Date]))
+		formatString: 0.0%
+		displayFolder: Sales\Time Intelligence\Gross Margin
+		lineageTag: 7b787943-4621-42e8-9888-ab0dbc888c81
+
+	/// Absolute change in gross margin percentage points compared to the same period in the prior year.
+	measure '% Gross Margin Year-over-Year Change' = [% Gross Margin] - [% Gross Margin Prior Year]
+		formatString: 0.0%
+		displayFolder: Sales\Time Intelligence\Gross Margin
+		lineageTag: 9c00798f-ad26-47bd-bdae-7ac4551bcbac
+
+	/// Average sales price per unit for the same period in the prior year.
+	measure '€ Avg Sales Price Prior Year' = CALCULATE([€ Avg Sales Price], SAMEPERIODLASTYEAR('Date'[Date]))
+		formatString: €#,##0.0
+		displayFolder: Sales\Time Intelligence\Avg Sales Price
+		lineageTag: a521a18a-5655-4a7b-b430-2beb92a43898
+
+	/// Year-over-year growth rate for average sales price per unit.
+	measure '% Avg Sales Price Year-over-Year Growth' = DIVIDE([€ Avg Sales Price Year-over-Year Change], [€ Avg Sales Price Prior Year])
+		formatString: 0.0%
+		displayFolder: Sales\Time Intelligence\Avg Sales Price
+		lineageTag: ff4f935d-7b84-4187-8576-9332c733e04c
+
+	/// Average order amount for the same period in the prior year.
+	measure '€ Avg Order Amount Prior Year' = CALCULATE([€ Avg Order Amount], SAMEPERIODLASTYEAR('Date'[Date]))
+		formatString: €#,##0.0
+		displayFolder: Sales\Time Intelligence\Avg Order Amount
+		lineageTag: de3eb426-ef2f-4769-80a1-f53176893b97
+
+	/// Year-over-year growth rate for average order amount.
+	measure '% Avg Order Amount Year-over-Year Growth' = DIVIDE([€ Avg Order Amount Year-over-Year Change], [€ Avg Order Amount Prior Year])
+		formatString: 0.0%
+		displayFolder: Sales\Time Intelligence\Avg Order Amount
+		lineageTag: 9d4a60d9-a75e-4313-b757-8f27720cac7e
+
+	/// Cumulative sales target from the start of the year to the current filter context.
+	measure '€ Sales Target Year to Date' = TOTALYTD([€ Total Sales Target], 'Date'[Date])
+		formatString: €#,##0
+		displayFolder: Salesperson Targets\Time Intelligence\Sales Target
+		lineageTag: 91cdbf28-e0de-43a5-a6cc-63a1ae76f72b
+
+	/// Cumulative sales target from the start of the current quarter to the current filter context.
+	measure '€ Sales Target Quarter to Date' = TOTALQTD([€ Total Sales Target], 'Date'[Date])
+		formatString: €#,##0
+		displayFolder: Salesperson Targets\Time Intelligence\Sales Target
+		lineageTag: 35d15da5-83cd-41c2-b995-1e316d4415a5
+
+	/// Cumulative sales target from the start of the current month to the current filter context.
+	measure '€ Sales Target Month to Date' = TOTALMTD([€ Total Sales Target], 'Date'[Date])
+		formatString: €#,##0
+		displayFolder: Salesperson Targets\Time Intelligence\Sales Target
+		lineageTag: e24f4f1c-1f3c-40bd-a90a-b24ae54b4dc0
+
+	/// Total sales target for the same period in the prior year.
+	measure '€ Sales Target Prior Year' = CALCULATE([€ Total Sales Target], SAMEPERIODLASTYEAR('Date'[Date]))
+		formatString: €#,##0
+		displayFolder: Salesperson Targets\Time Intelligence\Sales Target
+		lineageTag: 655f73ce-997f-4d84-959b-af09186a1cd7
+
+	/// Cumulative variance between actual sales and target from the start of the year to the current filter context.
+	measure '€ Target Variance Year to Date' = TOTALYTD([€ Target Variance], 'Date'[Date])
+		formatString: €#,##0
+		displayFolder: Salesperson Targets\Time Intelligence\Target Variance
+		lineageTag: 2626f60c-16ae-4796-aa04-a124a20c42ae
+
+	/// Cumulative variance between actual sales and target from the start of the current month to the current filter context.
+	measure '€ Target Variance Month to Date' = TOTALMTD([€ Target Variance], 'Date'[Date])
+		formatString: €#,##0
+		displayFolder: Salesperson Targets\Time Intelligence\Target Variance
+		lineageTag: 3cf96b94-e409-4161-a43c-b326e1680d11
+
+	/// Year-to-date actual sales as a percentage of the year-to-date sales target.
+	measure '% Target Coverage Year to Date' = DIVIDE(TOTALYTD([€ Total Sales], 'Date'[Date]), TOTALYTD([€ Total Sales Target], 'Date'[Date]))
+		formatString: 0.0%
+		displayFolder: Salesperson Targets\Time Intelligence\Target Coverage
+		lineageTag: 0350a477-f9f4-457a-b736-07789c085e91
+
+	/// Target coverage percentage for the same period in the prior year.
+	measure '% Target Coverage Prior Year' = CALCULATE([% Target Coverage], SAMEPERIODLASTYEAR('Date'[Date]))
+		formatString: 0.0%
+		displayFolder: Salesperson Targets\Time Intelligence\Target Coverage
+		lineageTag: aa40c3c2-f2ce-42c6-bc4f-cef212a48dc4
+
+	/// Gross margin percentage from the start of the year to the current filter context.
+	measure '% Gross Margin Year to Date' = TOTALYTD([% Gross Margin], 'Date'[Date])
+		formatString: 0.0%
+		displayFolder: Sales\Time Intelligence\Gross Margin
+		lineageTag: 8b4af7b9-7e71-45f8-b004-80a98a2bed59
+
+	/// Gross margin percentage from the start of the current quarter to the current filter context.
+	measure '% Gross Margin Quarter to Date' = TOTALQTD([% Gross Margin], 'Date'[Date])
+		formatString: 0.0%
+		displayFolder: Sales\Time Intelligence\Gross Margin
+		lineageTag: 43b00fa1-9966-4a94-b798-a9c6723e8c46
+
+	/// Gross margin percentage from the start of the current month to the current filter context.
+	measure '% Gross Margin Month to Date' = TOTALMTD([% Gross Margin], 'Date'[Date])
+		formatString: 0.0%
+		displayFolder: Sales\Time Intelligence\Gross Margin
+		lineageTag: 4faa3791-5d88-4ade-b4bc-3d55f5e273c8
+
+	/// Average sales price per unit from the start of the year to the current filter context.
+	measure '€ Avg Sales Price Year to Date' = TOTALYTD([€ Avg Sales Price], 'Date'[Date])
+		formatString: €#,##0.0
+		displayFolder: Sales\Time Intelligence\Avg Sales Price
+		lineageTag: d18149c4-1c51-4160-8086-8c6160466ece
+
+	/// Average sales price per unit from the start of the current quarter to the current filter context.
+	measure '€ Avg Sales Price Quarter to Date' = TOTALQTD([€ Avg Sales Price], 'Date'[Date])
+		formatString: €#,##0.0
+		displayFolder: Sales\Time Intelligence\Avg Sales Price
+		lineageTag: e6da9c00-8c3f-40eb-8fbe-973f796f0160
+
+	/// Average sales price per unit from the start of the current month to the current filter context.
+	measure '€ Avg Sales Price Month to Date' = TOTALMTD([€ Avg Sales Price], 'Date'[Date])
+		formatString: €#,##0.0
+		displayFolder: Sales\Time Intelligence\Avg Sales Price
+		lineageTag: eedc880c-ce97-451c-9cf0-36048ae4889a
+
+	/// Average order amount from the start of the year to the current filter context.
+	measure '€ Avg Order Amount Year to Date' = TOTALYTD([€ Avg Order Amount], 'Date'[Date])
+		formatString: €#,##0.0
+		displayFolder: Sales\Time Intelligence\Avg Order Amount
+		lineageTag: efb96586-00de-4600-8698-058a660062eb
+
+	/// Average order amount from the start of the current quarter to the current filter context.
+	measure '€ Avg Order Amount Quarter to Date' = TOTALQTD([€ Avg Order Amount], 'Date'[Date])
+		formatString: €#,##0.0
+		displayFolder: Sales\Time Intelligence\Avg Order Amount
+		lineageTag: cd50fb51-d4e0-4116-8212-f0553652ac47
+
+	/// Average order amount from the start of the current month to the current filter context.
+	measure '€ Avg Order Amount Month to Date' = TOTALMTD([€ Avg Order Amount], 'Date'[Date])
+		formatString: €#,##0.0
+		displayFolder: Sales\Time Intelligence\Avg Order Amount
+		lineageTag: bbbeb438-9092-4ad3-bfc6-acd2a75a7fa9
+
+	/// Year-over-year growth rate for total sales target compared to the same period in the prior year.
+	measure '% Sales Target Year-over-Year Growth' = DIVIDE([€ Sales Target Year-over-Year Change], [€ Sales Target Prior Year])
+		formatString: 0.0%
+		displayFolder: Salesperson Targets\Time Intelligence\Sales Target
+		lineageTag: 42014fc1-042d-4d4e-8bcf-3d000b476571
+
+	/// Cumulative variance between actual sales and target from the start of the current quarter to the current filter context.
+	measure '€ Target Variance Quarter to Date' = TOTALQTD([€ Target Variance], 'Date'[Date])
+		formatString: €#,##0
+		displayFolder: Salesperson Targets\Time Intelligence\Target Variance
+		lineageTag: 8a688c93-e888-410d-aee5-3e52bbd4ea1a
+
+	/// Variance between actual sales and target for the same period in the prior year.
+	measure '€ Target Variance Prior Year' = CALCULATE([€ Target Variance], SAMEPERIODLASTYEAR('Date'[Date]))
+		formatString: €#,##0
+		displayFolder: Salesperson Targets\Time Intelligence\Target Variance
+		lineageTag: 97ada99b-bd26-484e-b47e-40a394a35f19
+
+	/// Year-over-year change in target variance relative to the prior year variance.
+	measure '% Target Variance Year-over-Year Growth' = DIVIDE([€ Target Variance Year-over-Year Change], ABS([€ Target Variance Prior Year]))
+		formatString: 0.0%
+		displayFolder: Salesperson Targets\Time Intelligence\Target Variance
+		lineageTag: 682052e7-c62a-44ec-9eca-599aab8c5662
+
+	/// Quarter-to-date actual sales as a percentage of the quarter-to-date sales target.
+	measure '% Target Coverage Quarter to Date' = DIVIDE(TOTALQTD([€ Total Sales], 'Date'[Date]), TOTALQTD([€ Total Sales Target], 'Date'[Date]))
+		formatString: 0.0%
+		displayFolder: Salesperson Targets\Time Intelligence\Target Coverage
+		lineageTag: f156367d-4ccc-4205-939e-c802c226cf75
+
+	/// Month-to-date actual sales as a percentage of the month-to-date sales target.
+	measure '% Target Coverage Month to Date' = DIVIDE(TOTALMTD([€ Total Sales], 'Date'[Date]), TOTALMTD([€ Total Sales Target], 'Date'[Date]))
+		formatString: 0.0%
+		displayFolder: Salesperson Targets\Time Intelligence\Target Coverage
+		lineageTag: 226ade41-0c96-4cc8-80ca-08bee01dbfc2
+
+	/// Absolute change in target coverage percentage points compared to the same period in the prior year.
+	measure '% Target Coverage Year-over-Year Change' = [% Target Coverage] - [% Target Coverage Prior Year]
+		formatString: 0.0%
+		displayFolder: Salesperson Targets\Time Intelligence\Target Coverage
+		lineageTag: 272ca44c-3841-48ae-82db-3167e78db661
+
+	/// Absolute change in net sales compared to the same period in the prior year.
+	measure '€ Sales Year-over-Year Change' = [€ Total Sales] - [€ Sales Prior Year]
+		formatString: €#,##0
+		displayFolder: Sales\Time Intelligence\Total Sales
+		lineageTag: a0ab3779-9d48-424e-9dc8-f22df0eb6a9d
+
+	/// Absolute change in quantity sold compared to the same period in the prior year.
+	measure '# Quantity Sold Year-over-Year Change' = [# Total Quantity Sold] - [# Quantity Sold Prior Year]
+		formatString: #,0
+		displayFolder: Sales\Time Intelligence\Quantity Sold
+		lineageTag: 54c44191-12cf-4d4e-b86a-6cc38081feb9
+
+	/// Absolute change in order count compared to the same period in the prior year.
+	measure '# Orders Year-over-Year Change' = [# Total Orders] - [# Orders Prior Year]
+		formatString: #,0
+		displayFolder: Sales\Time Intelligence\Total Orders
+		lineageTag: 350f6c18-29dd-4836-854d-4f83971f406e
+
+	/// Absolute change in total discount amount compared to the same period in the prior year.
+	measure '€ Discount Year-over-Year Change' = [€ Total Discount Amount] - [€ Discount Prior Year]
+		formatString: €#,##0
+		displayFolder: Sales\Time Intelligence\Discount Amount
+		lineageTag: 2c3e6aac-de24-459b-aff5-a454241c7b94
+
+	/// Absolute change in gross margin compared to the same period in the prior year.
+	measure '€ Gross Margin Year-over-Year Change' = [€ Gross Margin] - [€ Gross Margin Prior Year]
+		formatString: €#,##0
+		displayFolder: Sales\Time Intelligence\Gross Margin
+		lineageTag: 8cf536c5-9392-474b-b1d6-ab80e706a04d
+
+	/// Absolute change in average sales price per unit compared to the same period in the prior year.
+	measure '€ Avg Sales Price Year-over-Year Change' = [€ Avg Sales Price] - [€ Avg Sales Price Prior Year]
+		formatString: €#,##0.0
+		displayFolder: Sales\Time Intelligence\Avg Sales Price
+		lineageTag: 749c86c7-341a-4b12-b460-7c58460b9862
+
+	/// Absolute change in average order amount compared to the same period in the prior year.
+	measure '€ Avg Order Amount Year-over-Year Change' = [€ Avg Order Amount] - [€ Avg Order Amount Prior Year]
+		formatString: €#,##0.0
+		displayFolder: Sales\Time Intelligence\Avg Order Amount
+		lineageTag: bf4f72e5-5e3b-4183-9dd3-229789d9439a
+
+	/// Absolute change in total sales target compared to the same period in the prior year.
+	measure '€ Sales Target Year-over-Year Change' = [€ Total Sales Target] - [€ Sales Target Prior Year]
+		formatString: €#,##0
+		displayFolder: Salesperson Targets\Time Intelligence\Sales Target
+		lineageTag: 5542e015-98d6-41b7-bad0-655b1a2db1a9
+
+	/// Absolute change in target variance compared to the same period in the prior year.
+	measure '€ Target Variance Year-over-Year Change' = [€ Target Variance] - [€ Target Variance Prior Year]
+		formatString: €#,##0
+		displayFolder: Salesperson Targets\Time Intelligence\Target Variance
+		lineageTag: 392e73bf-adcd-498e-bcbe-80033db2c076
+
+	partition @Measures = m
+		mode: import
+		queryGroup: 'Measure Table'
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i44FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Column1 = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Column1", type text}}),
+				    #"Removed Columns" = Table.RemoveColumns(#"Changed Type",{"Column1"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

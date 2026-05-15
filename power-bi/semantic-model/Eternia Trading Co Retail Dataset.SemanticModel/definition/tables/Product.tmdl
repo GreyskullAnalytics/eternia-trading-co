@@ -1,0 +1,88 @@
+/// Dimension table containing the product catalogue, including category, brand, power level, alignment, and unit cost.
+table Product
+	lineageTag: 6d7f340d-4c24-4afa-97b2-70cd7b223b69
+
+	/// Unique integer identifier for each product. Primary key of the Product table.
+	column 'Product Key'
+		dataType: int64
+		isHidden
+		isKey
+		formatString: 0
+		isAvailableInMdx: false
+		lineageTag: 865b62ca-9864-48a8-ac36-9baba5dac6ee
+		summarizeBy: none
+		sourceColumn: Product Key
+
+		annotation SummarizationSetBy = Automatic
+
+	/// The name of the product.
+	column 'Product Name'
+		dataType: string
+		lineageTag: 0e852d3f-5219-4f33-bcf0-a35af2d01602
+		summarizeBy: none
+		sourceColumn: Product Name
+
+		annotation SummarizationSetBy = Automatic
+
+	/// High-level category that the product belongs to (e.g. Weapons, Armour, Artefacts).
+	column Category
+		dataType: string
+		lineageTag: 1c17f48e-f2cd-462f-9b96-7b96ff2d96ee
+		summarizeBy: none
+		sourceColumn: Category
+
+		annotation SummarizationSetBy = Automatic
+
+	/// The faction or moral alignment associated with the product (e.g. Heroic, Evil, Neutral).
+	column Alignment
+		dataType: string
+		lineageTag: 32b1665f-ff5d-40b9-87e5-2eb2d60675be
+		summarizeBy: none
+		sourceColumn: Alignment
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Brand or manufacturer associated with the product.
+	column 'Brand Name'
+		dataType: string
+		lineageTag: 74346f63-66a1-44aa-b461-0ab01d159bd4
+		summarizeBy: none
+		sourceColumn: Brand Name
+
+		annotation SummarizationSetBy = Automatic
+
+	/// A rating indicating the strength or potency of the product.
+	column 'Power Level'
+		dataType: string
+		lineageTag: 110c503a-4a62-48c5-9fca-317cb5c81801
+		summarizeBy: none
+		sourceColumn: Power Level
+
+		annotation SummarizationSetBy = Automatic
+
+	/// The purchase cost per unit paid to the supplier. Represents purchase cost, not full cost of goods sold.
+	column 'Unit Cost'
+		dataType: int64
+		formatString: €#,##0.00
+		lineageTag: 6b4ec7b8-0fb6-406e-96c7-7c0292d9e333
+		summarizeBy: none
+		sourceColumn: Unit Cost
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Product = m
+		mode: import
+		queryGroup: Dimensions
+		source =
+				let
+				    Source = Csv.Document(Web.Contents("https://raw.githubusercontent.com/GreyskullAnalytics/eternia-trading-co/refs/heads/main/data/dim_product.csv"),[Delimiter=",", Columns=7, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"product_key", Int64.Type}, {"product_name", type text}, {"category", type text}, {"alignment", type text}, {"brand_name", type text}, {"power_level", type text}, {"unit_cost", Int64.Type}}),
+				    #"Rename columns" = fn_FormatColumnNames ( #"Changed Type" )
+				in
+				    #"Rename columns"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

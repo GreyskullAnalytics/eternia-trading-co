@@ -1,0 +1,69 @@
+/// Dimension table containing geographic details about sales locations, including city, region, alignment, and population size.
+table Location
+	lineageTag: eec80db3-6eb1-4820-8180-c39eea7bef1c
+
+	/// Unique integer identifier for each location. Primary key of the Location table.
+	column 'Location Key'
+		dataType: int64
+		isHidden
+		isKey
+		formatString: 0
+		isAvailableInMdx: false
+		lineageTag: 7ba3e586-c9ba-4e23-8009-bc0f888a4c59
+		summarizeBy: none
+		sourceColumn: Location Key
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Name of the city where the sale or activity took place.
+	column 'City Name'
+		dataType: string
+		lineageTag: d2e949d7-7a7b-4e2b-a19e-01ed6a21d694
+		summarizeBy: none
+		sourceColumn: City Name
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Geographic region that the city belongs to.
+	column Region
+		dataType: string
+		lineageTag: c881c5cf-99a2-4ef2-9994-7d8f61473516
+		summarizeBy: none
+		sourceColumn: Region
+
+		annotation SummarizationSetBy = Automatic
+
+	/// The political or faction alignment of the location (e.g. Heroic, Evil, Neutral).
+	column Alignment
+		dataType: string
+		lineageTag: 5d457a31-dbda-4c14-aecc-ec94c3f6b874
+		summarizeBy: none
+		sourceColumn: Alignment
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Population size category of the city (e.g. Small, Medium, Large).
+	column 'Population Size'
+		dataType: string
+		lineageTag: 420b44ab-2513-4b4d-a1d7-33c27ee0f33f
+		summarizeBy: none
+		sourceColumn: Population Size
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Location = m
+		mode: import
+		queryGroup: Dimensions
+		source =
+				let
+				    Source = Csv.Document(Web.Contents("https://raw.githubusercontent.com/GreyskullAnalytics/eternia-trading-co/refs/heads/main/data/dim_location.csv"),[Delimiter=",", Columns=5, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"location_key", Int64.Type}, {"city_name", type text}, {"region", type text}, {"alignment", type text}, {"population_size", type text}}),
+				    #"Rename columns" = fn_FormatColumnNames ( #"Changed Type" )
+				in
+				    #"Rename columns"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

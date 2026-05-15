@@ -1,0 +1,142 @@
+/// Fact table containing individual sales transactions, including order date, quantity, pricing, discounts, and foreign keys to all dimension tables.
+table Sales
+	isHidden
+	lineageTag: c230d8a6-fbd0-4080-b625-31fba2954f2c
+
+	/// The date on which the sales order was placed. Links to the Date dimension table.
+	column 'Order Date'
+		dataType: dateTime
+		isHidden
+		formatString: Long Date
+		isAvailableInMdx: false
+		lineageTag: 02247869-b1c2-48e9-8113-3cf8b73688b0
+		summarizeBy: none
+		sourceColumn: Order Date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	/// Foreign key linking to the Location dimension table, identifying where the sale occurred.
+	column 'Location Key'
+		dataType: int64
+		isHidden
+		formatString: 0
+		isAvailableInMdx: false
+		lineageTag: 6ec67d7d-36ea-418a-a356-b5cee149b2f5
+		summarizeBy: none
+		sourceColumn: Location Key
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Foreign key linking to the Salesperson dimension table, identifying who made the sale.
+	column 'Salesperson Key'
+		dataType: int64
+		isHidden
+		formatString: 0
+		isAvailableInMdx: false
+		lineageTag: 07bfddde-3445-49a5-aea7-52d549579dcb
+		summarizeBy: none
+		sourceColumn: Salesperson Key
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Foreign key linking to the Customer dimension table, identifying who purchased.
+	column 'Customer Key'
+		dataType: int64
+		isHidden
+		formatString: 0
+		isAvailableInMdx: false
+		lineageTag: b2d56a96-a442-423a-948a-4a9c51f499ea
+		summarizeBy: none
+		sourceColumn: Customer Key
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Foreign key linking to the Product dimension table, identifying what was sold.
+	column 'Product Key'
+		dataType: int64
+		isHidden
+		formatString: 0
+		isAvailableInMdx: false
+		lineageTag: bc79229f-89fb-4354-b70b-277a0e86c763
+		summarizeBy: none
+		sourceColumn: Product Key
+
+		annotation SummarizationSetBy = Automatic
+
+	/// The number of units sold in the transaction.
+	column Quantity
+		dataType: int64
+		formatString: #,0
+		lineageTag: 7ab8d4d1-f14c-4682-8cef-ed249f61449d
+		summarizeBy: none
+		sourceColumn: Quantity
+
+		annotation SummarizationSetBy = Automatic
+
+	/// The price per unit charged to the customer at the time of sale.
+	column 'Unit Price'
+		dataType: double
+		formatString: €#,##0.00
+		lineageTag: d36940b3-8f5a-4c0e-92c1-e0afb700aaa8
+		summarizeBy: none
+		sourceColumn: Unit Price
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// The total monetary discount applied to the order.
+	column 'Discount Amount'
+		dataType: double
+		formatString: €#,##0.00
+		lineageTag: 8c0be8b4-978b-4b6f-9612-b7c8b18228aa
+		summarizeBy: none
+		sourceColumn: Discount Amount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// The total revenue from the transaction after discounts have been applied (Unit Price × Quantity − Discount Amount).
+	column 'Net Amount'
+		dataType: double
+		formatString: €#,##0.00
+		lineageTag: 40266436-906b-46f2-89b1-668748147c42
+		summarizeBy: none
+		sourceColumn: Net Amount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Unique identifier for each sales order.
+	column 'Order Id'
+		dataType: int64
+		isHidden
+		formatString: 0
+		isAvailableInMdx: false
+		lineageTag: 6e07c047-e976-452b-afdf-dfca445f3695
+		summarizeBy: none
+		sourceColumn: Order Id
+
+		annotation SummarizationSetBy = User
+
+	partition Sales = m
+		mode: import
+		queryGroup: Facts
+		source =
+				let
+				    Source = Csv.Document(Web.Contents("https://raw.githubusercontent.com/GreyskullAnalytics/eternia-trading-co/refs/heads/main/data/fact_sales.csv"),[Delimiter=",", Columns=11, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"sales_id", Int64.Type}, {"order_id", Int64.Type}, {"order_date", type date}, {"location_key", Int64.Type}, {"salesperson_key", Int64.Type}, {"customer_key", Int64.Type}, {"product_key", Int64.Type}, {"quantity", Int64.Type}, {"unit_price", type number}, {"discount_amount", type number}, {"net_amount", type number}}),
+				    #"Removed Columns" = Table.RemoveColumns(#"Changed Type",{"sales_id"}),
+				    #"Rename columns" = fn_FormatColumnNames ( #"Removed Columns" )
+				in
+				    #"Rename columns"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

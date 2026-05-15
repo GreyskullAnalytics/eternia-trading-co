@@ -1,0 +1,28 @@
+relationship AutoDetected_8a70aeff-0a78-4051-b052-19c40d94616e
+	fromColumn: Sales.'Customer Key'
+	toColumn: Customer.'Customer Key'
+
+relationship AutoDetected_51c823c3-f24b-4b7f-b551-d469e1a2649e
+	fromColumn: Sales.'Location Key'
+	toColumn: Location.'Location Key'
+
+relationship AutoDetected_e64604a0-7d73-477e-8d3c-9f0c6871b57a
+	fromColumn: Sales.'Product Key'
+	toColumn: Product.'Product Key'
+
+relationship AutoDetected_132da289-3f2a-4c19-ae25-e4b9c1eb8495
+	fromColumn: Sales.'Salesperson Key'
+	toColumn: Salesperson.'Salesperson Key'
+
+relationship a557a8ec-a7d3-6be3-1847-37890c3ee605
+	fromColumn: Sales.'Order Date'
+	toColumn: Date.Date
+
+relationship AutoDetected_f26dc45c-5eb5-43c4-bbf3-fff357f2fc38
+	fromColumn: 'Salesperson Targets'.'Salesperson Key'
+	toColumn: Salesperson.'Salesperson Key'
+
+relationship a166d965-71a0-0a6c-7763-9bc602d5c71f
+	fromColumn: 'Salesperson Targets'.Date
+	toColumn: Date.Date
+
