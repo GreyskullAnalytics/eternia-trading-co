@@ -43,6 +43,8 @@ jobs:
           git checkout -b "$BRANCH"
           git add data/fact_sales.csv data/fact_salesperson_targets.csv README.md
           git commit -m "chore: refresh data [$(date -u +%Y-%m-%d)]"
+          # Remove any leftover branch from a previous failed run
+          git push origin --delete "$BRANCH" 2>/dev/null || true
           git push origin "$BRANCH"
 
           PR_URL=$(gh pr create \
