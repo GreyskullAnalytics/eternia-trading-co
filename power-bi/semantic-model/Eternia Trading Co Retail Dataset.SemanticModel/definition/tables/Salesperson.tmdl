@@ -3,7 +3,10 @@ table Salesperson
 
 	column 'Salesperson Key'
 		dataType: int64
+		isHidden
+		isKey
 		formatString: 0
+		isAvailableInMdx: false
 		lineageTag: 54c0646f-d330-457d-840c-3744f26b4d8f
 		summarizeBy: none
 		sourceColumn: Salesperson Key

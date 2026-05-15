@@ -3,7 +3,10 @@ table Customer
 
 	column 'Customer Key'
 		dataType: int64
+		isHidden
+		isKey
 		formatString: 0
+		isAvailableInMdx: false
 		lineageTag: 7f16a8e9-33c7-4f13-830d-9ab97aea6093
 		summarizeBy: none
 		sourceColumn: Customer Key

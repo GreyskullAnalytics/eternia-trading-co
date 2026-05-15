@@ -3,7 +3,10 @@ table Product
 
 	column 'Product Key'
 		dataType: int64
+		isHidden
+		isKey
 		formatString: 0
+		isAvailableInMdx: false
 		lineageTag: 865b62ca-9864-48a8-ac36-9baba5dac6ee
 		summarizeBy: none
 		sourceColumn: Product Key

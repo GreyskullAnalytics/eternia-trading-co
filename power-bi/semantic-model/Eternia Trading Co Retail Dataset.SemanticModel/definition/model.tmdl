@@ -26,7 +26,7 @@ annotation __PBI_TimeIntelligenceEnabled = 0
 
 annotation PBI_QueryOrder = ["Customer","Location","Product","Salesperson","Sales","Salesperson Targets","fn_FormatColumnNames","@Measures","Date"]
 
-annotation PBI_ProTooling = ["DevMode"]
+annotation PBI_ProTooling = ["DevMode","MCP-PBIModeling"]
 
 ref table Customer
 ref table Location

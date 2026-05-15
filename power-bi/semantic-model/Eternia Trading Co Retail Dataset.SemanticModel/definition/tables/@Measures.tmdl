@@ -1,13 +1,65 @@
 table @Measures
 	lineageTag: cc0f3fd2-6cf3-48f0-bdb1-ab8e61e3c43c
 
-	column Column1
-		dataType: string
-		lineageTag: 1a10fcbf-65ea-4b62-b37a-fea6a06be439
-		summarizeBy: none
-		sourceColumn: Column1
+	/// Net revenue earned from the Sales fact table.
+	measure '€ Total Sales' = SUM(Sales[Net Amount])
+		formatString: Currency
+		displayFolder: Sales
+		lineageTag: 64bc8c6c-928b-4441-9e9d-00659a3d6ee7
 
-		annotation SummarizationSetBy = Automatic
+	/// Total quantity of products sold across all sales transactions.
+	measure '# Total Quantity Sold' = SUM(Sales[Quantity])
+		formatString: 0
+		displayFolder: Sales
+		lineageTag: 98277300-31d4-4ba4-ba4b-1fbeb0331047
+
+	/// Average net sales price per unit sold, based on total sales and quantity.
+	measure '€ Average Sales Price' = DIVIDE([€ Total Sales],[# Total Quantity Sold],0)
+		formatString: Currency
+		displayFolder: Sales
+		lineageTag: c7bf540e-6f9e-40f4-9823-3a0f16c2a98d
+
+	/// Total discount value applied across all sales transaction lines.
+	measure '€ Total Discount Amount' = SUM(Sales[Discount Amount])
+		formatString: Currency
+		displayFolder: Sales
+		lineageTag: e8bfe9b2-32f9-4b52-9536-9918a66c1999
+
+	/// Cumulative net sales from the start of the year to the current filter context.
+	measure '€ Sales Year to Date' = TOTALYTD([€ Total Sales],'Date'[Date])
+		formatString: Currency
+		displayFolder: Sales\Time Intelligence
+		lineageTag: 6c0bc44b-6a53-4913-8f7a-7136c6d99a64
+
+	/// Net sales for the same period in the prior year, using the model Date table.
+	measure '€ Sales Prior Year' = CALCULATE([€ Total Sales],SAMEPERIODLASTYEAR('Date'[Date]))
+		formatString: Currency
+		displayFolder: Sales\Time Intelligence
+		lineageTag: 839ea92d-3fed-4406-9416-ec339283da44
+
+	/// Year-over-year growth rate for net sales compared to the prior year period.
+	measure '% Sales Year-over-Year Growth' = DIVIDE([€ Total Sales]-[€ Sales Prior Year],[€ Sales Prior Year],0)
+		formatString: Percent
+		displayFolder: Sales\Time Intelligence
+		lineageTag: 5370af19-ad07-41be-ad5a-7bb381b11db1
+
+	/// The sum of monthly revenue targets from the Salesperson Targets fact table.
+	measure '€ Total Sales Target' = SUM('Salesperson Targets'[Monthly Target])
+		formatString: Currency
+		displayFolder: Salesperson Targets
+		lineageTag: 128eb130-953d-4003-8660-b6124de22a2d
+
+	/// Difference between actual net sales and the aggregated monthly target.
+	measure '€ Target Variance' = [€ Total Sales]-[€ Total Sales Target]
+		formatString: Currency
+		displayFolder: Salesperson Targets
+		lineageTag: 567e7244-36fb-43e8-af30-8365adb12f2e
+
+	/// The share of target reached, expressed as a percentage of the total sales target.
+	measure '% Target Coverage' = DIVIDE([€ Total Sales],[€ Total Sales Target],0)
+		formatString: Percent
+		displayFolder: Salesperson Targets
+		lineageTag: 8c597f49-bc3f-4658-bcff-520975f42a01
 
 	partition @Measures = m
 		mode: import
@@ -15,9 +67,10 @@ table @Measures
 		source =
 				let
 				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i44FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Column1 = _t]),
-				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Column1", type text}})
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Column1", type text}}),
+				    #"Removed Columns" = Table.RemoveColumns(#"Changed Type",{"Column1"})
 				in
-				    #"Changed Type"
+				    #"Removed Columns"
 
 	annotation PBI_NavigationStepName = Navigation
 

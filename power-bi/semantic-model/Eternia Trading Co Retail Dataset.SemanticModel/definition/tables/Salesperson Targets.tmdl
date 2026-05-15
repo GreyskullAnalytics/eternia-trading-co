@@ -1,4 +1,5 @@
 table 'Salesperson Targets'
+	isHidden
 	lineageTag: f973819d-e732-444a-90d8-4c2a46bb9359
 
 	column Date
@@ -25,7 +26,7 @@ table 'Salesperson Targets'
 		dataType: int64
 		formatString: 0
 		lineageTag: f47461cc-c265-48a3-9a1a-835344f8e494
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: Monthly Target
 
 		annotation SummarizationSetBy = Automatic

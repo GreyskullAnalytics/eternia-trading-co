@@ -1,4 +1,5 @@
 table Sales
+	isHidden
 	lineageTag: c230d8a6-fbd0-4080-b625-31fba2954f2c
 
 	column 'Order Date'
@@ -52,7 +53,7 @@ table Sales
 		dataType: int64
 		formatString: 0
 		lineageTag: 7ab8d4d1-f14c-4682-8cef-ed249f61449d
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: Quantity
 
 		annotation SummarizationSetBy = Automatic
@@ -60,7 +61,7 @@ table Sales
 	column 'Unit Price'
 		dataType: double
 		lineageTag: d36940b3-8f5a-4c0e-92c1-e0afb700aaa8
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: Unit Price
 
 		annotation SummarizationSetBy = Automatic
@@ -70,7 +71,7 @@ table Sales
 	column 'Discount Amount'
 		dataType: double
 		lineageTag: 8c0be8b4-978b-4b6f-9612-b7c8b18228aa
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: Discount Amount
 
 		annotation SummarizationSetBy = Automatic
@@ -80,12 +81,21 @@ table Sales
 	column 'Net Amount'
 		dataType: double
 		lineageTag: 40266436-906b-46f2-89b1-668748147c42
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: Net Amount
 
 		annotation SummarizationSetBy = Automatic
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Order Id'
+		dataType: int64
+		formatString: 0
+		lineageTag: 6e07c047-e976-452b-afdf-dfca445f3695
+		summarizeBy: none
+		sourceColumn: Order Id
+
+		annotation SummarizationSetBy = User
 
 	partition Sales = m
 		mode: import
@@ -95,7 +105,7 @@ table Sales
 				    Source = Csv.Document(Web.Contents("https://raw.githubusercontent.com/GreyskullAnalytics/eternia-trading-co/refs/heads/main/data/fact_sales.csv"),[Delimiter=",", Columns=11, Encoding=65001, QuoteStyle=QuoteStyle.None]),
 				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
 				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"sales_id", Int64.Type}, {"order_id", Int64.Type}, {"order_date", type date}, {"location_key", Int64.Type}, {"salesperson_key", Int64.Type}, {"customer_key", Int64.Type}, {"product_key", Int64.Type}, {"quantity", Int64.Type}, {"unit_price", type number}, {"discount_amount", type number}, {"net_amount", type number}}),
-				    #"Removed Columns" = Table.RemoveColumns(#"Changed Type",{"sales_id", "order_id"}),
+				    #"Removed Columns" = Table.RemoveColumns(#"Changed Type",{"sales_id"}),
 				    #"Rename columns" = fn_FormatColumnNames ( #"Removed Columns" )
 				in
 				    #"Rename columns"

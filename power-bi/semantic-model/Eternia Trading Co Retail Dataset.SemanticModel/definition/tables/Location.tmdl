@@ -3,7 +3,10 @@ table Location
 
 	column 'Location Key'
 		dataType: int64
+		isHidden
+		isKey
 		formatString: 0
+		isAvailableInMdx: false
 		lineageTag: 7ba3e586-c9ba-4e23-8009-bc0f888a4c59
 		summarizeBy: none
 		sourceColumn: Location Key

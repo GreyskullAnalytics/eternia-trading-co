@@ -1,8 +1,11 @@
 table Date
 	lineageTag: 90c9b992-a8d9-42ec-a069-cdfaf03a67ce
+	dataCategory: Time
 
 	column Date
 		dataType: dateTime
+		isUnique
+		isKey
 		formatString: Long Date
 		lineageTag: badf1d4d-18c9-470b-8182-dc280234867f
 		summarizeBy: none
@@ -24,7 +27,7 @@ table Date
 		dataType: int64
 		formatString: 0
 		lineageTag: e898524d-d727-495c-a029-31c063d8fbfb
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: Day of Week Number
 
 		annotation SummarizationSetBy = Automatic
@@ -41,7 +44,7 @@ table Date
 		dataType: int64
 		formatString: 0
 		lineageTag: 750b955b-5997-476a-b2d7-1081b84d2b66
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: Month Number
 
 		annotation SummarizationSetBy = Automatic
@@ -58,7 +61,7 @@ table Date
 		dataType: int64
 		formatString: 0
 		lineageTag: 31559113-2d6c-4725-a87e-3bd9a9f5b5f2
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: Quarter Number
 
 		annotation SummarizationSetBy = Automatic
@@ -67,7 +70,7 @@ table Date
 		dataType: int64
 		formatString: 0
 		lineageTag: e5ba3f3e-2f90-4dc8-9b97-7c0e999303bb
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: Year
 
 		annotation SummarizationSetBy = Automatic
