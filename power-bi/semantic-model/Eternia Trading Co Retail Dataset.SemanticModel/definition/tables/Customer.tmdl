@@ -1,6 +1,8 @@
+/// Dimension table containing demographic and profile information for each customer, including their race, alignment, home region, and loyalty tier.
 table Customer
 	lineageTag: 6f0b068c-df37-4952-a01a-e737b979c1f3
 
+	/// Unique integer identifier for each customer. Primary key of the Customer table.
 	column 'Customer Key'
 		dataType: int64
 		isHidden
@@ -13,6 +15,7 @@ table Customer
 
 		annotation SummarizationSetBy = Automatic
 
+	/// Full name of the customer.
 	column 'Customer Name'
 		dataType: string
 		lineageTag: 47223014-4d00-46b4-a374-5de2d4944ca9
@@ -21,6 +24,7 @@ table Customer
 
 		annotation SummarizationSetBy = Automatic
 
+	/// The race or species of the customer (e.g. Human, Elf, Beast Man).
 	column Race
 		dataType: string
 		lineageTag: e3059e3c-0fac-4be0-90a1-7fc9ccd8084a
@@ -29,6 +33,7 @@ table Customer
 
 		annotation SummarizationSetBy = Automatic
 
+	/// The moral or faction alignment of the customer (e.g. Heroic, Evil, Neutral).
 	column Alignment
 		dataType: string
 		lineageTag: 25f0008c-9349-47b1-b9d3-59d05a894ed5
@@ -37,6 +42,7 @@ table Customer
 
 		annotation SummarizationSetBy = Automatic
 
+	/// The region of Eternia that the customer originates from.
 	column 'Home Region'
 		dataType: string
 		lineageTag: 0d990185-14ef-4fa7-a1da-746dbdf9e2ac
@@ -45,6 +51,7 @@ table Customer
 
 		annotation SummarizationSetBy = Automatic
 
+	/// Customer loyalty classification tier, used to segment customers by purchasing behaviour and reward level.
 	column 'Loyalty Tier'
 		dataType: string
 		lineageTag: 817e2da2-4163-45be-a5d6-a59f52a370c1

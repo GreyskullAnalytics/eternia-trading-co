@@ -1,6 +1,8 @@
+/// Dimension table containing geographic details about sales locations, including city, region, alignment, and population size.
 table Location
 	lineageTag: eec80db3-6eb1-4820-8180-c39eea7bef1c
 
+	/// Unique integer identifier for each location. Primary key of the Location table.
 	column 'Location Key'
 		dataType: int64
 		isHidden
@@ -13,6 +15,7 @@ table Location
 
 		annotation SummarizationSetBy = Automatic
 
+	/// Name of the city where the sale or activity took place.
 	column 'City Name'
 		dataType: string
 		lineageTag: d2e949d7-7a7b-4e2b-a19e-01ed6a21d694
@@ -21,6 +24,7 @@ table Location
 
 		annotation SummarizationSetBy = Automatic
 
+	/// Geographic region that the city belongs to.
 	column Region
 		dataType: string
 		lineageTag: c881c5cf-99a2-4ef2-9994-7d8f61473516
@@ -29,6 +33,7 @@ table Location
 
 		annotation SummarizationSetBy = Automatic
 
+	/// The political or faction alignment of the location (e.g. Heroic, Evil, Neutral).
 	column Alignment
 		dataType: string
 		lineageTag: 5d457a31-dbda-4c14-aecc-ec94c3f6b874
@@ -37,6 +42,7 @@ table Location
 
 		annotation SummarizationSetBy = Automatic
 
+	/// Population size category of the city (e.g. Small, Medium, Large).
 	column 'Population Size'
 		dataType: string
 		lineageTag: 420b44ab-2513-4b4d-a1d7-33c27ee0f33f
