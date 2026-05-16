@@ -179,12 +179,12 @@ all_locations = [dict(zip(_loc_cols, r)) for r in [
 ]]
 
 all_salespeople = [dict(zip(_sp_cols, r)) for r in [
-    (1,  "He-Man",    "Heroic", None,       "Champion",   "Weapons",      "Royal Kingdom"),
+    (1,  "He-Man",    "Heroic", "He-Man",   "Champion",   "Weapons",      "Royal Kingdom"),
     (2,  "Teela",     "Heroic", "He-Man",   "Captain",    "Tactical Gear","Royal Kingdom"),
     (3,  "Man-At-Arms","Heroic","He-Man",   "Engineer",   "Technology",   "Royal Kingdom"),
     (4,  "Stratos",   "Heroic", "He-Man",   "Scout",      "Aerial Gear",  "Sky Realm"),
     (5,  "Orko",      "Heroic", "He-Man",   "Mage",       "Magic",        "Mystic Zone"),
-    (6,  "Skeletor",  "Evil",   None,       "Overlord",   "Dark Magic",   "Dark Hemisphere"),
+    (6,  "Skeletor",  "Evil",   "Skeletor", "Overlord",   "Dark Magic",   "Dark Hemisphere"),
     (7,  "Evil-Lyn",  "Evil",   "Skeletor", "Sorceress",  "Spells",       "Dark Hemisphere"),
     (8,  "Trap Jaw",  "Evil",   "Skeletor", "Enforcer",   "Weapons",      "Dark Hemisphere"),
     (9,  "Beast Man", "Evil",   "Skeletor", "Handler",    "Creatures",    "Wilderness"),
@@ -605,6 +605,23 @@ The fact table is generated with:
 - New fact_sales rows this run       : `{new_rows:,}`
 - Total fact_salesperson_target rows : `{len(_tgt_existing):,}`
 - New fact_salesperson_target rows   : `{_tgt_added:,}`
+
+## Power BI Semantic Model
+
+This repository includes a pre-built Power BI semantic model (`power-bi/semantic-model/`) ready to use out of the box.
+
+The model connects directly to the CSV files hosted in this GitHub repository, so refreshing it in Power BI Desktop will always pull the latest data. Since the underlying dataset is updated daily, the model can be kept current with a single refresh — no manual data exports or file replacements required.
+
+## Brand Assets
+
+To help you create professional dashboards and reports, this repository includes complete brand assets for Eternia Trading Co.:
+
+- **Brand Guidelines** (`assets/eternia-trading-co-brand-guidelines.pdf`) – Full brand guide including colour palettes, typography, logo usage, and design principles
+- **Logo Suite** (`assets/logos/`) – Multiple logo variations including horizontal, shield-led, and circular crest formats in various file types
+- **Power BI Theme** (`power-bi/theme/eternia-trading-co-theme.json`) – Pre-configured theme with brand colours, fonts, and styling for consistent Power BI reports
+- **Report Background** (`power-bi/theme/report-background.png`) – Branded background image for Power BI report pages
+
+Feel free to use these assets to create on-brand dashboards, presentations, and analytical reports.
 
 ## Support
 

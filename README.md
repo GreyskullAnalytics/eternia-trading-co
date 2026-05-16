@@ -139,6 +139,23 @@ The fact table is generated with:
 - Total fact_salesperson_target rows : `504`
 - New fact_salesperson_target rows   : `0`
 
+## Power BI Semantic Model
+
+This repository includes a pre-built Power BI semantic model (`power-bi/semantic-model/`) ready to use out of the box.
+
+The model connects directly to the CSV files hosted in this GitHub repository, so refreshing it in Power BI Desktop will always pull the latest data. Since the underlying dataset is updated daily, the model can be kept current with a single refresh — no manual data exports or file replacements required.
+
+## Brand Assets
+
+To help you create professional dashboards and reports, this repository includes complete brand assets for Eternia Trading Co.:
+
+- **Brand Guidelines** (`assets/eternia-trading-co-brand-guidelines.pdf`) – Full brand guide including colour palettes, typography, logo usage, and design principles
+- **Logo Suite** (`assets/logos/`) – Multiple logo variations including horizontal, shield-led, and circular crest formats in various file types
+- **Power BI Theme** (`power-bi/theme/eternia-trading-co-theme.json`) – Pre-configured theme with brand colours, fonts, and styling for consistent Power BI reports
+- **Report Background** (`power-bi/theme/report-background.png`) – Branded background image for Power BI report pages
+
+Feel free to use these assets to create on-brand dashboards, presentations, and analytical reports.
+
 ## Support
 
 The Eternia Trading Co. Dataset is provided free of charge. If it saves you time or sparks a project, Greyskull Analytics would really appreciate your support.

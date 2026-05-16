@@ -1,10 +1,10 @@
 salesperson_key,name,faction,sales_manager,role,specialty,home_region
-1,He-Man,Heroic,,Champion,Weapons,Royal Kingdom
+1,He-Man,Heroic,He-Man,Champion,Weapons,Royal Kingdom
 2,Teela,Heroic,He-Man,Captain,Tactical Gear,Royal Kingdom
 3,Man-At-Arms,Heroic,He-Man,Engineer,Technology,Royal Kingdom
 4,Stratos,Heroic,He-Man,Scout,Aerial Gear,Sky Realm
 5,Orko,Heroic,He-Man,Mage,Magic,Mystic Zone
-6,Skeletor,Evil,,Overlord,Dark Magic,Dark Hemisphere
+6,Skeletor,Evil,Skeletor,Overlord,Dark Magic,Dark Hemisphere
 7,Evil-Lyn,Evil,Skeletor,Sorceress,Spells,Dark Hemisphere
 8,Trap Jaw,Evil,Skeletor,Enforcer,Weapons,Dark Hemisphere
 9,Beast Man,Evil,Skeletor,Handler,Creatures,Wilderness
