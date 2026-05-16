@@ -6,7 +6,7 @@
 
 ## Last refreshed
 
-This data was last refreshed on **15 May 2026**.
+This data was last refreshed on **16 May 2026**.
 
 Data is automatically updated each day. Data covers a rolling three-year window — the current calendar year and the two preceding years — so the oldest year drops off each January as the new year is added.
 
@@ -114,7 +114,7 @@ Columns:
 ## Date logic
 
 - Rolling window start: `2024-01-01` (1 January, 2024)
-- Current end date: `2026-05-14`
+- Current end date: `2026-05-15`
 - Target fact volume: approximately **250,000 rows per calendar year**
 - Maximum window: 3 full calendar years; oldest year rolls off each January
 
@@ -131,19 +131,13 @@ The fact table is generated with:
 ## Refresh summary
 
 - Window start         : `2024-01-01`
-- Window end           : `2026-05-14`
-- Days covered         : `865`
+- Window end           : `2026-05-15`
+- Days covered         : `866`
 - Years covered        : `2.37`
-- Total fact_sales rows              : `590,477`
+- Total fact_sales rows              : `591,156`
 - New fact_sales rows this run       : `679`
 - Total fact_salesperson_target rows : `504`
 - New fact_salesperson_target rows   : `0`
-
-## Power BI Semantic Model
-
-This repository includes a pre-built Power BI semantic model (`power-bi/semantic-model/`) ready to use out of the box.
-
-The model connects directly to the CSV files hosted in this GitHub repository, so refreshing it in Power BI Desktop will always pull the latest data. Since the underlying dataset is updated daily, the model can be kept current with a single refresh — no manual data exports or file replacements required.
 
 ## Support
 
