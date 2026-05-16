@@ -1,0 +1,776 @@
+{
+    "name":  "Eternia Trading Co. - Minimalist",
+    "dataColors":  [
+                       "#0A1F3D",
+                       "#C79A2E",
+                       "#4F79C7",
+                       "#0F9D58",
+                       "#9ACD32",
+                       "#E4572E",
+                       "#8B5CF6",
+                       "#F4C542",
+                       "#6B7280",
+                       "#2D9CDB"
+                   ],
+    "background":  "#D6D6D8",
+    "backgroundLight":  "#F5F7FA",
+    "backgroundNeutral":  "#FFFFFF",
+    "foreground":  "#0A1F3D",
+    "foregroundNeutralSecondary":  "#6B7280",
+    "foregroundNeutralTertiary":  "#D6D6D8",
+    "tableAccent":  "#C79A2E",
+    "textClasses":  {
+                        "callout":  {
+                                        "fontSize":  45,
+                                        "fontFace":  "Segoe UI",
+                                        "color":  "#0A1F3D"
+                                    },
+                        "title":  {
+                                      "fontSize":  18,
+                                      "fontFace":  "Segoe UI Semibold",
+                                      "color":  "#0A1F3D"
+                                  },
+                        "header":  {
+                                       "fontSize":  14,
+                                       "fontFace":  "Segoe UI Semibold",
+                                       "color":  "#0A1F3D"
+                                   },
+                        "label":  {
+                                      "fontSize":  12,
+                                      "fontFace":  "Segoe UI",
+                                      "color":  "#0A1F3D"
+                                  }
+                    },
+    "visualStyles":  {
+                         "*":  {
+                                   "*":  {
+                                             "background":  [
+                                                                {
+                                                                    "color":  {
+                                                                                  "solid":  {
+                                                                                                "color":  "#FFFFFF"
+                                                                                            }
+                                                                              },
+                                                                    "transparency":  0
+                                                                }
+                                                            ],
+                                             "border":  [
+                                                            {
+                                                                "color":  {
+                                                                              "solid":  {
+                                                                                            "color":  "#D6D6D8"
+                                                                                        }
+                                                                          },
+                                                                "radius":  5,
+                                                                "show":  true
+                                                            }
+                                                        ],
+                                             "dropShadow":  [
+                                                                {
+                                                                    "show":  false
+                                                                }
+                                                            ],
+                                             "visualHeader":  [
+                                                                  {
+                                                                      "background":  {
+                                                                                         "solid":  {
+                                                                                                       "color":  "#FFFFFF"
+                                                                                                   }
+                                                                                     },
+                                                                      "border":  {
+                                                                                     "solid":  {
+                                                                                                   "color":  "#D6D6D8"
+                                                                                               }
+                                                                                 },
+                                                                      "foreground":  {
+                                                                                         "solid":  {
+                                                                                                       "color":  "#0A1F3D"
+                                                                                                   }
+                                                                                     }
+                                                                  }
+                                                              ],
+                                             "visualHeaderTooltip":  [
+                                                                         {
+                                                                             "background":  {
+                                                                                                "solid":  {
+                                                                                                              "color":  "#0A1F3D"
+                                                                                                          }
+                                                                                            },
+                                                                             "foreground":  {
+                                                                                                "solid":  {
+                                                                                                              "color":  "#FFFFFF"
+                                                                                                          }
+                                                                                            }
+                                                                         }
+                                                                     ]
+                                         }
+                               },
+                         "page":  {
+                                      "*":  {
+                                                "background":  [
+                                                                   {
+                                                                       "color":  {
+                                                                                     "solid":  {
+                                                                                                   "color":  "#D6D6D8"
+                                                                                               }
+                                                                                 },
+                                                                       "transparency":  0
+                                                                   }
+                                                               ],
+                                                "backgroundImage":  [
+                                                                        {
+                                                                            "show":  true,
+                                                                            "imageUrl":  "https://raw.githubusercontent.com/GreyskullAnalytics/eternia-trading-co/main/power-bi/theme/report-background.png",
+                                                                            "transparency":  0,
+                                                                            "imageScaling":  "Fit"
+                                                                        }
+                                                                    ],
+                                                "outspace":  [
+                                                                 {
+                                                                     "color":  {
+                                                                                   "solid":  {
+                                                                                                 "color":  "#D6D6D8"
+                                                                                             }
+                                                                               }
+                                                                 }
+                                                             ]
+                                            }
+                                  },
+                         "filterCard":  {
+                                            "$id":  "Applied",
+                                            "*":  {
+                                                      "background":  [
+                                                                         {
+                                                                             "color":  {
+                                                                                           "solid":  {
+                                                                                                         "color":  "#FFFFFF"
+                                                                                                     }
+                                                                                       },
+                                                                             "transparency":  0
+                                                                         }
+                                                                     ],
+                                                      "border":  [
+                                                                     {
+                                                                         "color":  {
+                                                                                       "solid":  {
+                                                                                                     "color":  "#D6D6D8"
+                                                                                                 }
+                                                                                   },
+                                                                         "radius":  5,
+                                                                         "show":  true
+                                                                     }
+                                                                 ],
+                                                      "inputBox":  [
+                                                                       {
+                                                                           "background":  {
+                                                                                              "solid":  {
+                                                                                                            "color":  "#F5F7FA"
+                                                                                                        }
+                                                                                          },
+                                                                           "foreground":  {
+                                                                                              "solid":  {
+                                                                                                            "color":  "#0A1F3D"
+                                                                                                        }
+                                                                                          }
+                                                                       }
+                                                                   ],
+                                                      "filterHeader":  [
+                                                                           {
+                                                                               "background":  {
+                                                                                                  "solid":  {
+                                                                                                                "color":  "#FFFFFF"
+                                                                                                            }
+                                                                                              },
+                                                                               "foreground":  {
+                                                                                                  "solid":  {
+                                                                                                                "color":  "#0A1F3D"
+                                                                                                            }
+                                                                                              }
+                                                                           }
+                                                                       ]
+                                                  }
+                                        },
+                         "slicer":  {
+                                        "*":  {
+                                                  "background":  [
+                                                                     {
+                                                                         "color":  {
+                                                                                       "solid":  {
+                                                                                                     "color":  "#FFFFFF"
+                                                                                                 }
+                                                                                   },
+                                                                         "transparency":  0
+                                                                     }
+                                                                 ],
+                                                  "header":  [
+                                                                 {
+                                                                     "background":  {
+                                                                                        "solid":  {
+                                                                                                      "color":  "#FFFFFF"
+                                                                                                  }
+                                                                                    },
+                                                                     "foreground":  {
+                                                                                        "solid":  {
+                                                                                                      "color":  "#0A1F3D"
+                                                                                                  }
+                                                                                    },
+                                                                     "fontFamily":  "Segoe UI Semibold",
+                                                                     "fontSize":  12
+                                                                 }
+                                                             ],
+                                                  "items":  [
+                                                                {
+                                                                    "background":  {
+                                                                                       "solid":  {
+                                                                                                     "color":  "#FFFFFF"
+                                                                                                 }
+                                                                                   },
+                                                                    "fontColor":  {
+                                                                                      "solid":  {
+                                                                                                    "color":  "#0A1F3D"
+                                                                                                }
+                                                                                  },
+                                                                    "fontFamily":  "Segoe UI",
+                                                                    "fontSize":  10
+                                                                }
+                                                            ]
+                                              }
+                                    },
+                         "card":  {
+                                      "*":  {
+                                                "background":  [
+                                                                   {
+                                                                       "color":  {
+                                                                                     "solid":  {
+                                                                                                   "color":  "#0A1F3D"
+                                                                                               }
+                                                                                 },
+                                                                       "transparency":  0
+                                                                   }
+                                                               ],
+                                                "categoryLabels":  [
+                                                                       {
+                                                                           "show":  true,
+                                                                           "color":  {
+                                                                                         "solid":  {
+                                                                                                       "color":  "#D6D6D8"
+                                                                                                   }
+                                                                                     },
+                                                                           "fontSize":  12,
+                                                                           "fontFamily":  "Segoe UI"
+                                                                       }
+                                                                   ],
+                                                "labels":  [
+                                                               {
+                                                                   "color":  {
+                                                                                 "solid":  {
+                                                                                               "color":  "#FFFFFF"
+                                                                                           }
+                                                                             },
+                                                                   "fontSize":  28,
+                                                                   "fontFamily":  "Segoe UI Semibold"
+                                                               }
+                                                           ]
+                                            }
+                                  },
+                         "columnChart":  {
+                                             "*":  {
+                                                       "categoryAxis":  [
+                                                                            {
+                                                                                "show":  true,
+                                                                                "fontSize":  11,
+                                                                                "fontFamily":  "Segoe UI",
+                                                                                "labelColor":  {
+                                                                                                   "solid":  {
+                                                                                                                 "color":  "#6B7280"
+                                                                                                             }
+                                                                                               },
+                                                                                "showAxisTitle":  false
+                                                                            }
+                                                                        ],
+                                                       "valueAxis":  [
+                                                                         {
+                                                                             "show":  true,
+                                                                             "fontSize":  11,
+                                                                             "fontFamily":  "Segoe UI",
+                                                                             "labelColor":  {
+                                                                                                "solid":  {
+                                                                                                              "color":  "#6B7280"
+                                                                                                          }
+                                                                                            },
+                                                                             "showAxisTitle":  false,
+                                                                             "gridlineShow":  true,
+                                                                             "gridlineColor":  {
+                                                                                                   "solid":  {
+                                                                                                                 "color":  "#D6D6D8"
+                                                                                                             }
+                                                                                               },
+                                                                             "gridlineThickness":  1,
+                                                                             "position":  "Left",
+                                                                             "labelDisplayUnits":  0
+                                                                         }
+                                                                     ],
+                                                       "dataLabels":  [
+                                                                          {
+                                                                              "show":  false
+                                                                          }
+                                                                      ],
+                                                       "legend":  [
+                                                                      {
+                                                                          "show":  true,
+                                                                          "position":  "Top",
+                                                                          "fontSize":  10,
+                                                                          "fontFamily":  "Segoe UI",
+                                                                          "labelColor":  {
+                                                                                             "solid":  {
+                                                                                                           "color":  "#0A1F3D"
+                                                                                                       }
+                                                                                         }
+                                                                      }
+                                                                  ]
+                                                   }
+                                         },
+                         "barChart":  {
+                                          "*":  {
+                                                    "categoryAxis":  [
+                                                                         {
+                                                                             "show":  true,
+                                                                             "fontSize":  11,
+                                                                             "fontFamily":  "Segoe UI",
+                                                                             "labelColor":  {
+                                                                                                "solid":  {
+                                                                                                              "color":  "#6B7280"
+                                                                                                          }
+                                                                                            },
+                                                                             "showAxisTitle":  false,
+                                                                             "maximumSize":  100
+                                                                         }
+                                                                     ],
+                                                    "valueAxis":  [
+                                                                      {
+                                                                          "show":  true,
+                                                                          "fontSize":  11,
+                                                                          "fontFamily":  "Segoe UI",
+                                                                          "labelColor":  {
+                                                                                             "solid":  {
+                                                                                                           "color":  "#6B7280"
+                                                                                                       }
+                                                                                         },
+                                                                          "showAxisTitle":  false,
+                                                                          "gridlineShow":  true,
+                                                                          "gridlineColor":  {
+                                                                                                "solid":  {
+                                                                                                              "color":  "#D6D6D8"
+                                                                                                          }
+                                                                                            },
+                                                                          "gridlineThickness":  1
+                                                                      }
+                                                                  ],
+                                                    "dataLabels":  [
+                                                                       {
+                                                                           "show":  false
+                                                                       }
+                                                                   ],
+                                                    "legend":  [
+                                                                   {
+                                                                       "show":  true,
+                                                                       "position":  "Top",
+                                                                       "fontSize":  10,
+                                                                       "fontFamily":  "Segoe UI",
+                                                                       "labelColor":  {
+                                                                                          "solid":  {
+                                                                                                        "color":  "#0A1F3D"
+                                                                                                    }
+                                                                                      }
+                                                                   }
+                                                               ]
+                                                }
+                                      },
+                         "lineChart":  {
+                                           "*":  {
+                                                     "categoryAxis":  [
+                                                                          {
+                                                                              "show":  true,
+                                                                              "fontSize":  11,
+                                                                              "fontFamily":  "Segoe UI",
+                                                                              "labelColor":  {
+                                                                                                 "solid":  {
+                                                                                                               "color":  "#6B7280"
+                                                                                                           }
+                                                                                             },
+                                                                              "showAxisTitle":  false
+                                                                          }
+                                                                      ],
+                                                     "valueAxis":  [
+                                                                       {
+                                                                           "show":  true,
+                                                                           "fontSize":  11,
+                                                                           "fontFamily":  "Segoe UI",
+                                                                           "labelColor":  {
+                                                                                              "solid":  {
+                                                                                                            "color":  "#6B7280"
+                                                                                                        }
+                                                                                          },
+                                                                           "showAxisTitle":  false,
+                                                                           "gridlineShow":  true,
+                                                                           "gridlineColor":  {
+                                                                                                 "solid":  {
+                                                                                                               "color":  "#D6D6D8"
+                                                                                                           }
+                                                                                             },
+                                                                           "gridlineThickness":  1
+                                                                       }
+                                                                   ],
+                                                     "dataLabels":  [
+                                                                        {
+                                                                            "show":  false
+                                                                        }
+                                                                    ],
+                                                     "legend":  [
+                                                                    {
+                                                                        "show":  true,
+                                                                        "position":  "Top",
+                                                                        "fontSize":  10,
+                                                                        "fontFamily":  "Segoe UI",
+                                                                        "labelColor":  {
+                                                                                           "solid":  {
+                                                                                                         "color":  "#0A1F3D"
+                                                                                                     }
+                                                                                       }
+                                                                    }
+                                                                ]
+                                                 }
+                                       },
+                         "areaChart":  {
+                                           "*":  {
+                                                     "categoryAxis":  [
+                                                                          {
+                                                                              "show":  true,
+                                                                              "fontSize":  11,
+                                                                              "fontFamily":  "Segoe UI",
+                                                                              "labelColor":  {
+                                                                                                 "solid":  {
+                                                                                                               "color":  "#6B7280"
+                                                                                                           }
+                                                                                             },
+                                                                              "showAxisTitle":  false
+                                                                          }
+                                                                      ],
+                                                     "valueAxis":  [
+                                                                       {
+                                                                           "show":  true,
+                                                                           "fontSize":  11,
+                                                                           "fontFamily":  "Segoe UI",
+                                                                           "labelColor":  {
+                                                                                              "solid":  {
+                                                                                                            "color":  "#6B7280"
+                                                                                                        }
+                                                                                          },
+                                                                           "showAxisTitle":  false,
+                                                                           "gridlineShow":  true,
+                                                                           "gridlineColor":  {
+                                                                                                 "solid":  {
+                                                                                                               "color":  "#D6D6D8"
+                                                                                                           }
+                                                                                             },
+                                                                           "gridlineThickness":  1
+                                                                       }
+                                                                   ],
+                                                     "dataLabels":  [
+                                                                        {
+                                                                            "show":  false
+                                                                        }
+                                                                    ],
+                                                     "legend":  [
+                                                                    {
+                                                                        "show":  true,
+                                                                        "position":  "Top",
+                                                                        "fontSize":  10,
+                                                                        "fontFamily":  "Segoe UI",
+                                                                        "labelColor":  {
+                                                                                           "solid":  {
+                                                                                                         "color":  "#0A1F3D"
+                                                                                                     }
+                                                                                       }
+                                                                    }
+                                                                ]
+                                                 }
+                                       },
+                         "pieChart":  {
+                                          "*":  {
+                                                    "dataLabels":  [
+                                                                       {
+                                                                           "show":  true,
+                                                                           "color":  {
+                                                                                         "solid":  {
+                                                                                                       "color":  "#0A1F3D"
+                                                                                                   }
+                                                                                     },
+                                                                           "fontSize":  10,
+                                                                           "fontFamily":  "Segoe UI"
+                                                                       }
+                                                                   ],
+                                                    "legend":  [
+                                                                   {
+                                                                       "show":  true,
+                                                                       "position":  "Right",
+                                                                       "fontSize":  10,
+                                                                       "fontFamily":  "Segoe UI",
+                                                                       "labelColor":  {
+                                                                                          "solid":  {
+                                                                                                        "color":  "#0A1F3D"
+                                                                                                    }
+                                                                                      }
+                                                                   }
+                                                               ]
+                                                }
+                                      },
+                         "donutChart":  {
+                                            "*":  {
+                                                      "dataLabels":  [
+                                                                         {
+                                                                             "show":  true,
+                                                                             "color":  {
+                                                                                           "solid":  {
+                                                                                                         "color":  "#0A1F3D"
+                                                                                                     }
+                                                                                       },
+                                                                             "fontSize":  10,
+                                                                             "fontFamily":  "Segoe UI"
+                                                                         }
+                                                                     ],
+                                                      "legend":  [
+                                                                     {
+                                                                         "show":  true,
+                                                                         "position":  "Right",
+                                                                         "fontSize":  10,
+                                                                         "fontFamily":  "Segoe UI",
+                                                                         "labelColor":  {
+                                                                                            "solid":  {
+                                                                                                          "color":  "#0A1F3D"
+                                                                                                      }
+                                                                                        }
+                                                                     }
+                                                                 ]
+                                                  }
+                                        },
+                         "tableEx":  {
+                                         "*":  {
+                                                   "grid":  [
+                                                                {
+                                                                    "gridVertical":  true,
+                                                                    "gridVerticalColor":  {
+                                                                                              "solid":  {
+                                                                                                            "color":  "#D6D6D8"
+                                                                                                        }
+                                                                                          },
+                                                                    "gridVerticalWeight":  1,
+                                                                    "gridHorizontal":  true,
+                                                                    "gridHorizontalColor":  {
+                                                                                                "solid":  {
+                                                                                                              "color":  "#D6D6D8"
+                                                                                                          }
+                                                                                            },
+                                                                    "gridHorizontalWeight":  1,
+                                                                    "rowPadding":  3
+                                                                }
+                                                            ],
+                                                   "columnHeaders":  [
+                                                                         {
+                                                                             "fontSize":  11,
+                                                                             "fontFamily":  "Segoe UI Semibold",
+                                                                             "fontColor":  {
+                                                                                               "solid":  {
+                                                                                                             "color":  "#FFFFFF"
+                                                                                                         }
+                                                                                           },
+                                                                             "backColor":  {
+                                                                                               "solid":  {
+                                                                                                             "color":  "#0A1F3D"
+                                                                                                         }
+                                                                                           },
+                                                                             "outline":  "None"
+                                                                         }
+                                                                     ],
+                                                   "values":  [
+                                                                  {
+                                                                      "fontSize":  10,
+                                                                      "fontFamily":  "Segoe UI",
+                                                                      "fontColorPrimary":  {
+                                                                                               "solid":  {
+                                                                                                             "color":  "#0A1F3D"
+                                                                                                         }
+                                                                                           },
+                                                                      "backColorPrimary":  {
+                                                                                               "solid":  {
+                                                                                                             "color":  "#FFFFFF"
+                                                                                                         }
+                                                                                           },
+                                                                      "fontColorSecondary":  {
+                                                                                                 "solid":  {
+                                                                                                               "color":  "#0A1F3D"
+                                                                                                           }
+                                                                                             },
+                                                                      "backColorSecondary":  {
+                                                                                                 "solid":  {
+                                                                                                               "color":  "#F5F7FA"
+                                                                                                           }
+                                                                                             },
+                                                                      "outline":  "None"
+                                                                  }
+                                                              ],
+                                                   "total":  [
+                                                                 {
+                                                                     "fontSize":  11,
+                                                                     "fontFamily":  "Segoe UI Semibold",
+                                                                     "fontColor":  {
+                                                                                       "solid":  {
+                                                                                                     "color":  "#0A1F3D"
+                                                                                                 }
+                                                                                   },
+                                                                     "backColor":  {
+                                                                                       "solid":  {
+                                                                                                     "color":  "#F5F7FA"
+                                                                                                 }
+                                                                                   }
+                                                                 }
+                                                             ]
+                                               }
+                                     },
+                         "matrix":  {
+                                        "*":  {
+                                                  "grid":  [
+                                                               {
+                                                                   "gridVertical":  true,
+                                                                   "gridVerticalColor":  {
+                                                                                             "solid":  {
+                                                                                                           "color":  "#D6D6D8"
+                                                                                                       }
+                                                                                         },
+                                                                   "gridVerticalWeight":  1,
+                                                                   "gridHorizontal":  true,
+                                                                   "gridHorizontalColor":  {
+                                                                                               "solid":  {
+                                                                                                             "color":  "#D6D6D8"
+                                                                                                         }
+                                                                                           },
+                                                                   "gridHorizontalWeight":  1,
+                                                                   "rowPadding":  3
+                                                               }
+                                                           ],
+                                                  "columnHeaders":  [
+                                                                        {
+                                                                            "fontSize":  11,
+                                                                            "fontFamily":  "Segoe UI Semibold",
+                                                                            "fontColor":  {
+                                                                                              "solid":  {
+                                                                                                            "color":  "#FFFFFF"
+                                                                                                        }
+                                                                                          },
+                                                                            "backColor":  {
+                                                                                              "solid":  {
+                                                                                                            "color":  "#0A1F3D"
+                                                                                                        }
+                                                                                          },
+                                                                            "outline":  "None"
+                                                                        }
+                                                                    ],
+                                                  "rowHeaders":  [
+                                                                     {
+                                                                         "fontSize":  10,
+                                                                         "fontFamily":  "Segoe UI Semibold",
+                                                                         "fontColor":  {
+                                                                                           "solid":  {
+                                                                                                         "color":  "#0A1F3D"
+                                                                                                     }
+                                                                                       },
+                                                                         "backColor":  {
+                                                                                           "solid":  {
+                                                                                                         "color":  "#F5F7FA"
+                                                                                                     }
+                                                                                       },
+                                                                         "outline":  "None"
+                                                                     }
+                                                                 ],
+                                                  "values":  [
+                                                                 {
+                                                                     "fontSize":  10,
+                                                                     "fontFamily":  "Segoe UI",
+                                                                     "fontColorPrimary":  {
+                                                                                              "solid":  {
+                                                                                                            "color":  "#0A1F3D"
+                                                                                                        }
+                                                                                          },
+                                                                     "backColorPrimary":  {
+                                                                                              "solid":  {
+                                                                                                            "color":  "#FFFFFF"
+                                                                                                        }
+                                                                                          },
+                                                                     "outline":  "None"
+                                                                 }
+                                                             ]
+                                              }
+                                    },
+                         "scatterChart":  {
+                                              "*":  {
+                                                        "xAxis":  [
+                                                                      {
+                                                                          "show":  true,
+                                                                          "fontSize":  11,
+                                                                          "fontFamily":  "Segoe UI",
+                                                                          "labelColor":  {
+                                                                                             "solid":  {
+                                                                                                           "color":  "#6B7280"
+                                                                                                       }
+                                                                                         },
+                                                                          "showAxisTitle":  false
+                                                                      }
+                                                                  ],
+                                                        "yAxis":  [
+                                                                      {
+                                                                          "show":  true,
+                                                                          "fontSize":  11,
+                                                                          "fontFamily":  "Segoe UI",
+                                                                          "labelColor":  {
+                                                                                             "solid":  {
+                                                                                                           "color":  "#6B7280"
+                                                                                                       }
+                                                                                         },
+                                                                          "showAxisTitle":  false
+                                                                      }
+                                                                  ],
+                                                        "legend":  [
+                                                                       {
+                                                                           "show":  true,
+                                                                           "position":  "Top",
+                                                                           "fontSize":  10,
+                                                                           "fontFamily":  "Segoe UI",
+                                                                           "labelColor":  {
+                                                                                              "solid":  {
+                                                                                                            "color":  "#0A1F3D"
+                                                                                                        }
+                                                                                          }
+                                                                       }
+                                                                   ]
+                                                    }
+                                          },
+                         "shape":  {
+                                       "*":  {
+                                                 "foreground":  [
+                                                                    {
+                                                                        "solid":  {
+                                                                                      "color":  "#C79A2E"
+                                                                                  }
+                                                                    }
+                                                                ],
+                                                 "background":  [
+                                                                    {
+                                                                        "solid":  {
+                                                                                      "color":  "transparent"
+                                                                                  }
+                                                                    }
+                                                                ]
+                                             }
+                                   }
+                     }
+}
