@@ -138,10 +138,10 @@ The fact table is generated with:
 - Window end           : `2026-05-16`
 - Days covered         : `867`
 - Years covered        : `2.37`
-- Total fact_sales rows              : `591,835`
-- New fact_sales rows this run       : `679`
+- Total fact_sales rows              : `567,873`
+- New fact_sales rows this run       : `0`
 - Total fact_salesperson_target rows : `504`
-- New fact_salesperson_target rows   : `0`
+- New fact_salesperson_target rows   : `504`
 
 ## Power BI Semantic Model
 

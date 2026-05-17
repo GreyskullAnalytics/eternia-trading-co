@@ -95,7 +95,8 @@ _daily_base = 250000 / 365.25
 
 def daily_row_count(d):
     w = combined_weight(d.month) / _weight_mean
-    return max(1, int(round(_daily_base * w)))
+    yf = year_factors(d.year)["volume"]
+    return max(1, int(round(_daily_base * w * yf)))
 
 def heroic_share(month, year):
     if month in (1, 2, 3, 4, 5):
@@ -115,33 +116,33 @@ def heroic_share(month, year):
 # Orko is substantially lower due to his 10–45% discount behaviour.
 
 ANNUAL_TARGETS = {
-    1:  17_496_000,  # He-Man       – Champion   (Heroic manager)
-    2:  16_524_000,  # Teela        – Captain
-    3:  15_876_000,  # Man-At-Arms  – Engineer
-    4:  15_228_000,  # Stratos      – Scout
-    5:  12_136_000,  # Orko         – Mage       (heavy discounter, lower net revenue)
-    6:  23_112_000,  # Skeletor     – Overlord   (Evil manager)
-    7:  22_464_000,  # Evil-Lyn     – Sorceress
-    8:  22_032_000,  # Trap Jaw     – Enforcer
-    9:  19_872_000,  # Beast Man    – Handler
-    10: 21_168_000,  # Tri-Klops   – Technician
-    11: 20_736_000,  # Webstor      – Infiltrator
-    12: 19_440_000,  # Mantenna     – Observer
-    13: 16_200_000,  # Buzz-Off     – Commander
-    14: 15_876_000,  # Fisto        – Specialist
+    1:  15_400_000,  # He-Man       – Champion   (Heroic manager)
+    2:  14_600_000,  # Teela        – Captain
+    3:  14_000_000,  # Man-At-Arms  – Engineer
+    4:  13_400_000,  # Stratos      – Scout
+    5:  10_700_000,  # Orko         – Mage       (heavy discounter, lower net revenue)
+    6:  20_400_000,  # Skeletor     – Overlord   (Evil manager)
+    7:  19_800_000,  # Evil-Lyn     – Sorceress
+    8:  19_400_000,  # Trap Jaw     – Enforcer
+    9:  17_500_000,  # Beast Man    – Handler
+    10: 18_600_000,  # Tri-Klops   – Technician
+    11: 18_300_000,  # Webstor      – Infiltrator
+    12: 17_100_000,  # Mantenna     – Observer
+    13: 14_300_000,  # Buzz-Off     – Commander
+    14: 14_000_000,  # Fisto        – Specialist
 }
 
 
-<<<<<<< Updated upstream
-=======
 # Year-level performance factors applied on top of seasonal weights.
 # volume: multiplier on daily transaction count.
 # price:  multiplier on base unit price realisation.
+# heroic_bias: shift applied to the heroic faction share each year.
 YEAR_FACTORS = {
     2024: {"volume": 0.85, "price": 0.92, "heroic_bias": -0.07},  # disrupted year — Skeletor's schemes hit trade routes hard, Evil faction stronger
     2025: {"volume": 1.00, "price": 1.00, "heroic_bias":  0.00},  # recovery baseline
     2026: {"volume": 1.15, "price": 1.08, "heroic_bias": +0.06},  # expansion — Heroic faction resurgent, new territories opened
 }
+
 def year_factors(year):
     if year in YEAR_FACTORS:
         return YEAR_FACTORS[year]
@@ -153,9 +154,6 @@ def year_factors(year):
         "price":       round(rng.uniform(0.90, 1.12), 3),
         "heroic_bias": round(rng.uniform(-0.08, 0.08), 3),
     }
-
-
->>>>>>> Stashed changes
 def last_day_of_month(year, month):
     return date(year, month, calendar.monthrange(year, month)[1])
 
@@ -292,7 +290,10 @@ generate_from = start_date
 existing_rows = 0
 
 if fact_sales_path.exists():
-    df_ex = pd.read_csv(fact_sales_path, parse_dates=["order_date"])
+    df_ex = pd.read_csv(fact_sales_path, parse_dates=["order_date"], low_memory=False)
+    df_ex["sales_id"] = pd.to_numeric(df_ex["sales_id"], errors="coerce")
+    df_ex["order_id"] = pd.to_numeric(df_ex["order_id"], errors="coerce")
+    df_ex = df_ex.dropna(subset=["sales_id", "order_id"])
     original_count = len(df_ex)
 
     df_ex["order_date"] = pd.to_datetime(df_ex["order_date"]).dt.date
