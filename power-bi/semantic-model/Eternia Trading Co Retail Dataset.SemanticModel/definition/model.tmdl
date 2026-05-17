@@ -29,6 +29,8 @@ annotation PBI_QueryOrder = ["Customer","Location","Product","Salesperson","Sale
 
 annotation PBI_ProTooling = ["DevMode","MCP-PBIModeling"]
 
+annotation __TEdtr = 1
+
 ref table Customer
 ref table Location
 ref table Product
