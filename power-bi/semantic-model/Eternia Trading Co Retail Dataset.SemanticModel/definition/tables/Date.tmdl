@@ -8,7 +8,7 @@ table Date
 		dataType: dateTime
 		isUnique
 		isKey
-		formatString: Long Date
+		formatString: yyyy-mm-dd
 		lineageTag: badf1d4d-18c9-470b-8182-dc280234867f
 		summarizeBy: none
 		sourceColumn: Date
@@ -16,6 +16,8 @@ table Date
 		annotation SummarizationSetBy = Automatic
 
 		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
 
 	/// The name of the day of the week (e.g. Monday, Tuesday).
 	column 'Day of Week'
