@@ -6,7 +6,7 @@
 
 ## Last refreshed
 
-This data was last refreshed on **16 May 2026**.
+This data was last refreshed on **17 May 2026**.
 
 Data is automatically updated each day. Data covers a rolling three-year window — the current calendar year and the two preceding years — so the oldest year drops off each January as the new year is added.
 
@@ -114,7 +114,7 @@ Columns:
 ## Date logic
 
 - Rolling window start: `2024-01-01` (1 January, 2024)
-- Current end date: `2026-05-15`
+- Current end date: `2026-05-16`
 - Target fact volume: approximately **250,000 rows per calendar year**
 - Maximum window: 3 full calendar years; oldest year rolls off each January
 
@@ -127,15 +127,16 @@ The fact table is generated with:
 - Region-aware location selection
 - Mostly alignment-matching product sales, with occasional cross-alignment exceptions
 - Higher discount variability for Orko
+- Year-level performance factors that vary transaction volume and pricing year-on-year, creating meaningful differences in annual revenue — 2024 was a disrupted year (lower volume and pricing), 2025 is the recovery baseline, and 2026 reflects an expansion period with stronger volume and pricing power. Future years beyond the explicitly defined range receive automatically generated factors seeded on the year, ensuring consistent but varied performance across the rolling window
 
 ## Refresh summary
 
 - Window start         : `2024-01-01`
-- Window end           : `2026-05-15`
-- Days covered         : `866`
+- Window end           : `2026-05-16`
+- Days covered         : `867`
 - Years covered        : `2.37`
-- Total fact_sales rows              : `591,156`
-- New fact_sales rows this run       : `679`
+- Total fact_sales rows              : `567,873`
+- New fact_sales rows this run       : `0`
 - Total fact_salesperson_target rows : `504`
 - New fact_salesperson_target rows   : `0`
 
