@@ -1,5 +1,5 @@
 {
-  "name": "Eternia Trading Co. - Minimalist",
+  "name": "Eternia Trading Co.",
   "dataColors": [
     "#0A1F3D",
     "#C79A2E",
@@ -8,7 +8,6 @@
     "#9ACD32",
     "#E4572E",
     "#8B5CF6",
-    "#F4C542",
     "#6B7280",
     "#2D9CDB"
   ],
@@ -26,17 +25,17 @@
       "color": "#0A1F3D"
     },
     "title": {
-      "fontSize": 18,
+      "fontSize": 24,
       "fontFace": "Segoe UI Semibold",
       "color": "#0A1F3D"
     },
     "header": {
-      "fontSize": 14,
+      "fontSize": 18,
       "fontFace": "Segoe UI Semibold",
       "color": "#0A1F3D"
     },
     "label": {
-      "fontSize": 12,
+      "fontSize": 16,
       "fontFace": "Segoe UI",
       "color": "#0A1F3D"
     }
@@ -99,6 +98,15 @@
             "foreground": {
               "solid": {
                 "color": "#FFFFFF"
+              }
+            }
+          }
+        ],
+        "outspacePane": [
+          {
+            "backgroundColor": {
+              "solid": {
+                "color": "#F5F7FA"
               }
             }
           }
@@ -189,6 +197,11 @@
     },
     "slicer": {
       "*": {
+        "border": [
+          {
+            "show": false
+          }
+        ],
         "background": [
           {
             "color": {
@@ -212,7 +225,7 @@
               }
             },
             "fontFamily": "Segoe UI Semibold",
-            "fontSize": 12
+            "fontSize": 16
           }
         ],
         "items": [
@@ -228,7 +241,7 @@
               }
             },
             "fontFamily": "Segoe UI",
-            "fontSize": 10
+            "fontSize": 14
           }
         ]
       }
@@ -253,7 +266,7 @@
                 "color": "#D6D6D8"
               }
             },
-            "fontSize": 12,
+            "fontSize": 16,
             "fontFamily": "Segoe UI"
           }
         ],
@@ -264,7 +277,7 @@
                 "color": "#FFFFFF"
               }
             },
-            "fontSize": 28,
+            "fontSize": 36,
             "fontFamily": "Segoe UI Semibold"
           }
         ]
@@ -275,7 +288,7 @@
         "categoryAxis": [
           {
             "show": true,
-            "fontSize": 11,
+            "fontSize": 14,
             "fontFamily": "Segoe UI",
             "labelColor": {
               "solid": {
@@ -288,7 +301,7 @@
         "valueAxis": [
           {
             "show": true,
-            "fontSize": 11,
+            "fontSize": 14,
             "fontFamily": "Segoe UI",
             "labelColor": {
               "solid": {
@@ -316,7 +329,7 @@
           {
             "show": true,
             "position": "Top",
-            "fontSize": 10,
+            "fontSize": 14,
             "fontFamily": "Segoe UI",
             "labelColor": {
               "solid": {
@@ -332,7 +345,7 @@
         "categoryAxis": [
           {
             "show": true,
-            "fontSize": 11,
+            "fontSize": 14,
             "fontFamily": "Segoe UI",
             "labelColor": {
               "solid": {
@@ -346,7 +359,7 @@
         "valueAxis": [
           {
             "show": true,
-            "fontSize": 11,
+            "fontSize": 14,
             "fontFamily": "Segoe UI",
             "labelColor": {
               "solid": {
@@ -372,7 +385,7 @@
           {
             "show": true,
             "position": "Top",
-            "fontSize": 10,
+            "fontSize": 14,
             "fontFamily": "Segoe UI",
             "labelColor": {
               "solid": {
@@ -388,7 +401,7 @@
         "categoryAxis": [
           {
             "show": true,
-            "fontSize": 11,
+            "fontSize": 14,
             "fontFamily": "Segoe UI",
             "labelColor": {
               "solid": {
@@ -401,7 +414,7 @@
         "valueAxis": [
           {
             "show": true,
-            "fontSize": 11,
+            "fontSize": 14,
             "fontFamily": "Segoe UI",
             "labelColor": {
               "solid": {
@@ -427,7 +440,7 @@
           {
             "show": true,
             "position": "Top",
-            "fontSize": 10,
+            "fontSize": 14,
             "fontFamily": "Segoe UI",
             "labelColor": {
               "solid": {
@@ -443,7 +456,7 @@
         "categoryAxis": [
           {
             "show": true,
-            "fontSize": 11,
+            "fontSize": 14,
             "fontFamily": "Segoe UI",
             "labelColor": {
               "solid": {
@@ -456,7 +469,7 @@
         "valueAxis": [
           {
             "show": true,
-            "fontSize": 11,
+            "fontSize": 14,
             "fontFamily": "Segoe UI",
             "labelColor": {
               "solid": {
@@ -482,7 +495,7 @@
           {
             "show": true,
             "position": "Top",
-            "fontSize": 10,
+            "fontSize": 14,
             "fontFamily": "Segoe UI",
             "labelColor": {
               "solid": {
@@ -503,7 +516,7 @@
                 "color": "#0A1F3D"
               }
             },
-            "fontSize": 10,
+            "fontSize": 14,
             "fontFamily": "Segoe UI"
           }
         ],
@@ -511,7 +524,7 @@
           {
             "show": true,
             "position": "Right",
-            "fontSize": 10,
+            "fontSize": 14,
             "fontFamily": "Segoe UI",
             "labelColor": {
               "solid": {
@@ -532,7 +545,7 @@
                 "color": "#0A1F3D"
               }
             },
-            "fontSize": 10,
+            "fontSize": 14,
             "fontFamily": "Segoe UI"
           }
         ],
@@ -540,7 +553,7 @@
           {
             "show": true,
             "position": "Right",
-            "fontSize": 10,
+            "fontSize": 14,
             "fontFamily": "Segoe UI",
             "labelColor": {
               "solid": {
@@ -574,7 +587,7 @@
         ],
         "columnHeaders": [
           {
-            "fontSize": 11,
+            "fontSize": 14,
             "fontFamily": "Segoe UI Semibold",
             "fontColor": {
               "solid": {
@@ -591,7 +604,7 @@
         ],
         "values": [
           {
-            "fontSize": 10,
+            "fontSize": 14,
             "fontFamily": "Segoe UI",
             "fontColorPrimary": {
               "solid": {
@@ -618,7 +631,7 @@
         ],
         "total": [
           {
-            "fontSize": 11,
+            "fontSize": 14,
             "fontFamily": "Segoe UI Semibold",
             "fontColor": {
               "solid": {
@@ -657,7 +670,7 @@
         ],
         "columnHeaders": [
           {
-            "fontSize": 11,
+            "fontSize": 14,
             "fontFamily": "Segoe UI Semibold",
             "fontColor": {
               "solid": {
@@ -674,7 +687,7 @@
         ],
         "rowHeaders": [
           {
-            "fontSize": 10,
+            "fontSize": 14,
             "fontFamily": "Segoe UI Semibold",
             "fontColor": {
               "solid": {
@@ -691,7 +704,7 @@
         ],
         "values": [
           {
-            "fontSize": 10,
+            "fontSize": 14,
             "fontFamily": "Segoe UI",
             "fontColorPrimary": {
               "solid": {
@@ -713,7 +726,7 @@
         "xAxis": [
           {
             "show": true,
-            "fontSize": 11,
+            "fontSize": 14,
             "fontFamily": "Segoe UI",
             "labelColor": {
               "solid": {
@@ -726,7 +739,7 @@
         "yAxis": [
           {
             "show": true,
-            "fontSize": 11,
+            "fontSize": 14,
             "fontFamily": "Segoe UI",
             "labelColor": {
               "solid": {
@@ -740,7 +753,7 @@
           {
             "show": true,
             "position": "Top",
-            "fontSize": 10,
+            "fontSize": 14,
             "fontFamily": "Segoe UI",
             "labelColor": {
               "solid": {

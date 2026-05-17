@@ -95,7 +95,8 @@ _daily_base = 250000 / 365.25
 
 def daily_row_count(d):
     w = combined_weight(d.month) / _weight_mean
-    return max(1, int(round(_daily_base * w)))
+    yf = year_factors(d.year)["volume"]
+    return max(1, int(round(_daily_base * w * yf)))
 
 def heroic_share(month):
     if month in (1, 2, 3, 4, 5):
@@ -127,6 +128,26 @@ ANNUAL_TARGETS = {
     13: 16_200_000,  # Buzz-Off     – Commander
     14: 15_876_000,  # Fisto        – Specialist
 }
+
+
+# Year-level performance factors applied on top of seasonal weights.
+# volume: multiplier on daily transaction count.
+# price:  multiplier on base unit price realisation.
+YEAR_FACTORS = {
+    2024: {"volume": 0.85, "price": 0.92},  # disrupted year — Skeletor's schemes hit trade routes hard
+    2025: {"volume": 1.00, "price": 1.00},  # recovery baseline
+    2026: {"volume": 1.15, "price": 1.08},  # expansion — new territories, stronger pricing power
+}
+def year_factors(year):
+    if year in YEAR_FACTORS:
+        return YEAR_FACTORS[year]
+    # For years beyond the explicitly defined range, generate reproducible factors
+    # seeded on the year so each year always gets the same values across runs.
+    rng = random.Random(year * 31_337)
+    return {
+        "volume": round(rng.uniform(0.82, 1.20), 3),
+        "price":  round(rng.uniform(0.90, 1.12), 3),
+    }
 
 
 def last_day_of_month(year, month):
@@ -377,7 +398,7 @@ else:
                     used_product_keys.add(prod["product_key"])
 
                     qty        = int(random.choices([1, 2, 3, 4, 5, 6], weights=[35, 25, 18, 12, 7, 3])[0])
-                    base_price = float(prod["unit_cost"]) * float(random.uniform(1.28, 2.15))
+                    base_price = float(prod["unit_cost"]) * float(random.uniform(1.28, 2.15)) * year_factors(day.year)["price"]
 
                     if sp["name"] == "Orko":
                         discount = base_price * float(random.uniform(0.10, 0.45))
@@ -594,6 +615,7 @@ The fact table is generated with:
 - Region-aware location selection
 - Mostly alignment-matching product sales, with occasional cross-alignment exceptions
 - Higher discount variability for Orko
+- Year-level performance factors that vary transaction volume and pricing year-on-year, creating meaningful differences in annual revenue — 2024 was a disrupted year (lower volume and pricing), 2025 is the recovery baseline, and 2026 reflects an expansion period with stronger volume and pricing power. Future years beyond the explicitly defined range receive automatically generated factors seeded on the year, ensuring consistent but varied performance across the rolling window
 
 ## Refresh summary
 
