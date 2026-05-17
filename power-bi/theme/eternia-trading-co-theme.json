@@ -633,6 +633,7 @@
           {
             "fontSize": 14,
             "fontFamily": "Segoe UI Semibold",
+            "bold": true,
             "fontColor": {
               "solid": {
                 "color": "#0A1F3D"
@@ -647,7 +648,7 @@
         ]
       }
     },
-    "matrix": {
+    "pivotTable": {
       "*": {
         "grid": [
           {
@@ -716,7 +717,34 @@
                 "color": "#FFFFFF"
               }
             },
+            "fontColorSecondary": {
+              "solid": {
+                "color": "#0A1F3D"
+              }
+            },
+            "backColorSecondary": {
+              "solid": {
+                "color": "#F5F7FA"
+              }
+            },
             "outline": "None"
+          }
+        ],
+        "rowSubtotals": [
+          {
+            "fontSize": 14,
+            "fontFamily": "Segoe UI Semibold",
+            "bold": true,
+            "fontColor": {
+              "solid": {
+                "color": "#0A1F3D"
+              }
+            },
+            "backColor": {
+              "solid": {
+                "color": "#F5F7FA"
+              }
+            }
           }
         ]
       }
@@ -787,6 +815,80 @@
         "border": [
           {
             "show": false
+          }
+        ]
+      }
+    },
+    "actionButton": {
+      "*": {
+        "border": [{ "show": false }],
+        "background": [{ "transparency": 100 }],
+        "fill": [
+          { "$id": "default",  "show": false, "transparency": 100 },
+          { "$id": "hover",    "show": false, "transparency": 100 },
+          { "$id": "selected", "show": false, "transparency": 100 },
+          { "$id": "disabled", "show": false, "transparency": 100 }
+        ],
+        "outline": [
+          { "$id": "default",  "show": false },
+          { "$id": "hover",    "show": false },
+          { "$id": "selected", "show": false },
+          { "$id": "disabled", "show": false }
+        ],
+        "text": [
+          {
+            "$id": "default",
+            "show": true,
+            "fontColor": { "solid": { "color": "#0A1F3D" } },
+            "fontSize": 16,
+            "horizontalAlignment": "right"
+          },
+          {
+            "$id": "hover",
+            "show": true,
+            "fontColor": { "solid": { "color": "#4F79C7" } },
+            "fontSize": 16,
+            "horizontalAlignment": "right"
+          },
+          {
+            "$id": "selected",
+            "show": true,
+            "fontColor": { "solid": { "color": "#C79A2E" } },
+            "fontSize": 16,
+            "horizontalAlignment": "right"
+          },
+          {
+            "$id": "disabled",
+            "show": true,
+            "fontColor": { "solid": { "color": "#6B7280" } },
+            "fontSize": 16,
+            "horizontalAlignment": "right"
+          }
+        ],
+        "icon": [
+          {
+            "$id": "default",
+            "lineColor": { "solid": { "color": "#0A1F3D" } },
+            "placement": "custom",
+            "horizontalAlignment": "left"
+          },
+          {
+            "$id": "hover",
+            "lineColor": { "solid": { "color": "#4F79C7" } },
+            "placement": "custom",
+            "horizontalAlignment": "left"
+          },
+          {
+            "$id": "selected",
+            "lineColor": { "solid": { "color": "#C79A2E" } },
+            "placement": "custom",
+            "horizontalAlignment": "left"
+          },
+          {
+            "$id": "disabled",
+            "lineColor": { "solid": { "color": "#6B7280" } },
+            "placement": "custom",
+            "horizontalAlignment": "left"
           }
         ]
       }

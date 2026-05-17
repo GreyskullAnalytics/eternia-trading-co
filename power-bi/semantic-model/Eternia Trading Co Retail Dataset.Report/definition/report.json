@@ -1,5 +1,5 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/report/3.0.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/report/3.2.0/schema.json",
   "themeCollection": {
     "baseTheme": {
       "name": "Fluent2-CY26SU04",
@@ -11,11 +11,11 @@
       "type": "SharedResources"
     },
     "customTheme": {
-      "name": "Eternia_Trading_Co._-_Minimali47720744464499154.json",
+      "name": "Eternia_Trading_Co.21141432896585421.json",
       "reportVersionAtImport": {
-        "visual": "2.4.0",
-        "report": "3.0.0",
-        "page": "2.3.0"
+        "visual": "2.8.0",
+        "report": "3.2.0",
+        "page": "2.3.1"
       },
       "type": "RegisteredResources"
     }
@@ -72,8 +72,8 @@
       "type": "RegisteredResources",
       "items": [
         {
-          "name": "Eternia_Trading_Co._-_Minimali47720744464499154.json",
-          "path": "Eternia_Trading_Co._-_Minimali47720744464499154.json",
+          "name": "Eternia_Trading_Co.21141432896585421.json",
+          "path": "Eternia_Trading_Co.21141432896585421.json",
           "type": "CustomTheme"
         }
       ]
