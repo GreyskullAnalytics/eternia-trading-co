@@ -95,15 +95,17 @@ _daily_base = 250000 / 365.25
 
 def daily_row_count(d):
     w = combined_weight(d.month) / _weight_mean
-    yf = year_factors(d.year)["volume"]
-    return max(1, int(round(_daily_base * w * yf)))
+    return max(1, int(round(_daily_base * w)))
 
-def heroic_share(month):
+def heroic_share(month, year):
     if month in (1, 2, 3, 4, 5):
-        return 0.56
+        base = 0.56
     elif month in (6, 7, 8):
-        return 0.49
-    return 0.53
+        base = 0.49
+    else:
+        base = 0.53
+    bias = year_factors(year).get("heroic_bias", 0.0)
+    return max(0.20, min(0.80, base + bias))
 
 # ── SALESPERSON TARGETS CONFIG ───────────────────────────────────────────────
 # Annual targets per salesperson, derived from expected transaction volume ×
@@ -130,13 +132,15 @@ ANNUAL_TARGETS = {
 }
 
 
+<<<<<<< Updated upstream
+=======
 # Year-level performance factors applied on top of seasonal weights.
 # volume: multiplier on daily transaction count.
 # price:  multiplier on base unit price realisation.
 YEAR_FACTORS = {
-    2024: {"volume": 0.85, "price": 0.92},  # disrupted year — Skeletor's schemes hit trade routes hard
-    2025: {"volume": 1.00, "price": 1.00},  # recovery baseline
-    2026: {"volume": 1.15, "price": 1.08},  # expansion — new territories, stronger pricing power
+    2024: {"volume": 0.85, "price": 0.92, "heroic_bias": -0.07},  # disrupted year — Skeletor's schemes hit trade routes hard, Evil faction stronger
+    2025: {"volume": 1.00, "price": 1.00, "heroic_bias":  0.00},  # recovery baseline
+    2026: {"volume": 1.15, "price": 1.08, "heroic_bias": +0.06},  # expansion — Heroic faction resurgent, new territories opened
 }
 def year_factors(year):
     if year in YEAR_FACTORS:
@@ -145,11 +149,13 @@ def year_factors(year):
     # seeded on the year so each year always gets the same values across runs.
     rng = random.Random(year * 31_337)
     return {
-        "volume": round(rng.uniform(0.82, 1.20), 3),
-        "price":  round(rng.uniform(0.90, 1.12), 3),
+        "volume":      round(rng.uniform(0.82, 1.20), 3),
+        "price":       round(rng.uniform(0.90, 1.12), 3),
+        "heroic_bias": round(rng.uniform(-0.08, 0.08), 3),
     }
 
 
+>>>>>>> Stashed changes
 def last_day_of_month(year, month):
     return date(year, month, calendar.monthrange(year, month)[1])
 
@@ -349,7 +355,7 @@ else:
             random.seed(_seed)
             np.random.seed(_seed)
 
-            hs = heroic_share(day.month)
+            hs = heroic_share(day.month, day.year)
 
             # Generate orders; some have multiple lines sharing salesperson/customer/location.
             target_lines = daily_row_count(day)
@@ -398,7 +404,7 @@ else:
                     used_product_keys.add(prod["product_key"])
 
                     qty        = int(random.choices([1, 2, 3, 4, 5, 6], weights=[35, 25, 18, 12, 7, 3])[0])
-                    base_price = float(prod["unit_cost"]) * float(random.uniform(1.28, 2.15)) * year_factors(day.year)["price"]
+                    base_price = float(prod["unit_cost"]) * float(random.uniform(1.28, 2.15))
 
                     if sp["name"] == "Orko":
                         discount = base_price * float(random.uniform(0.10, 0.45))
@@ -615,7 +621,10 @@ The fact table is generated with:
 - Region-aware location selection
 - Mostly alignment-matching product sales, with occasional cross-alignment exceptions
 - Higher discount variability for Orko
-- Year-level performance factors that vary transaction volume and pricing year-on-year, creating meaningful differences in annual revenue — 2024 was a disrupted year (lower volume and pricing), 2025 is the recovery baseline, and 2026 reflects an expansion period with stronger volume and pricing power. Future years beyond the explicitly defined range receive automatically generated factors seeded on the year, ensuring consistent but varied performance across the rolling window
+<<<<<<< Updated upstream
+=======
+- Year-level performance factors that vary transaction volume, pricing, and Heroic/Evil faction split year-on-year — 2024 was a disrupted year (lower volume and pricing, Evil faction dominant), 2025 is the recovery baseline, and 2026 reflects an expansion period with stronger volume, pricing power, and a resurgent Heroic faction. Future years beyond the explicitly defined range receive automatically generated factors seeded on the year, ensuring consistent but varied performance across the rolling window
+>>>>>>> Stashed changes
 
 ## Refresh summary
 
