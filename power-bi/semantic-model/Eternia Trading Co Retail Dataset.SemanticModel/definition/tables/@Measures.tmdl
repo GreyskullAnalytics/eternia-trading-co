@@ -36,7 +36,7 @@ table @Measures
 
 	/// Cumulative net sales from the start of the year to the current filter context.
 	measure '€ Sales Year to Date' =
-
+			
 			VAR _LastSalesDate =
 			    CALCULATE( MAX( Sales[Order Date] ), REMOVEFILTERS( 'Date' ) )
 			RETURN
@@ -131,7 +131,7 @@ table @Measures
 
 	/// Cumulative net sales from the start of the current quarter to the current filter context.
 	measure '€ Sales Quarter to Date' =
-
+			
 			VAR _LastSalesDate =
 			    CALCULATE( MAX( Sales[Order Date] ), REMOVEFILTERS( 'Date' ) )
 			RETURN
@@ -144,7 +144,7 @@ table @Measures
 
 	/// Cumulative net sales from the start of the current month to the current filter context.
 	measure '€ Sales Month to Date' =
-
+			
 			VAR _LastSalesDate =
 			    CALCULATE( MAX( Sales[Order Date] ), REMOVEFILTERS( 'Date' ) )
 			RETURN
@@ -157,7 +157,7 @@ table @Measures
 
 	/// Cumulative quantity sold from the start of the year to the current filter context.
 	measure '# Quantity Sold Year to Date' =
-
+			
 			VAR _LastSalesDate =
 			    CALCULATE( MAX( Sales[Order Date] ), REMOVEFILTERS( 'Date' ) )
 			RETURN
@@ -170,7 +170,7 @@ table @Measures
 
 	/// Cumulative quantity sold from the start of the current quarter to the current filter context.
 	measure '# Quantity Sold Quarter to Date' =
-
+			
 			VAR _LastSalesDate =
 			    CALCULATE( MAX( Sales[Order Date] ), REMOVEFILTERS( 'Date' ) )
 			RETURN
@@ -183,7 +183,7 @@ table @Measures
 
 	/// Cumulative quantity sold from the start of the current month to the current filter context.
 	measure '# Quantity Sold Month to Date' =
-
+			
 			VAR _LastSalesDate =
 			    CALCULATE( MAX( Sales[Order Date] ), REMOVEFILTERS( 'Date' ) )
 			RETURN
@@ -218,7 +218,7 @@ table @Measures
 
 	/// Cumulative distinct order count from the start of the year to the current filter context.
 	measure '# Orders Year to Date' =
-
+			
 			VAR _LastSalesDate =
 			    CALCULATE( MAX( Sales[Order Date] ), REMOVEFILTERS( 'Date' ) )
 			RETURN
@@ -231,7 +231,7 @@ table @Measures
 
 	/// Cumulative distinct order count from the start of the current quarter to the current filter context.
 	measure '# Orders Quarter to Date' =
-
+			
 			VAR _LastSalesDate =
 			    CALCULATE( MAX( Sales[Order Date] ), REMOVEFILTERS( 'Date' ) )
 			RETURN
@@ -244,7 +244,7 @@ table @Measures
 
 	/// Cumulative distinct order count from the start of the current month to the current filter context.
 	measure '# Orders Month to Date' =
-
+			
 			VAR _LastSalesDate =
 			    CALCULATE( MAX( Sales[Order Date] ), REMOVEFILTERS( 'Date' ) )
 			RETURN
@@ -279,7 +279,7 @@ table @Measures
 
 	/// Cumulative total discount applied from the start of the year to the current filter context.
 	measure '€ Discount Year to Date' =
-
+			
 			VAR _LastSalesDate =
 			    CALCULATE( MAX( Sales[Order Date] ), REMOVEFILTERS( 'Date' ) )
 			RETURN
@@ -292,7 +292,7 @@ table @Measures
 
 	/// Cumulative total discount applied from the start of the current quarter to the current filter context.
 	measure '€ Discount Quarter to Date' =
-
+			
 			VAR _LastSalesDate =
 			    CALCULATE( MAX( Sales[Order Date] ), REMOVEFILTERS( 'Date' ) )
 			RETURN
@@ -305,7 +305,7 @@ table @Measures
 
 	/// Cumulative total discount applied from the start of the current month to the current filter context.
 	measure '€ Discount Month to Date' =
-
+			
 			VAR _LastSalesDate =
 			    CALCULATE( MAX( Sales[Order Date] ), REMOVEFILTERS( 'Date' ) )
 			RETURN
@@ -340,7 +340,7 @@ table @Measures
 
 	/// Cumulative gross margin from the start of the year to the current filter context.
 	measure '€ Gross Margin Year to Date' =
-
+			
 			VAR _LastSalesDate =
 			    CALCULATE( MAX( Sales[Order Date] ), REMOVEFILTERS( 'Date' ) )
 			RETURN
@@ -353,7 +353,7 @@ table @Measures
 
 	/// Cumulative gross margin from the start of the current quarter to the current filter context.
 	measure '€ Gross Margin Quarter to Date' =
-
+			
 			VAR _LastSalesDate =
 			    CALCULATE( MAX( Sales[Order Date] ), REMOVEFILTERS( 'Date' ) )
 			RETURN
@@ -366,7 +366,7 @@ table @Measures
 
 	/// Cumulative gross margin from the start of the current month to the current filter context.
 	measure '€ Gross Margin Month to Date' =
-
+			
 			VAR _LastSalesDate =
 			    CALCULATE( MAX( Sales[Order Date] ), REMOVEFILTERS( 'Date' ) )
 			RETURN
@@ -537,7 +537,7 @@ table @Measures
 
 	/// Gross margin percentage from the start of the year to the current filter context.
 	measure '% Gross Margin Year to Date' =
-
+			
 			VAR _LastSalesDate =
 			    CALCULATE( MAX( Sales[Order Date] ), REMOVEFILTERS( 'Date' ) )
 			RETURN
@@ -550,7 +550,7 @@ table @Measures
 
 	/// Gross margin percentage from the start of the current quarter to the current filter context.
 	measure '% Gross Margin Quarter to Date' =
-
+			
 			VAR _LastSalesDate =
 			    CALCULATE( MAX( Sales[Order Date] ), REMOVEFILTERS( 'Date' ) )
 			RETURN
@@ -563,7 +563,7 @@ table @Measures
 
 	/// Gross margin percentage from the start of the current month to the current filter context.
 	measure '% Gross Margin Month to Date' =
-
+			
 			VAR _LastSalesDate =
 			    CALCULATE( MAX( Sales[Order Date] ), REMOVEFILTERS( 'Date' ) )
 			RETURN
@@ -576,7 +576,7 @@ table @Measures
 
 	/// Average sales price per unit from the start of the year to the current filter context.
 	measure '€ Avg Sales Price Year to Date' =
-
+			
 			VAR _LastSalesDate =
 			    CALCULATE( MAX( Sales[Order Date] ), REMOVEFILTERS( 'Date' ) )
 			RETURN
@@ -589,7 +589,7 @@ table @Measures
 
 	/// Average sales price per unit from the start of the current quarter to the current filter context.
 	measure '€ Avg Sales Price Quarter to Date' =
-
+			
 			VAR _LastSalesDate =
 			    CALCULATE( MAX( Sales[Order Date] ), REMOVEFILTERS( 'Date' ) )
 			RETURN
@@ -602,7 +602,7 @@ table @Measures
 
 	/// Average sales price per unit from the start of the current month to the current filter context.
 	measure '€ Avg Sales Price Month to Date' =
-
+			
 			VAR _LastSalesDate =
 			    CALCULATE( MAX( Sales[Order Date] ), REMOVEFILTERS( 'Date' ) )
 			RETURN
@@ -615,7 +615,7 @@ table @Measures
 
 	/// Average order amount from the start of the year to the current filter context.
 	measure '€ Avg Order Amount Year to Date' =
-
+			
 			VAR _LastSalesDate =
 			    CALCULATE( MAX( Sales[Order Date] ), REMOVEFILTERS( 'Date' ) )
 			RETURN
@@ -628,7 +628,7 @@ table @Measures
 
 	/// Average order amount from the start of the current quarter to the current filter context.
 	measure '€ Avg Order Amount Quarter to Date' =
-
+			
 			VAR _LastSalesDate =
 			    CALCULATE( MAX( Sales[Order Date] ), REMOVEFILTERS( 'Date' ) )
 			RETURN
@@ -641,7 +641,7 @@ table @Measures
 
 	/// Average order amount from the start of the current month to the current filter context.
 	measure '€ Avg Order Amount Month to Date' =
-
+			
 			VAR _LastSalesDate =
 			    CALCULATE( MAX( Sales[Order Date] ), REMOVEFILTERS( 'Date' ) )
 			RETURN

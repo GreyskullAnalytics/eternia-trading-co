@@ -32,7 +32,8 @@
                   {
                     "value": "Data Dictionary",
                     "textStyle": {
-                      "fontSize": "18pt"
+                      "fontSize": "18pt",
+                      "color": "#666666"
                     }
                   }
                 ]
