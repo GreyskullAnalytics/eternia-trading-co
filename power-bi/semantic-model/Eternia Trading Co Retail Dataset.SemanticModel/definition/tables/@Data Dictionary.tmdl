@@ -1,0 +1,117 @@
+/// Table holding semantic model metadata generated from DAX INFO.VIEW queries
+table '@Data Dictionary'
+	isHidden
+	lineageTag: 806e92f6-6382-4783-a1e5-0b0a793a6141
+
+	/// The type of semantic model item (Table, Column, Measure or Relationship)
+	column Type
+		isHidden
+		lineageTag: d83ac102-2199-43ea-8885-4290c081e055
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Type]
+		sortByColumn: TypeSortOrder
+
+		annotation SummarizationSetBy = Automatic
+
+	/// The name of the semantic model item.
+	column Name
+		isHidden
+		lineageTag: 6ddc4c1b-030a-47ef-a595-4c0fcc67fd4e
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Name]
+
+		annotation SummarizationSetBy = Automatic
+
+	/// The description of the semantic model item, as defined in the model metadata.
+	column Description
+		isHidden
+		lineageTag: cf75c02a-e0a2-4616-8776-34b1d781c889
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Description]
+
+		annotation SummarizationSetBy = Automatic
+
+	/// The parent table or display folder path the item belongs to within the semantic model.
+	column Location
+		isHidden
+		lineageTag: 766de31f-d520-4e1f-bd94-791ebe1149de
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Location]
+
+		annotation SummarizationSetBy = Automatic
+
+	/// The DAX expression or formula associated with the item, populated for measures and calculated columns.
+	column Expression
+		isHidden
+		lineageTag: de388942-2211-4a1d-bf5f-22922bc47b25
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Expression]
+
+		annotation SummarizationSetBy = Automatic
+
+	/// The sort order of the type.
+	column TypeSortOrder
+		isHidden
+		formatString: 0
+		lineageTag: 8d0bd8a5-45d1-4198-808d-43ee2f818e96
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [TypeSortOrder]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition '@Data Dictionary' = calculated
+		mode: import
+		source = ```
+				
+				VAR __Columns = 
+				    SELECTCOLUMNS (
+				        FILTER ( INFO.VIEW.COLUMNS(), [IsHidden] = FALSE() && [Table] <> "@Data Dictionary" ),
+				        "Type", "Column",
+				        "TypeSortOrder", 2,
+				        "Name", [Name],
+				        "Description", [Description],
+				        "Location", [Table],
+				        "Expression", [Expression]
+				    )
+				VAR __Measures =
+				    SELECTCOLUMNS (
+				        FILTER ( INFO.VIEW.MEASURES(), [IsHidden] = FALSE() ),
+				        "Type", "Measure",
+				        "TypeSortOrder", 3,
+				        "Name", [Name],
+				        "Description", [Description],
+				        "Location", [Table],
+				        "Expression", [Expression]
+				    )
+				VAR __Tables =
+				    SELECTCOLUMNS (
+				        FILTER ( INFO.VIEW.TABLES(), [IsHidden] = FALSE() && [Name] <> "@Data Dictionary" ),
+				        "Type", "Table",
+				        "TypeSortOrder", 1,
+				        "Name", [Name],
+				        "Description", [Description],
+				        "Location", "N/A",
+				        "Expression", [Expression]
+				    )
+				VAR __Relationships =
+				    SELECTCOLUMNS (
+				        INFO.VIEW.RELATIONSHIPS(),
+				        "Type", "Relationship",
+				        "TypeSortOrder", 4,
+				        "Name", [Relationship],
+				        "Description", BLANK(),
+				        "Location", "From: " & [FromTable] & " -> To: " & [ToTable],
+				        "Expression", "N/A"
+				    )
+				RETURN
+				    UNION ( __Columns, __Measures, __Tables, __Relationships )
+				```
+
+	annotation PBI_Id = 2ee4b5b2128e443cb3f1962bca9fcb15
+

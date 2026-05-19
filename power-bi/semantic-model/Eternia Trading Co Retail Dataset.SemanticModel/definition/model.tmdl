@@ -25,7 +25,7 @@ queryGroup 'Measure Table'
 
 annotation __PBI_TimeIntelligenceEnabled = 0
 
-annotation PBI_QueryOrder = ["Customer","Location","Product","Salesperson","Sales","Salesperson Targets","fn_FormatColumnNames","@Measures","Date"]
+annotation PBI_QueryOrder = ["Customer","Location","Product","Salesperson","Sales","Salesperson Targets","fn_FormatColumnNames","@Measures","Date","@Last Refresh Date"]
 
 annotation PBI_ProTooling = ["DevMode","MCP-PBIModeling"]
 
@@ -39,6 +39,8 @@ ref table Sales
 ref table @Measures
 ref table Date
 ref table 'Salesperson Targets'
+ref table '@Data Dictionary'
+ref table '@Last Refresh Date'
 
 ref cultureInfo en-US
 
