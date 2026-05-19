@@ -36,8 +36,13 @@ table @Measures
 
 	/// Cumulative net sales from the start of the year to the current filter context.
 	measure '€ Sales Year to Date' =
-			
-			TOTALYTD( [€ Total Sales], 'Date'[Date] )
+
+			VAR _LastSalesDate =
+			    CALCULATE( MAX( Sales[Order Date] ), REMOVEFILTERS( 'Date' ) )
+			RETURN
+			    IF(
+			        MIN( 'Date'[Date] ) <= _LastSalesDate,
+			        TOTALYTD([€ Total Sales], 'Date'[Date] ) )
 		formatString: €#,##0
 		displayFolder: Sales\Time Intelligence\Total Sales
 		lineageTag: 6c0bc44b-6a53-4913-8f7a-7136c6d99a64
@@ -126,40 +131,65 @@ table @Measures
 
 	/// Cumulative net sales from the start of the current quarter to the current filter context.
 	measure '€ Sales Quarter to Date' =
-			
-			TOTALQTD( [€ Total Sales], 'Date'[Date] )
+
+			VAR _LastSalesDate =
+			    CALCULATE( MAX( Sales[Order Date] ), REMOVEFILTERS( 'Date' ) )
+			RETURN
+			    IF(
+			        MIN( 'Date'[Date] ) <= _LastSalesDate,
+			        TOTALQTD([€ Total Sales], 'Date'[Date] ) )
 		formatString: €#,##0
 		displayFolder: Sales\Time Intelligence\Total Sales
 		lineageTag: 87993c0b-a40d-4386-88dc-efdd74501ef4
 
 	/// Cumulative net sales from the start of the current month to the current filter context.
 	measure '€ Sales Month to Date' =
-			
-			TOTALMTD( [€ Total Sales], 'Date'[Date] )
+
+			VAR _LastSalesDate =
+			    CALCULATE( MAX( Sales[Order Date] ), REMOVEFILTERS( 'Date' ) )
+			RETURN
+			    IF(
+			        MIN( 'Date'[Date] ) <= _LastSalesDate,
+			        TOTALMTD([€ Total Sales], 'Date'[Date] ) )
 		formatString: €#,##0
 		displayFolder: Sales\Time Intelligence\Total Sales
 		lineageTag: d3dc93bc-c301-4f72-bd40-d3acd5c9258c
 
 	/// Cumulative quantity sold from the start of the year to the current filter context.
 	measure '# Quantity Sold Year to Date' =
-			
-			TOTALYTD( [# Total Quantity Sold], 'Date'[Date] )
+
+			VAR _LastSalesDate =
+			    CALCULATE( MAX( Sales[Order Date] ), REMOVEFILTERS( 'Date' ) )
+			RETURN
+			    IF(
+			        MIN( 'Date'[Date] ) <= _LastSalesDate,
+			        TOTALYTD([# Total Quantity Sold], 'Date'[Date] ) )
 		formatString: #,0
 		displayFolder: Sales\Time Intelligence\Quantity Sold
 		lineageTag: 2791fbc0-b219-48e7-8434-28c7345dbede
 
 	/// Cumulative quantity sold from the start of the current quarter to the current filter context.
 	measure '# Quantity Sold Quarter to Date' =
-			
-			TOTALQTD( [# Total Quantity Sold], 'Date'[Date] )
+
+			VAR _LastSalesDate =
+			    CALCULATE( MAX( Sales[Order Date] ), REMOVEFILTERS( 'Date' ) )
+			RETURN
+			    IF(
+			        MIN( 'Date'[Date] ) <= _LastSalesDate,
+			        TOTALQTD([# Total Quantity Sold], 'Date'[Date] ) )
 		formatString: #,0
 		displayFolder: Sales\Time Intelligence\Quantity Sold
 		lineageTag: c34bd6c9-52f9-46f8-ae00-587d7b62d78c
 
 	/// Cumulative quantity sold from the start of the current month to the current filter context.
 	measure '# Quantity Sold Month to Date' =
-			
-			TOTALMTD( [# Total Quantity Sold], 'Date'[Date] )
+
+			VAR _LastSalesDate =
+			    CALCULATE( MAX( Sales[Order Date] ), REMOVEFILTERS( 'Date' ) )
+			RETURN
+			    IF(
+			        MIN( 'Date'[Date] ) <= _LastSalesDate,
+			        TOTALMTD([# Total Quantity Sold], 'Date'[Date] ) )
 		formatString: #,0
 		displayFolder: Sales\Time Intelligence\Quantity Sold
 		lineageTag: 752a8806-328c-4233-bc91-87030f0b1fe9
@@ -188,24 +218,39 @@ table @Measures
 
 	/// Cumulative distinct order count from the start of the year to the current filter context.
 	measure '# Orders Year to Date' =
-			
-			TOTALYTD( [# Total Orders], 'Date'[Date] )
+
+			VAR _LastSalesDate =
+			    CALCULATE( MAX( Sales[Order Date] ), REMOVEFILTERS( 'Date' ) )
+			RETURN
+			    IF(
+			        MIN( 'Date'[Date] ) <= _LastSalesDate,
+			        TOTALYTD([# Total Orders], 'Date'[Date] ) )
 		formatString: #,0
 		displayFolder: Sales\Time Intelligence\Total Orders
 		lineageTag: a4ecba68-d477-425c-a722-2f11b9b74fd8
 
 	/// Cumulative distinct order count from the start of the current quarter to the current filter context.
 	measure '# Orders Quarter to Date' =
-			
-			TOTALQTD( [# Total Orders], 'Date'[Date] )
+
+			VAR _LastSalesDate =
+			    CALCULATE( MAX( Sales[Order Date] ), REMOVEFILTERS( 'Date' ) )
+			RETURN
+			    IF(
+			        MIN( 'Date'[Date] ) <= _LastSalesDate,
+			        TOTALQTD([# Total Orders], 'Date'[Date] ) )
 		formatString: #,0
 		displayFolder: Sales\Time Intelligence\Total Orders
 		lineageTag: 7de8942d-5d11-4784-af49-c05bdcf58f3f
 
 	/// Cumulative distinct order count from the start of the current month to the current filter context.
 	measure '# Orders Month to Date' =
-			
-			TOTALMTD( [# Total Orders], 'Date'[Date] )
+
+			VAR _LastSalesDate =
+			    CALCULATE( MAX( Sales[Order Date] ), REMOVEFILTERS( 'Date' ) )
+			RETURN
+			    IF(
+			        MIN( 'Date'[Date] ) <= _LastSalesDate,
+			        TOTALMTD([# Total Orders], 'Date'[Date] ) )
 		formatString: #,0
 		displayFolder: Sales\Time Intelligence\Total Orders
 		lineageTag: cd2aa4b2-a26d-4c67-90c9-43ac27283a7e
@@ -234,24 +279,39 @@ table @Measures
 
 	/// Cumulative total discount applied from the start of the year to the current filter context.
 	measure '€ Discount Year to Date' =
-			
-			TOTALYTD( [€ Total Discount Amount], 'Date'[Date] )
+
+			VAR _LastSalesDate =
+			    CALCULATE( MAX( Sales[Order Date] ), REMOVEFILTERS( 'Date' ) )
+			RETURN
+			    IF(
+			        MIN( 'Date'[Date] ) <= _LastSalesDate,
+			        TOTALYTD([€ Total Discount Amount], 'Date'[Date] ) )
 		formatString: €#,##0
 		displayFolder: Sales\Time Intelligence\Discount Amount
 		lineageTag: be76ab68-c453-43ef-ad7c-68449360013c
 
 	/// Cumulative total discount applied from the start of the current quarter to the current filter context.
 	measure '€ Discount Quarter to Date' =
-			
-			TOTALQTD( [€ Total Discount Amount], 'Date'[Date] )
+
+			VAR _LastSalesDate =
+			    CALCULATE( MAX( Sales[Order Date] ), REMOVEFILTERS( 'Date' ) )
+			RETURN
+			    IF(
+			        MIN( 'Date'[Date] ) <= _LastSalesDate,
+			        TOTALQTD([€ Total Discount Amount], 'Date'[Date] ) )
 		formatString: €#,##0
 		displayFolder: Sales\Time Intelligence\Discount Amount
 		lineageTag: 9ee093d4-1ab0-4e06-9609-ef9bc07afc9b
 
 	/// Cumulative total discount applied from the start of the current month to the current filter context.
 	measure '€ Discount Month to Date' =
-			
-			TOTALMTD( [€ Total Discount Amount], 'Date'[Date] )
+
+			VAR _LastSalesDate =
+			    CALCULATE( MAX( Sales[Order Date] ), REMOVEFILTERS( 'Date' ) )
+			RETURN
+			    IF(
+			        MIN( 'Date'[Date] ) <= _LastSalesDate,
+			        TOTALMTD([€ Total Discount Amount], 'Date'[Date] ) )
 		formatString: €#,##0
 		displayFolder: Sales\Time Intelligence\Discount Amount
 		lineageTag: 04e2fb25-4477-4e5e-863e-d824471ecd94
@@ -280,24 +340,39 @@ table @Measures
 
 	/// Cumulative gross margin from the start of the year to the current filter context.
 	measure '€ Gross Margin Year to Date' =
-			
-			TOTALYTD( [€ Gross Margin], 'Date'[Date] )
+
+			VAR _LastSalesDate =
+			    CALCULATE( MAX( Sales[Order Date] ), REMOVEFILTERS( 'Date' ) )
+			RETURN
+			    IF(
+			        MIN( 'Date'[Date] ) <= _LastSalesDate,
+			        TOTALYTD([€ Gross Margin], 'Date'[Date] ) )
 		formatString: €#,##0
 		displayFolder: Sales\Time Intelligence\Gross Margin
 		lineageTag: 9865df10-a986-4dc4-b01c-d3e1b14acf40
 
 	/// Cumulative gross margin from the start of the current quarter to the current filter context.
 	measure '€ Gross Margin Quarter to Date' =
-			
-			TOTALQTD( [€ Gross Margin], 'Date'[Date] )
+
+			VAR _LastSalesDate =
+			    CALCULATE( MAX( Sales[Order Date] ), REMOVEFILTERS( 'Date' ) )
+			RETURN
+			    IF(
+			        MIN( 'Date'[Date] ) <= _LastSalesDate,
+			        TOTALQTD([€ Gross Margin], 'Date'[Date] ) )
 		formatString: €#,##0
 		displayFolder: Sales\Time Intelligence\Gross Margin
 		lineageTag: eac3cb58-a67e-4d58-bcd2-89e43b49b732
 
 	/// Cumulative gross margin from the start of the current month to the current filter context.
 	measure '€ Gross Margin Month to Date' =
-			
-			TOTALMTD( [€ Gross Margin], 'Date'[Date] )
+
+			VAR _LastSalesDate =
+			    CALCULATE( MAX( Sales[Order Date] ), REMOVEFILTERS( 'Date' ) )
+			RETURN
+			    IF(
+			        MIN( 'Date'[Date] ) <= _LastSalesDate,
+			        TOTALMTD([€ Gross Margin], 'Date'[Date] ) )
 		formatString: €#,##0
 		displayFolder: Sales\Time Intelligence\Gross Margin
 		lineageTag: 6f520ab8-71f4-4a43-bd62-d738db5087d9
@@ -462,72 +537,117 @@ table @Measures
 
 	/// Gross margin percentage from the start of the year to the current filter context.
 	measure '% Gross Margin Year to Date' =
-			
-			TOTALYTD( [% Gross Margin], 'Date'[Date] )
+
+			VAR _LastSalesDate =
+			    CALCULATE( MAX( Sales[Order Date] ), REMOVEFILTERS( 'Date' ) )
+			RETURN
+			    IF(
+			        MIN( 'Date'[Date] ) <= _LastSalesDate,
+			        TOTALYTD([% Gross Margin], 'Date'[Date] ) )
 		formatString: 0.0%
 		displayFolder: Sales\Time Intelligence\Gross Margin
 		lineageTag: 8b4af7b9-7e71-45f8-b004-80a98a2bed59
 
 	/// Gross margin percentage from the start of the current quarter to the current filter context.
 	measure '% Gross Margin Quarter to Date' =
-			
-			TOTALQTD( [% Gross Margin], 'Date'[Date] )
+
+			VAR _LastSalesDate =
+			    CALCULATE( MAX( Sales[Order Date] ), REMOVEFILTERS( 'Date' ) )
+			RETURN
+			    IF(
+			        MIN( 'Date'[Date] ) <= _LastSalesDate,
+			        TOTALQTD([% Gross Margin], 'Date'[Date] ) )
 		formatString: 0.0%
 		displayFolder: Sales\Time Intelligence\Gross Margin
 		lineageTag: 43b00fa1-9966-4a94-b798-a9c6723e8c46
 
 	/// Gross margin percentage from the start of the current month to the current filter context.
 	measure '% Gross Margin Month to Date' =
-			
-			TOTALMTD( [% Gross Margin], 'Date'[Date] )
+
+			VAR _LastSalesDate =
+			    CALCULATE( MAX( Sales[Order Date] ), REMOVEFILTERS( 'Date' ) )
+			RETURN
+			    IF(
+			        MIN( 'Date'[Date] ) <= _LastSalesDate,
+			        TOTALMTD([% Gross Margin], 'Date'[Date] ) )
 		formatString: 0.0%
 		displayFolder: Sales\Time Intelligence\Gross Margin
 		lineageTag: 4faa3791-5d88-4ade-b4bc-3d55f5e273c8
 
 	/// Average sales price per unit from the start of the year to the current filter context.
 	measure '€ Avg Sales Price Year to Date' =
-			
-			TOTALYTD( [€ Avg Sales Price], 'Date'[Date] )
+
+			VAR _LastSalesDate =
+			    CALCULATE( MAX( Sales[Order Date] ), REMOVEFILTERS( 'Date' ) )
+			RETURN
+			    IF(
+			        MIN( 'Date'[Date] ) <= _LastSalesDate,
+			        TOTALYTD([€ Avg Sales Price], 'Date'[Date] ) )
 		formatString: €#,##0.0
 		displayFolder: Sales\Time Intelligence\Avg Sales Price
 		lineageTag: d18149c4-1c51-4160-8086-8c6160466ece
 
 	/// Average sales price per unit from the start of the current quarter to the current filter context.
 	measure '€ Avg Sales Price Quarter to Date' =
-			
-			TOTALQTD( [€ Avg Sales Price], 'Date'[Date] )
+
+			VAR _LastSalesDate =
+			    CALCULATE( MAX( Sales[Order Date] ), REMOVEFILTERS( 'Date' ) )
+			RETURN
+			    IF(
+			        MIN( 'Date'[Date] ) <= _LastSalesDate,
+			        TOTALQTD([€ Avg Sales Price], 'Date'[Date] ) )
 		formatString: €#,##0.0
 		displayFolder: Sales\Time Intelligence\Avg Sales Price
 		lineageTag: e6da9c00-8c3f-40eb-8fbe-973f796f0160
 
 	/// Average sales price per unit from the start of the current month to the current filter context.
 	measure '€ Avg Sales Price Month to Date' =
-			
-			TOTALMTD( [€ Avg Sales Price], 'Date'[Date] )
+
+			VAR _LastSalesDate =
+			    CALCULATE( MAX( Sales[Order Date] ), REMOVEFILTERS( 'Date' ) )
+			RETURN
+			    IF(
+			        MIN( 'Date'[Date] ) <= _LastSalesDate,
+			        TOTALMTD([€ Avg Sales Price], 'Date'[Date] ) )
 		formatString: €#,##0.0
 		displayFolder: Sales\Time Intelligence\Avg Sales Price
 		lineageTag: eedc880c-ce97-451c-9cf0-36048ae4889a
 
 	/// Average order amount from the start of the year to the current filter context.
 	measure '€ Avg Order Amount Year to Date' =
-			
-			TOTALYTD( [€ Avg Order Amount], 'Date'[Date] )
+
+			VAR _LastSalesDate =
+			    CALCULATE( MAX( Sales[Order Date] ), REMOVEFILTERS( 'Date' ) )
+			RETURN
+			    IF(
+			        MIN( 'Date'[Date] ) <= _LastSalesDate,
+			        TOTALYTD([€ Avg Order Amount], 'Date'[Date] ) )
 		formatString: €#,##0.0
 		displayFolder: Sales\Time Intelligence\Avg Order Amount
 		lineageTag: efb96586-00de-4600-8698-058a660062eb
 
 	/// Average order amount from the start of the current quarter to the current filter context.
 	measure '€ Avg Order Amount Quarter to Date' =
-			
-			TOTALQTD( [€ Avg Order Amount], 'Date'[Date] )
+
+			VAR _LastSalesDate =
+			    CALCULATE( MAX( Sales[Order Date] ), REMOVEFILTERS( 'Date' ) )
+			RETURN
+			    IF(
+			        MIN( 'Date'[Date] ) <= _LastSalesDate,
+			        TOTALQTD([€ Avg Order Amount], 'Date'[Date] ) )
 		formatString: €#,##0.0
 		displayFolder: Sales\Time Intelligence\Avg Order Amount
 		lineageTag: cd50fb51-d4e0-4116-8212-f0553652ac47
 
 	/// Average order amount from the start of the current month to the current filter context.
 	measure '€ Avg Order Amount Month to Date' =
-			
-			TOTALMTD( [€ Avg Order Amount], 'Date'[Date] )
+
+			VAR _LastSalesDate =
+			    CALCULATE( MAX( Sales[Order Date] ), REMOVEFILTERS( 'Date' ) )
+			RETURN
+			    IF(
+			        MIN( 'Date'[Date] ) <= _LastSalesDate,
+			        TOTALMTD([€ Avg Order Amount], 'Date'[Date] ) )
 		formatString: €#,##0.0
 		displayFolder: Sales\Time Intelligence\Avg Order Amount
 		lineageTag: bbbeb438-9092-4ad3-bfc6-acd2a75a7fa9
