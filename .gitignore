@@ -1,7 +1,6 @@
 __pycache__/
 *.pyc
 .venv/
-power-bi/semantic-model/Eternia Trading Co Retail Dataset.Report/.pbi/localSettings.json
 *.abf
-power-bi/semantic-model/Eternia Trading Co Retail Dataset.Report/.pbi/localSettings.json
-*.abf
+*localSettings.json
+

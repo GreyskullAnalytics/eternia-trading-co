@@ -1,0 +1,35 @@
+/// Single-row table storing the date and time the semantic model data was last refreshed.
+table '@Last Refresh Date'
+	isHidden
+	lineageTag: 335b1d11-82a6-40b8-861d-3ee06850611a
+
+	/// The date and time the semantic model data was last refreshed, stored as a formatted text string.
+	column 'Last Refresh Date'
+		dataType: string
+		isHidden
+		lineageTag: b55383d5-6459-49be-a327-f38eaa2582e9
+		summarizeBy: none
+		sourceColumn: Last Refresh Date
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition '@Last Refresh Date' = m
+		mode: import
+		source = ```
+				let
+				Source = #table(
+				    {"Last Refresh Date"}, 
+				    {{DateTime.LocalNow()}}
+				)
+				in
+				Source
+				```
+
+	changedProperty = IsHidden
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

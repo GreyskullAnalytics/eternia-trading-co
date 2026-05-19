@@ -1,13 +1,13 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.8.0/schema.json",
-  "name": "1f712874d5798dbcdddc",
+  "name": "a48ab1b311487cfa4de9",
   "position": {
     "x": 15,
     "y": 15,
-    "z": 1,
+    "z": 3,
     "height": 105,
     "width": 915,
-    "tabOrder": 1
+    "tabOrder": 3
   },
   "visual": {
     "visualType": "textbox",
@@ -30,7 +30,7 @@
               {
                 "textRuns": [
                   {
-                    "value": "Semantic Model",
+                    "value": "Data Dictionary",
                     "textStyle": {
                       "fontSize": "18pt"
                     }

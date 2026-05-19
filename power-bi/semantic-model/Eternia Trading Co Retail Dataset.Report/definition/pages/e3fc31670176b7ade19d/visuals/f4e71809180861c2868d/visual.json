@@ -1,12 +1,12 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.8.0/schema.json",
   "name": "f4e71809180861c2868d",
   "position": {
-    "x": 184.93765586034911,
-    "y": 133.7655860349127,
+    "x": 141.91735537190081,
+    "y": 204.39669421487602,
     "z": 0,
-    "height": 514.41396508728178,
-    "width": 910.32418952618445,
+    "height": 670.31404958677683,
+    "width": 1636.9586776859503,
     "tabOrder": 0
   },
   "visual": {
@@ -23,7 +23,7 @@
                     "textStyle": {
                       "fontWeight": "bold",
                       "fontFamily": "-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif",
-                      "fontSize": "13px"
+                      "fontSize": "20pt"
                     }
                   }
                 ]
@@ -34,7 +34,7 @@
                     "value": " ",
                     "textStyle": {
                       "fontFamily": "-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif",
-                      "fontSize": "13px"
+                      "fontSize": "20pt"
                     }
                   }
                 ]
@@ -45,7 +45,7 @@
                     "value": "This report serves as the ",
                     "textStyle": {
                       "fontFamily": "-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif",
-                      "fontSize": "13px"
+                      "fontSize": "20pt"
                     }
                   },
                   {
@@ -53,14 +53,14 @@
                     "textStyle": {
                       "fontWeight": "bold",
                       "fontFamily": "-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif",
-                      "fontSize": "13px"
+                      "fontSize": "20pt"
                     }
                   },
                   {
                     "value": " – a powerful semantic model containing the analytical might needed to defend against the forces of uncertainty.",
                     "textStyle": {
                       "fontFamily": "-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif",
-                      "fontSize": "13px"
+                      "fontSize": "20pt"
                     }
                   }
                 ]
@@ -71,7 +71,7 @@
                     "value": " ",
                     "textStyle": {
                       "fontFamily": "-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif",
-                      "fontSize": "13px"
+                      "fontSize": "20pt"
                     }
                   }
                 ]
@@ -83,7 +83,7 @@
                     "textStyle": {
                       "fontWeight": "bold",
                       "fontFamily": "-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif",
-                      "fontSize": "13px"
+                      "fontSize": "20pt"
                     }
                   }
                 ]
@@ -94,7 +94,7 @@
                     "value": " ",
                     "textStyle": {
                       "fontFamily": "-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif",
-                      "fontSize": "13px"
+                      "fontSize": "20pt"
                     }
                   }
                 ]
@@ -105,7 +105,7 @@
                     "value": "Like the legendary ",
                     "textStyle": {
                       "fontFamily": "-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif",
-                      "fontSize": "13px"
+                      "fontSize": "20pt"
                     }
                   },
                   {
@@ -113,14 +113,14 @@
                     "textStyle": {
                       "fontWeight": "bold",
                       "fontFamily": "-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif",
-                      "fontSize": "13px"
+                      "fontSize": "20pt"
                     }
                   },
                   {
                     "value": ", this semantic model is meant to be wielded by other reports and dashboards. Connect your Power BI reports to this semantic model to harness its full potential.",
                     "textStyle": {
                       "fontFamily": "-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif",
-                      "fontSize": "13px"
+                      "fontSize": "20pt"
                     }
                   }
                 ]
@@ -131,7 +131,7 @@
                     "value": " ",
                     "textStyle": {
                       "fontFamily": "-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif",
-                      "fontSize": "13px"
+                      "fontSize": "20pt"
                     }
                   }
                 ]
@@ -143,7 +143,7 @@
                     "textStyle": {
                       "fontWeight": "bold",
                       "fontFamily": "-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif",
-                      "fontSize": "13px"
+                      "fontSize": "20pt"
                     }
                   }
                 ]
@@ -154,7 +154,7 @@
                     "value": "Open Power BI Desktop",
                     "textStyle": {
                       "fontFamily": "-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif",
-                      "fontSize": "13px"
+                      "fontSize": "20pt"
                     }
                   }
                 ],
@@ -166,7 +166,7 @@
                     "value": "Select ",
                     "textStyle": {
                       "fontFamily": "-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif",
-                      "fontSize": "13px"
+                      "fontSize": "20pt"
                     }
                   },
                   {
@@ -174,14 +174,14 @@
                     "textStyle": {
                       "fontWeight": "bold",
                       "fontFamily": "-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif",
-                      "fontSize": "13px"
+                      "fontSize": "20pt"
                     }
                   },
                   {
                     "value": " > ",
                     "textStyle": {
                       "fontFamily": "-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif",
-                      "fontSize": "13px"
+                      "fontSize": "20pt"
                     }
                   },
                   {
@@ -189,7 +189,7 @@
                     "textStyle": {
                       "fontWeight": "bold",
                       "fontFamily": "-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif",
-                      "fontSize": "13px"
+                      "fontSize": "20pt"
                     }
                   }
                 ],
@@ -201,7 +201,7 @@
                     "value": "Choose ",
                     "textStyle": {
                       "fontFamily": "-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif",
-                      "fontSize": "13px"
+                      "fontSize": "20pt"
                     }
                   },
                   {
@@ -209,14 +209,14 @@
                     "textStyle": {
                       "fontWeight": "bold",
                       "fontFamily": "-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif",
-                      "fontSize": "13px"
+                      "fontSize": "20pt"
                     }
                   },
                   {
                     "value": " from the list",
                     "textStyle": {
                       "fontFamily": "-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif",
-                      "fontSize": "13px"
+                      "fontSize": "20pt"
                     }
                   }
                 ],
@@ -228,7 +228,7 @@
                     "value": "Begin your quest for insights!",
                     "textStyle": {
                       "fontFamily": "-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif",
-                      "fontSize": "13px"
+                      "fontSize": "20pt"
                     }
                   }
                 ],
@@ -237,18 +237,25 @@
               {
                 "textRuns": [
                   {
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
                     "value": "\"I have the data!\"",
                     "textStyle": {
                       "fontFamily": "-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif",
                       "fontStyle": "italic",
-                      "fontSize": "13px"
+                      "fontSize": "20pt"
                     }
                   },
                   {
                     "value": " – Every analyst who connects to this model",
                     "textStyle": {
                       "fontFamily": "-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif",
-                      "fontSize": "13px"
+                      "fontSize": "20pt"
                     }
                   }
                 ]
