@@ -622,10 +622,7 @@ The fact table is generated with:
 - Region-aware location selection
 - Mostly alignment-matching product sales, with occasional cross-alignment exceptions
 - Higher discount variability for Orko
-<<<<<<< Updated upstream
-=======
 - Year-level performance factors that vary transaction volume, pricing, and Heroic/Evil faction split year-on-year — 2024 was a disrupted year (lower volume and pricing, Evil faction dominant), 2025 is the recovery baseline, and 2026 reflects an expansion period with stronger volume, pricing power, and a resurgent Heroic faction. Future years beyond the explicitly defined range receive automatically generated factors seeded on the year, ensuring consistent but varied performance across the rolling window
->>>>>>> Stashed changes
 
 ## Refresh summary
 
