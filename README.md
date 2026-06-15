@@ -6,7 +6,7 @@
 
 ## Last refreshed
 
-This data was last refreshed on **14 June 2026**.
+This data was last refreshed on **15 June 2026**.
 
 Data is automatically updated each day. Data covers a rolling three-year window — the current calendar year and the two preceding years — so the oldest year drops off each January as the new year is added.
 
@@ -114,7 +114,7 @@ Columns:
 ## Date logic
 
 - Rolling window start: `2024-01-01` (1 January, 2024)
-- Current end date: `2026-06-13`
+- Current end date: `2026-06-14`
 - Target fact volume: approximately **250,000 rows per calendar year**
 - Maximum window: 3 full calendar years; oldest year rolls off each January
 
@@ -132,10 +132,10 @@ The fact table is generated with:
 ## Refresh summary
 
 - Window start         : `2024-01-01`
-- Window end           : `2026-06-13`
-- Days covered         : `895`
+- Window end           : `2026-06-14`
+- Days covered         : `896`
 - Years covered        : `2.45`
-- Total fact_sales rows              : `589,635`
+- Total fact_sales rows              : `590,409`
 - New fact_sales rows this run       : `774`
 - Total fact_salesperson_target rows : `504`
 - New fact_salesperson_target rows   : `0`
