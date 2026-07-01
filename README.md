@@ -4,12 +4,6 @@
 
 *Supplying the bold, the baffled, the noble, and the deeply suspicious all across Eternia.*
 
-## Last refreshed
-
-This data was last refreshed on **01 July 2026**.
-
-Data is automatically updated each day. Data covers a rolling three-year window — the current calendar year and the two preceding years — so the oldest year drops off each January as the new year is added.
-
 ## About the company
 
 Eternia Trading Co. is one of the most recognisable commercial houses in all Eternia, with trading routes, supplier networks, and customer relationships stretching from the Royal Kingdom to the Dark Hemisphere and well beyond. The company deals in a broad portfolio of high-demand goods including weapons, armour, mystical accessories, transport, consumables, field equipment, and other specialist items required by Eternia's more adventurous populations.
@@ -38,124 +32,49 @@ This repository contains a fictional sales and analytics dataset themed around E
 
 It is intended to feel fun rather than corporate: a playful star-schema sales model where serious data work meets a knowingly camp fantasy business premise. In other words, the numbers are useful, the company is ridiculous, and that is entirely the point.
 
-The dataset contains:
-- `data/dim_location.csv`
-- `data/dim_salesperson.csv`
-- `data/dim_customer.csv`
-- `data/dim_product.csv`
-- `data/fact_sales.csv` *(refreshed daily)*
-- `data/fact_salesperson_targets.csv` *(refreshed daily)*
+The dataset is built on a real Azure SQL ERP database — [eternia-trading-co-erp](https://github.com/GreyskullAnalytics/eternia-trading-co-erp) — updated daily. The files in this repository are published outputs of that system, refreshed automatically.
 
-## Schema
+## What's in this repository
 
-### fact_sales
-Grain: one row per sales transaction line. Multiple lines can share the same `order_id` (same salesperson, customer, and location) with each line representing a different product.
+| Path | What it contains |
+|---|---|
+| `data/` | Pre-modelled star-schema CSVs — ready to use in any BI tool |
+| `source-data/sales-targets/` | Annual sales target planning workbooks (Excel), one per manager per year |
+| `source-data/database/` | BACPAC download instructions — the full ERP database as a monthly snapshot |
+| `power-bi/` | A pre-built Power BI semantic model and report |
+| `assets/` | Brand guidelines, logos, and Power BI theme |
 
-Columns:
-- `sales_id`
-- `order_id`
-- `order_date`
-- `location_key`
-- `salesperson_key`
-- `customer_key`
-- `product_key`
-- `quantity`
-- `unit_price`
-- `discount_amount`
-- `net_amount`
+## Getting started
 
-### fact_salesperson_targets
-Grain: one row per salesperson per calendar month.
+### Option 1 — Power BI semantic model
 
-Columns:
-- `date` – last calendar day of the month
-- `salesperson_key` – foreign key to dim_salesperson
-- `monthly_target` – net revenue target for the month
+The fastest path. Clone this repository, open `power-bi/semantic-model/Eternia Trading Co Retail Dataset.pbip` in Power BI Desktop, and hit **Refresh**. The model reads directly from the GitHub-hosted CSVs — no manual data wrangling required.
 
-Targets use a seasonally adjusted formula based on each salesperson's annual quota, with higher-volume months receiving proportionally higher targets. The rolling window always covers the current year and the two preceding calendar years; targets for the remainder of the current year are projected forward. The oldest year rolls off each January.
+→ **[Power BI Semantic Model](https://github.com/GreyskullAnalytics/eternia-trading-co/wiki/Power-BI-Semantic-Model)** — setup guide and connection details.
 
-### dim_location
-Columns:
-- `location_key`
-- `city_name`
-- `region`
-- `alignment`
-- `population_size`
+### Option 2 — Pre-modelled CSVs
 
-### dim_salesperson
-Columns:
-- `salesperson_key`
-- `name`
-- `faction`
-- `sales_manager`
-- `role`
-- `specialty`
-- `home_region`
+Six CSV files in `data/` form a clean star schema (four dimension tables, two fact tables) ready to load into any database, BI tool, or notebook without further transformation. `fact_sales` grows daily; `fact_salesperson_targets` is updated each December.
 
-### dim_customer
-Columns:
-- `customer_key`
-- `customer_name`
-- `race`
-- `alignment`
-- `home_region`
-- `loyalty_tier`
+→ **[Star Schema CSVs](https://github.com/GreyskullAnalytics/eternia-trading-co/wiki/Star-Schema-CSVs)** — schema detail, column descriptions, and joining keys.
 
-### dim_product
-Columns:
-- `product_key`
-- `product_name`
-- `category`
-- `alignment`
-- `brand_name`
-- `power_level`
-- `unit_cost`
+### Option 3 — Source data
 
-## Date logic
+For the data engineering challenge. Download `ETERNIA_ERP_DB.bacpac` from the [Releases](https://github.com/GreyskullAnalytics/eternia-trading-co/releases) page and restore it to any SQL Server-compatible engine. The database contains the complete operational history in a normalised OLTP schema — build your own extraction pipeline and validate your output against the `data/` CSVs.
 
-- Rolling window start: `2024-01-01` (1 January, 2024)
-- Current end date: `2026-06-30`
-- Target fact volume: approximately **250,000 rows per calendar year**
-- Maximum window: 3 full calendar years; oldest year rolls off each January
+Pair it with the annual sales target planning workbooks in `source-data/sales-targets/` — deliberately messy Excel files built for a cleansing and unpivoting exercise.
 
-## Distribution logic
-
-The fact table is generated with:
-- Seasonal monthly weighting repeated across all months in scope
-- A mild heroic bias in earlier parts of the year
-- Stronger evil presence in later months
-- Region-aware location selection
-- Mostly alignment-matching product sales, with occasional cross-alignment exceptions
-- Higher discount variability for Orko
-- Year-level performance factors that vary transaction volume, pricing, and Heroic/Evil faction split year-on-year — 2024 was a disrupted year (lower volume and pricing, Evil faction dominant), 2025 is the recovery baseline, and 2026 reflects an expansion period with stronger volume, pricing power, and a resurgent Heroic faction. Future years beyond the explicitly defined range receive automatically generated factors seeded on the year, ensuring consistent but varied performance across the rolling window
-
-## Refresh summary
-
-- Window start         : `2024-01-01`
-- Window end           : `2026-06-30`
-- Days covered         : `912`
-- Years covered        : `2.50`
-- Total fact_sales rows              : `602,793`
-- New fact_sales rows this run       : `774`
-- Total fact_salesperson_target rows : `504`
-- New fact_salesperson_target rows   : `0`
-
-## Power BI Semantic Model
-
-This repository includes a pre-built Power BI semantic model (`power-bi/semantic-model/`) ready to use out of the box.
-
-The model connects directly to the CSV files hosted in this GitHub repository, so refreshing it in Power BI Desktop will always pull the latest data. Since the underlying dataset is updated daily, the model can be kept current with a single refresh — no manual data exports or file replacements required.
+→ **[Database BACPAC](https://github.com/GreyskullAnalytics/eternia-trading-co/wiki/Database-BACPAC)** — schema overview and import instructions.  
+→ **[Sales Target Workbooks](https://github.com/GreyskullAnalytics/eternia-trading-co/wiki/Sales-Target-Workbooks)** — workbook structure and the data engineering exercise.
 
 ## Brand Assets
 
-To help you create professional dashboards and reports, this repository includes complete brand assets for Eternia Trading Co.:
+This repository includes complete brand assets for Eternia Trading Co.:
 
-- **Brand Guidelines** (`assets/eternia-trading-co-brand-guidelines.pdf`) – Full brand guide including colour palettes, typography, logo usage, and design principles
-- **Logo Suite** (`assets/logos/`) – Multiple logo variations including horizontal, shield-led, and circular crest formats in various file types
-- **Power BI Theme** (`power-bi/theme/eternia-trading-co-theme.json`) – Pre-configured theme with brand colours, fonts, and styling for consistent Power BI reports
-- **Report Background** (`power-bi/theme/report-background.png`) – Branded background image for Power BI report pages
-
-Feel free to use these assets to create on-brand dashboards, presentations, and analytical reports.
+- **Brand Guidelines** (`assets/eternia-trading-co-brand-guidelines.pdf`) — colour palettes, typography, logo usage, and design principles
+- **Logo Suite** (`assets/logos/`) — horizontal, shield-led, and circular crest formats in multiple file types
+- **Power BI Theme** (`power-bi/theme/eternia-trading-co-theme.json`) — pre-configured theme with brand colours and fonts
+- **Report Background** (`power-bi/theme/report-background.png`) — branded background image for Power BI report pages
 
 ## Support
 
