@@ -32,7 +32,7 @@ This repository contains a fictional sales and analytics dataset themed around E
 
 It is intended to feel fun rather than corporate: a playful star-schema sales model where serious data work meets a knowingly camp fantasy business premise. In other words, the numbers are useful, the company is ridiculous, and that is entirely the point.
 
-The dataset is built on a real Azure SQL ERP database — [eternia-trading-co-erp](https://github.com/GreyskullAnalytics/eternia-trading-co-erp) — updated daily. The files in this repository are published outputs of that system, refreshed automatically.
+The dataset is built on a real [Azure SQL ERP database](https://github.com/GreyskullAnalytics/eternia-trading-co/wiki/Database-BACPAC), updated daily. The files in this repository are published outputs of that system, refreshed automatically.
 
 ## What's in this repository
 
