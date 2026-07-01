@@ -1,4 +1,5 @@
 customer_key,customer_name,race,alignment,home_region,loyalty_tier
+-1,Unknown,Unknown,Unknown,Unknown,Unknown
 1,King Randor,Human,Heroic,Royal Kingdom,Gold
 2,Royal Guard,Human,Heroic,Royal Kingdom,Silver
 3,Avion Sky Patrol,Avionian,Heroic,Sky Realm,Gold
@@ -15,3 +16,4 @@ customer_key,customer_name,race,alignment,home_region,loyalty_tier
 14,Shadow Syndicate,Human,Evil,Dark Hemisphere,Bronze
 15,Skywatch Corps,Avionian,Heroic,Sky Realm,Gold
 16,Jungle Cartographers,Human,Neutral,Wilderness,Silver
+(17 rows affected)

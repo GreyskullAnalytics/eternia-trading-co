@@ -1,4 +1,5 @@
 location_key,city_name,region,alignment,population_size
+-1,Unknown,Unknown,Unknown,Unknown
 1,Eternos,Royal Kingdom,Heroic,Large
 2,Royal Palace District,Royal Kingdom,Heroic,Medium
 3,Market of Eternos,Royal Kingdom,Heroic,Medium
@@ -23,3 +24,4 @@ location_key,city_name,region,alignment,population_size
 22,Pearl Trench,Coastal Depths,Neutral,Medium
 23,Caligar Reef,Coastal Depths,Heroic,Medium
 24,Sunken Bazaar,Coastal Depths,Neutral,Small
+(25 rows affected)

@@ -1,15 +1,31 @@
 salesperson_key,name,faction,sales_manager,role,specialty,home_region
-1,He-Man,Heroic,He-Man,Champion,Weapons,Royal Kingdom
-2,Teela,Heroic,He-Man,Captain,Tactical Gear,Royal Kingdom
-3,Man-At-Arms,Heroic,He-Man,Engineer,Technology,Royal Kingdom
-4,Stratos,Heroic,He-Man,Scout,Aerial Gear,Sky Realm
-5,Orko,Heroic,He-Man,Mage,Magic,Mystic Zone
-6,Skeletor,Evil,Skeletor,Overlord,Dark Magic,Dark Hemisphere
-7,Evil-Lyn,Evil,Skeletor,Sorceress,Spells,Dark Hemisphere
-8,Trap Jaw,Evil,Skeletor,Enforcer,Weapons,Dark Hemisphere
-9,Beast Man,Evil,Skeletor,Handler,Creatures,Wilderness
-10,Tri-Klops,Evil,Skeletor,Technician,Surveillance,Dark Hemisphere
-11,Webstor,Evil,Skeletor,Infiltrator,Gadgets,Dark Hemisphere
-12,Mantenna,Evil,Skeletor,Observer,Recon,Dark Hemisphere
-13,Buzz-Off,Heroic,He-Man,Commander,Armor,Wilderness
-14,Fisto,Heroic,He-Man,Specialist,Defense,Royal Kingdom
+-1,Unknown,Unknown,Unknown,Unknown,Unknown,Unknown
+5,He-Man,Heroic,He-Man,Champion,Weapons,Royal Kingdom
+6,Teela,Heroic,He-Man,Captain,Tactical Gear,Royal Kingdom
+7,Man-At-Arms,Heroic,He-Man,Engineer,Technology,Royal Kingdom
+8,Stratos,Heroic,He-Man,Scout,Aerial Gear,Sky Realm
+9,Orko,Heroic,He-Man,Mage,Magic,Mystic Zone
+10,Buzz-Off,Heroic,He-Man,Commander,Armor,Wilderness
+11,Fisto,Heroic,He-Man,Specialist,Defense,Royal Kingdom
+12,Skeletor,Evil,Skeletor,Overlord,Dark Magic,Dark Hemisphere
+13,Evil-Lyn,Evil,Skeletor,Sorceress,Spells,Dark Hemisphere
+14,Trap Jaw,Evil,Skeletor,Enforcer,Weapons,Dark Hemisphere
+15,Beast Man,Evil,Skeletor,Handler,Creatures,Wilderness
+16,Tri-Klops,Evil,Skeletor,Technician,Surveillance,Dark Hemisphere
+17,Webstor,Evil,Skeletor,Infiltrator,Gadgets,Dark Hemisphere
+18,Mantenna,Evil,Skeletor,Observer,Recon,Dark Hemisphere
+19,Korin Vass,Neutral,Skeletor,Sales Operations Coordinator — Heroic Division,,Royal Kingdom
+20,Tamsin Reyes,Neutral,Skeletor,Sales Operations Coordinator — Evil Division,,Dark Hemisphere
+59,Joran Lindt,Neutral,Skeletor,Sales Operations Coordinator — Heroic Division,,Mystic Zone
+60,Moss Man,Heroic,He-Man,Commander,,Wilderness
+63,Whiplash,Evil,Skeletor,Observer,,Dark Hemisphere
+64,Leech,Evil,Skeletor,Infiltrator,,Underground
+66,Extendar,Heroic,He-Man,Specialist,,Mystic Zone
+68,Spikor,Evil,Skeletor,Technician,,Mystic Zone
+69,Kobra Khan,Evil,Skeletor,Infiltrator,,Royal Kingdom
+72,Clawful,Evil,Skeletor,Technician,,Mystic Zone
+73,Modulok,Evil,Skeletor,Infiltrator,,Royal Kingdom
+74,Rio Blast,Heroic,He-Man,Specialist,,Sky Realm
+76,Two Bad,Evil,Skeletor,Observer,,Sky Realm
+77,Snout Spout,Heroic,He-Man,Commander,,Mystic Zone
+(29 rows affected)
