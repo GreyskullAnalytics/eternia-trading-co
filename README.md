@@ -40,8 +40,8 @@ The dataset is built on a real [Azure SQL ERP database](https://github.com/Greys
 |---|---|
 | `data/` | Pre-modelled star-schema CSVs — ready to use in any BI tool |
 | `source-data/sales-targets/` | Annual sales target planning workbooks (Excel), one per manager per year |
-| `source-data/database/` | BACPAC download instructions — the full ERP database as a monthly snapshot |
-| `power-bi/` | A pre-built Power BI semantic model and report |
+| [Releases](https://github.com/GreyskullAnalytics/eternia-trading-co/releases) | Monthly BACPAC snapshot of the full ERP database |
+| `power-bi/` | A pre-built Power BI semantic model and data dictionary |
 | `assets/` | Brand guidelines, logos, and Power BI theme |
 
 ## Getting started
