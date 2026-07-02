@@ -16,4 +16,3 @@ product_key,product_name,category,alignment,brand_name,power_level,unit_cost
 14,Chaos Staff,Weapons,Evil,Darkspell Collective,High,320.00
 15,Soul Drain Amulet,Dark Magic,Evil,ShadowForge,High,450.00
 16,Nightmare Blade,Weapons,Evil,ShadowForge,High,380.00
-(17 rows affected)
